@@ -1,0 +1,11 @@
+i:hover{
+    cursor: pointer;
+}
+
+#divNoData{
+    height: 60vh;
+}
+
+h3.text-danger{
+    margin-top: 10%;
+}
