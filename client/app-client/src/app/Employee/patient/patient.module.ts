@@ -4,13 +4,14 @@ import { PatientListComponent } from './patient-list/patient-list.component';
 import { PatientAddComponent } from './patient-add/patient-add.component';
 import { PatientEditComponent } from './patient-edit/patient-edit.component';
 import { RouterModule, Routes } from '@angular/router';
+import { PatientProfileComponent } from './patient-profile/patient-profile.component';
 
 
 const routes:Routes=[
   {path:"",component:PatientListComponent},
   {path:"add",component:PatientAddComponent},
   {path:"edit/:id",component:PatientEditComponent},
-  // {path:"details/:id",component:DepartmentDetailsComponent},
+  {path:"profile/:id",component:PatientProfileComponent},
 ]
 
 @NgModule({
@@ -19,7 +20,8 @@ const routes:Routes=[
   
     // PatientAddComponent
   
-    PatientEditComponent
+    PatientEditComponent,
+       PatientProfileComponent
   ],
   imports: [
     CommonModule,

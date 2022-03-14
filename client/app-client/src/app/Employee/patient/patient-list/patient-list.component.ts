@@ -10,16 +10,16 @@ export class PatientListComponent implements OnInit {
 
 
   mainPatientList:Patient[] = [
-    new Patient(1,"Patient Name",25,"010-111-2224","/assets/img/avatars/avatar3.jpeg"),
-    new Patient(1,"Patient Name",25,"010-111-2224","/assets/img/avatars/avatar3.jpeg"),
-    new Patient(1,"Patient Name",25,"010-111-2224","/assets/img/avatars/avatar3.jpeg"),
-    new Patient(1,"Patient Name",25,"010-111-2224","/assets/img/avatars/avatar3.jpeg"),
-    new Patient(1,"Patient Name",25,"010-111-2224","/assets/img/avatars/avatar3.jpeg"),
-    new Patient(1,"Patient Name",25,"010-111-2224","/assets/img/avatars/avatar3.jpeg"),
-    new Patient(1,"Patient Name",25,"010-111-2224","/assets/img/avatars/avatar3.jpeg"),
-    new Patient(1,"Patient Name",25,"010-111-2224","/assets/img/avatars/avatar3.jpeg"),
-    new Patient(1,"Patient Name",25,"010-111-2224","/assets/img/avatars/avatar3.jpeg"),
-    new Patient(1,"Patient Name",25,"010-111-2224","/assets/img/avatars/avatar3.jpeg"),
+    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
+    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
+    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
+    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
+    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
+    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
+    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
+    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
+    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
+    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
   ]; 
 
   patientList:Patient[] = this.mainPatientList;

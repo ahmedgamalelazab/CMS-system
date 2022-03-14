@@ -6,8 +6,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes:Routes = [
   // {path:"home",component:HomeComponent},
-  // {path:"",redirectTo:"/home",pathMatch:"full"},
+  {path:"",redirectTo:"/employee/patient",pathMatch:"full"},
   {path:"patient",loadChildren:()=>import("./patient/patient.module").then(m=>m.PatientModule)},
+  {path:"",redirectTo:"/employee/patient",pathMatch:"full"},
   // {path:"students",loadChildren:()=>import("./students/students.module").then(m=>m.StudentsModule)},
 
   // {path:"**",component:ErrorComponent},

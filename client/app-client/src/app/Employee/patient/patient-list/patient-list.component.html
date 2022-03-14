@@ -11,7 +11,7 @@
                     <div class="text-md" id="dataTable_filter"><label class="form-label"><input type="search" ngModel #username (keyup)="searchPatient(username.value)" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
                 </div>
                 <div class="col-md-6">
-                    <div class="text-md-end"><button class="btn btn-outline-success">Add New</button></div>
+                    <div class="text-md-end"><button [routerLink]="['./add']" class="btn btn-outline-success">Add New</button></div>
                 </div>
             </div>
             <div *ngIf="patientList.length == 0" class="row">
@@ -25,13 +25,15 @@
                         <tr>
                             <th>Name</th>
                             <th>Age</th>
+                            <th>Gender</th>
                             <th>Phone</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let patient of patientList">
-                            <td><img class="rounded-circle me-2" width="30" height="30" [src]="patient.img">{{patient.name}}</td>
+                            <td class="link"><a [routerLink]="['./profile/'+patient._id]"><img class="rounded-circle me-2" width="30" height="30" [src]="patient.img">{{patient.name}}</a></td>
                             <td>{{patient.age}}</td>
+                            <td>{{patient.gender}}</td>
                             <td>{{patient.phone}}</td>
                             <td>
                                 <a [routerLink]="['./edit/'+patient._id]"><i class="fas fa-edit fs-4 text-primary" title="Edit"></i></a>
