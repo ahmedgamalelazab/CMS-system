@@ -1,0 +1,40 @@
+<!-- <p>prescription-edit works!</p> -->
+<pre>
+     <label>Patient Name: </label> <input type="text" [(ngModel)]="editedPrescription.patientName">   <label>Doctor Name: </label><input type="text" [(ngModel)]="editedPrescription.doctortName">
+     <label>Clinic Name: </label>  <input type="text" [(ngModel)]="editedPrescription.clinicName">   <label> Dose:</label>       <input type="text" [(ngModel)]="editedPrescription.dose">    <button class="btn btn-primary" (click)="SaveEditedPrescription()"> Save </button>
+</pre>
+
+<br><br>
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Edit Prescription</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 fw-bold">Prescription Information</p>
+        </div>
+        <div class="card-body">
+            <div id="divAddPatient">
+                <form action="">
+                    <div class="mb-3">
+                        <label  class="form-label">Patient Name:</label>
+                        <input type="text" class="form-control" id="txtStdId" [(ngModel)]="editedPrescription.patientName">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Doctor Name:</label>
+                        <input type="text" required class="form-control" id="txtStdName" [(ngModel)]="editedPrescription.doctortName">
+                    </div>
+                    <div class="mb-3">
+                        <label  class="form-label">Clinic Name:</label>
+                        <input type="text" required class="form-control" id="txtStdGrade" [(ngModel)]="editedPrescription.clinicName">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Dose:</label>
+                        <input type="text" required class="form-control" id="txtStdGrade" [(ngModel)]="editedPrescription.dose">
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary" (click)="SaveEditedPrescription()">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
