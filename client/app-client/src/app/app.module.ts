@@ -4,14 +4,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { EmployeeModule } from './Employee/employee.module';
 import * as $ from 'jquery';
+import { MedicineModule } from './Employee/medicine/medicine.module';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes:Routes = [
+const routes: Routes = [
   // {path:"home",component:HomeComponent},
-  
-  {path:"employee",loadChildren:()=>import("./Employee/employee.module").then(m=>m.EmployeeModule)},
-  {path:"",redirectTo:"/employee",pathMatch:"full"},
+
+  { path: "employee", loadChildren: () => import("./Employee/employee.module").then(m => m.EmployeeModule) },
+  { path: "", redirectTo: "/employee", pathMatch: "full" },
   // {path:"students",loadChildren:()=>import("./students/students.module").then(m=>m.StudentsModule)},
   // {path:"**",component:ErrorComponent},
 ]
@@ -21,7 +22,7 @@ const routes:Routes = [
     AppComponent,
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     EmployeeModule,
     FormsModule,
     RouterModule.forRoot(routes)

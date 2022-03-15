@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PatientModule } from './patient/patient.module';
+import { MedicineModule } from './medicine/medicine.module';
 import { EmployeeComponent } from './employee.component';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes:Routes = [
+const routes: Routes = [
   // {path:"home",component:HomeComponent},
-  {path:"",redirectTo:"/employee/patient",pathMatch:"full"},
-  {path:"patient",loadChildren:()=>import("./patient/patient.module").then(m=>m.PatientModule)},
-  {path:"",redirectTo:"/employee/patient",pathMatch:"full"},
+  { path: "", redirectTo: "/employee/patient", pathMatch: "full" },
+  { path: "patient", loadChildren: () => import("./patient/patient.module").then(m => m.PatientModule) },
+  { path: "", redirectTo: "/employee/patient", pathMatch: "full" },
   // {path:"students",loadChildren:()=>import("./students/students.module").then(m=>m.StudentsModule)},
 
   // {path:"**",component:ErrorComponent},
@@ -19,12 +20,13 @@ const routes:Routes = [
     EmployeeComponent
   ],
   imports: [
-  CommonModule,
+    CommonModule,
     PatientModule,
+    MedicineModule,
     RouterModule,
     RouterModule.forChild(routes),
   ],
-  exports:[
+  exports: [
     EmployeeComponent
   ]
 })

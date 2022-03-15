@@ -1,0 +1,37 @@
+<!-- <pre>
+    <label>Id: </label>        <input type="text" [(ngModel)]="newMedicine.id">           <label>Name: </label>     <input type="text" [(ngModel)]="newMedicine.name">            <label>Price: </label>            <input type="text" [(ngModel)]="newMedicine.price">    <button class="btn btn-secondary btn-sm" (click)="save()">
+    ADD
+</button>
+</pre> -->
+
+
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Add Medicine</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 fw-bold">Medicine Info</p>
+        </div>
+        <div class="card-body">
+            <div id="divAddMedicine>">
+                <!-- <form action=""> -->
+                    <div class="mb-3">
+                        <label for="txtStdName" class="form-label">ID</label>
+                        <input type="number" [(ngModel)]="newMedicine.id" required class="form-control" id="txtMedId">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="txtStdId" class="form-label">Name</label>
+                        <input type="text" [(ngModel)]="newMedicine.name" class="form-control" id="txtMedName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtStdName" class="form-label">Price</label>
+                        <input type="number" [(ngModel)]="newMedicine.price" required class="form-control" id="txtMedPrice">
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" (click)="save()" class="btn btn-primary">Add</button>
+                    </div>
+                <!-- </form> -->
+            </div>
+        </div>
+    </div>
+</div>
