@@ -7,7 +7,7 @@ import { Prescription } from './_model/Prescription';
 export class PrescriptionService {
 
   private Prescriptions: Prescription[] = [
-    new Prescription(1,"Ahmed","Dr.Omar","Trust Care Center",["Esbriet","Torseretic","Concor5","pirfict"],new Date(2020,3,20)),
+    new Prescription(1,"Mohammed","Dr.Omar","Trust Care Center",["Esbriet","Torseretic","Concor5","pirfict"],new Date(2020,3,20)),
     new Prescription(2,"Ali","Dr.Mohammed","Journey to Dianosis",["Esbriet","Torseretic","Concor5","pirfict"],new Date(2020,3,20)),
     new Prescription(3,"Noha","Dr.Hend","HealthCare",["Esbriet","Torseretic","Concor5","pirfict"],new Date(2020,4,20)),
     new Prescription(4,"Mona","Dr.Hadeer","Alhoda",["Esbriet","Torseretic","Concor5","pirfict"],new Date (2020,8,23)),
