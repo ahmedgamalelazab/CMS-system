@@ -10,7 +10,7 @@ import { Prescription } from 'src/app/_model/Prescription';
 export class PrescriptionListComponent implements OnInit {
 
   Prescriptions: Prescription[] = [];
-  prescription: Prescription = new Prescription(0,"","","",0);
+  prescription: Prescription = new Prescription(0,"","","",["","","",""],new Date());
   PrescriptionList:Prescription[] = this.PrescriptionSer.getAllPrescription();
   constructor(private PrescriptionSer:PrescriptionService) { }
  
@@ -30,7 +30,6 @@ export class PrescriptionListComponent implements OnInit {
       this.PrescriptionList = this.Prescriptions;
       return;
     }
-
     this.PrescriptionList = [];
     this.Prescriptions.forEach(element => {
       if(element.patientName.toLowerCase().startsWith(pname.toLowerCase()))

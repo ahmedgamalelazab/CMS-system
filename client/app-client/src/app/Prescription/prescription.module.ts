@@ -4,8 +4,13 @@ import { PrescriptionAddComponent } from './prescription-add/prescription-add.co
 import { PrescriptionListComponent } from './prescription-list/prescription-list.component';
 import { PrescriptionEditComponent } from './prescription-edit/prescription-edit.component';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
-
+const routes: Routes = [
+  { path: "", component: PrescriptionListComponent },
+  { path: "add", component: PrescriptionAddComponent },
+  { path: "edit/:id", component: PrescriptionEditComponent }
+]
 
 @NgModule({
   declarations: [
@@ -14,12 +19,13 @@ import { FormsModule } from '@angular/forms';
     PrescriptionEditComponent
   ],
   imports: [
-    CommonModule,FormsModule
+    CommonModule, FormsModule, RouterModule.forChild(routes)
   ],
   exports: [
     PrescriptionAddComponent,
     PrescriptionListComponent,
     PrescriptionEditComponent,
-   ]
+    FormsModule
+  ]
 })
 export class PrescriptionModule { }
