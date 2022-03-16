@@ -2,6 +2,7 @@
  * @DATE : 16-3-2022
  * @description : a Notification lib .. that our project client code can consume it
  * @purposeOfDesign : support the states in the project
+ * @contributors : ENG : AHMED GAMAL MOHAMED
  */
 
 //pubsub
@@ -12,7 +13,7 @@
 class Pubsub{
 
   //code ..
-
+  //dependencies
 }
 
 //subject observers
