@@ -8,11 +8,9 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="text-md" id="dataTable_filter"><label class="form-label"><input type="search" ngModel #MedicineName (keyup)="searchMedicine(MedicineName.value)" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
-                    <!-- <div class="text-md" id="dataTable_filter"><label class="form-label"><input type="search"  class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div> -->
                 </div>
                 <div class="col-md-6">
-                    <div class="text-md-end"><button  class="btn btn-outline-success">Add New</button></div>
-                    <!-- <div class="text-md-end"><button [routerLink]="['./add']" class="btn btn-outline-success">Add New</button></div> -->
+                    <div class="text-md-end"><button [routerLink]="['./add']" class="btn btn-outline-success">Add New</button></div>
                 </div>
             </div>
             <div *ngIf="medicineList.length == 0" class="row">
@@ -37,12 +35,10 @@
                             <td>{{item.name}}</td>
                             <td>{{item.price|currency}}</td>
                             <td>
-                                <!-- <button type="button" class="btn btn-primary" (click)="EditDelete(item.id)">Edit</button> -->
-                                <a (click)="EditDelete(item.id)"><i class="fas fa-edit fs-4 text-primary" title="Edit"></i></a>
+                                <a (click)="PassID(item.id)" [routerLink]="['./edit',item.id]"><i class="fas fa-edit fs-4 text-primary" title="Edit"></i></a>
                 
                             </td>
                             <td>
-                                <!-- <button type="button" class="btn btn-primary" (click)="DeleteMedicine(item.id)">Delete</button> -->
                                 <a (click)="DeleteMedicine(item.id)"><i class="fa fa-trash text-danger fs-4" title="Delete" aria-hidden="true"></i></a>
                             </td>
                         </tr>
@@ -76,4 +72,4 @@
         </div>
     </div>
 </div>
-<pm-medicine-edit [editedMedicine]="medicine"></pm-medicine-edit>
+<!-- <pm-medicine-edit [editedMedicine]="medicine"></pm-medicine-edit> -->

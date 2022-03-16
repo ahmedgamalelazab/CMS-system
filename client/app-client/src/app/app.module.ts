@@ -13,6 +13,8 @@ const routes: Routes = [
 
   { path: "employee", loadChildren: () => import("./Employee/employee.module").then(m => m.EmployeeModule) },
   { path: "", redirectTo: "/employee", pathMatch: "full" },
+  { path: "medicine", loadChildren: () => import("./Employee/medicine/medicine.module").then(m => m.MedicineModule) },
+
   // {path:"students",loadChildren:()=>import("./students/students.module").then(m=>m.StudentsModule)},
   // {path:"**",component:ErrorComponent},
 ]

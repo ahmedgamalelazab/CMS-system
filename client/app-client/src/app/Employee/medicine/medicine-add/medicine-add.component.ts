@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MedicineService } from 'src/app/medicine.service';
 import { Medicine } from 'src/app/_model/medicine';
 
@@ -10,9 +11,10 @@ import { Medicine } from 'src/app/_model/medicine';
 export class MedicineAddComponent implements OnInit {
 
   newMedicine: Medicine = new Medicine(0, "", 0);
-  constructor(private medSer: MedicineService) { }
+  constructor(private medSer: MedicineService, public router: Router) { }
   save() {
     this.medSer.AddMedicine(this.newMedicine);
+    this.router.navigate(['medicine'])
   }
 
   ngOnInit(): void {

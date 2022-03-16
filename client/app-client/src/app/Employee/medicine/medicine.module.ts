@@ -5,8 +5,13 @@ import { MedicineEditComponent } from './medicine-edit/medicine-edit.component';
 import { MedicineDeleteComponent } from './medicine-delete/medicine-delete.component';
 import { MedicineAddComponent } from './medicine-add/medicine-add.component';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
-
+const routes: Routes = [
+  { path: "", component: MedicineListComponent },
+  { path: "add", component: MedicineAddComponent },
+  { path: "edit/:id", component: MedicineEditComponent },
+];
 
 @NgModule({
   declarations: [
@@ -16,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     MedicineAddComponent
   ],
   imports: [
-    CommonModule, FormsModule
+    CommonModule, FormsModule,
+    RouterModule.forChild(routes)
   ],
   exports: [
     MedicineListComponent,

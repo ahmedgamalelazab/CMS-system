@@ -7,27 +7,27 @@ import { RouterModule, Routes } from '@angular/router';
 import { PatientProfileComponent } from './patient-profile/patient-profile.component';
 
 
-const routes:Routes=[
-  {path:"",component:PatientListComponent},
-  {path:"add",component:PatientAddComponent},
-  {path:"edit/:id",component:PatientEditComponent},
-  {path:"profile/:id",component:PatientProfileComponent},
+const routes: Routes = [
+  { path: "", component: PatientListComponent },
+  { path: "add", component: PatientAddComponent },
+  { path: "edit/:id", component: PatientEditComponent },
+  { path: "profile/:id", component: PatientProfileComponent },
 ]
 
 @NgModule({
   declarations: [
     PatientListComponent,
-  
+
     // PatientAddComponent
-  
+
     PatientEditComponent,
-       PatientProfileComponent
+    PatientProfileComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes)
   ],
-  exports:[
+  exports: [
     PatientListComponent,
     PatientEditComponent
   ]

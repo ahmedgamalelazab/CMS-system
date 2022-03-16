@@ -33,11 +33,10 @@ export class MedicineListComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    // this.medicines = this.medSer.getAllMedicines();
   }
 
-  EditDelete(medId: number) {
-    this.medicine = this.medSer.getMedicineByID(medId);
+  PassID(medId: number) {
+    this.medSer.medicineId = medId;
 
   }
   DeleteMedicine(medId: number) {

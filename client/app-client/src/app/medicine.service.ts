@@ -13,7 +13,7 @@ export class MedicineService {
     new Medicine(3, "ALMOVITAE", 137),
     new Medicine(4, "AMLOPHAR", 76)
   ];
-
+  medicineId: number = 1;
   constructor() { }
   //***********Get********* */
   getAllMedicines(): Medicine[] {
@@ -45,15 +45,5 @@ export class MedicineService {
     }
   }// end of edit
 
-
-  deleteMedicine(delMed: Medicine) {
-    for (let i = 0; i < this.medicines.length; i++) {
-      if (this.medicines[i].id == delMed.id) {
-        this.medicines.splice(i, 1);
-      }
-    }
-    console.log(this.medicines);
-
-  }//End of delete
 
 }
