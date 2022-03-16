@@ -11,16 +11,20 @@ export class PrescriptionListComponent implements OnInit {
 
   Prescriptions: Prescription[] = [];
   prescription: Prescription = new Prescription(0,"","","",0);
+  PrescriptionList:Prescription[] = this.PrescriptionSer.getAllPrescription();
   constructor(private PrescriptionSer:PrescriptionService) { }
  
   PrescriptionDetails(pid: number) {
     this.prescription= this.PrescriptionSer.getPrescriptionByID(pid);
   }
   deletePrescription(id:number){
-    this.PrescriptionSer.delete(id);
+    if(confirm("Are you sure you want delete this record?")){
+      this.PrescriptionSer.delete(id);
+    }
+   
 
   }
-  PrescriptionList:Prescription[] = this.Prescriptions;
+  
   searchprescription(pname:string){
     if(pname.length == 0){
       this.PrescriptionList = this.Prescriptions;
@@ -36,6 +40,9 @@ export class PrescriptionListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+   
     this.Prescriptions=this.PrescriptionSer.getAllPrescription();
+  
+  
   }
 }
