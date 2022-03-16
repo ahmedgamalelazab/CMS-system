@@ -21,20 +21,30 @@
             </div>
             <div *ngIf="patientList.length > 0" class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                 <table class="table my-0" id="dataTable">
+                    <!-- mdbTable #tableEl="mdbTable" -->
                     <thead>
                         <tr>
+                            <th>#</th>
                             <th>Name</th>
                             <th>Age</th>
                             <th>Gender</th>
                             <th>Phone</th>
+                            <th>SignUp Date</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let patient of patientList">
-                            <td class="link"><a [routerLink]="['./profile/'+patient._id]"><img class="rounded-circle me-2" width="30" height="30" [src]="patient.img">{{patient.name}}</a></td>
+                        <tr *ngFor="let patient of patientList|paginate:{
+                            id: 'listing_pagination',
+                            itemsPerPage: 10,
+                            currentPage: page,
+                            totalItems: patientList.length
+                        }; let i=index">
+                            <td>{{patient._id}}</td>
+                            <td class="link"><a [routerLink]="['./profile/'+patient._id]"><img class="rounded-circle me-2" width="30" height="30" [src]="patient.image">{{patient.first_name+" "+patient.last_name}}</a></td>
                             <td>{{patient.age}}</td>
                             <td>{{patient.gender}}</td>
                             <td>{{patient.phone}}</td>
+                            <td>{{patient.signUpDate}}</td>
                             <td>
                                 <a [routerLink]="['./edit/'+patient._id]"><i class="fas fa-edit fs-4 text-primary" title="Edit"></i></a>
                             </td>
@@ -45,26 +55,20 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td><strong>Name</strong></td>
-                            <td><strong>Age</strong></td>
-                            <td><strong>Phone</strong></td>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Phone</th>
+                            <th>SignUp Date</th>
                         </tr>
                     </tfoot>
                 </table>
             </div>
             <div *ngIf="patientList.length > 0" class="row">
-                <div class="col-md-6 align-self-center">
-                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
-                </div>
-                <div class="col-md-6">
-                    <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-                        <ul class="pagination">
-                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                        </ul>
+                <div class="row">
+                    <nav class="d-flex justify-content-end dataTables_paginate paging_simple_numbers">
+                        <pagination-controls  id="listing_pagination" [maxSize]="10" [directionLinks]="true" (pageChange)="page = $event"></pagination-controls>
                     </nav>
                 </div>
             </div>

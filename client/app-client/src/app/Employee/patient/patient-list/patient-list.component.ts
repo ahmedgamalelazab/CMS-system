@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Patient } from 'src/app/_model/patient';
+import { PatientService } from '../../services/patient.service';
 
 @Component({
   selector: 'app-patient-list',
@@ -8,25 +9,23 @@ import { Patient } from 'src/app/_model/patient';
 })
 export class PatientListComponent implements OnInit {
 
+  page: number = 1;
 
-  mainPatientList:Patient[] = [
-    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
-    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
-    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
-    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
-    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
-    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
-    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
-    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
-    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
-    new Patient(1,"Patient Name",25,"010-111-2224","Male","/assets/img/avatars/avatar6.jpg"),
-  ]; 
+  mainPatientList:Patient[] = []; 
+  patientList:Patient[] = [];
 
-  patientList:Patient[] = this.mainPatientList;
-
-  constructor() { }
+  constructor(private patientService:PatientService) {
+    this.patientService.getAllPatients()
+    .subscribe({
+      next:pts=> {this.mainPatientList = pts;this.patientList=pts},
+      error:e => console.error("Error get data"),
+      complete:()=> console.log("Completed")
+    });
+    console.log(this.patientList.length)
+  }
 
   ngOnInit(): void {
+    
   }
 
   searchPatient(name:string){
@@ -37,7 +36,7 @@ export class PatientListComponent implements OnInit {
 
     this.patientList = [];
     this.mainPatientList.forEach(element => {
-      if(element.name.toLowerCase().startsWith(name.toLowerCase()))
+      if((element.first_name.toLowerCase()+" "+element.last_name.toLowerCase()).startsWith(name.toLowerCase()))
         this.patientList.push(element);
     });
 

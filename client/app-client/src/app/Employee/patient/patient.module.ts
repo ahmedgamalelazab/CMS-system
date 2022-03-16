@@ -5,6 +5,7 @@ import { PatientAddComponent } from './patient-add/patient-add.component';
 import { PatientEditComponent } from './patient-edit/patient-edit.component';
 import { RouterModule, Routes } from '@angular/router';
 import { PatientProfileComponent } from './patient-profile/patient-profile.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 const routes:Routes=[
@@ -17,19 +18,18 @@ const routes:Routes=[
 @NgModule({
   declarations: [
     PatientListComponent,
-  
-    // PatientAddComponent
-  
+    PatientAddComponent,
     PatientEditComponent,
-       PatientProfileComponent
+    PatientProfileComponent
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    NgxPaginationModule,
   ],
   exports:[
     PatientListComponent,
-    PatientEditComponent
+    PatientEditComponent,
   ]
 })
 export class PatientModule { }

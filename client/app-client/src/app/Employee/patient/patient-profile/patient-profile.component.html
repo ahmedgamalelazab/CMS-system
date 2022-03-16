@@ -4,60 +4,180 @@
         <div class="card-header py-3">
             <p class="text-primary m-0 fw-bold">Patient Profile</p>
         </div>
-        <div class="card-body">
+        <div *ngIf="patient != null" class="card-body">
             <!-- Code here -->
-            <div class="row g-0">
-                <div class="col-6">
-                    <img id="patientImg" src="/assets/img/avatars/avatar6.jpg" alt="">
+            <div class="row mt-2">
+                <div class="d-flex">
+                    <h3 style="border-bottom:1px solid;" class="border-gray">Informations</h3>
                 </div>
-                <div class="mt-3 col-6">
-                    <!-- d-flex flex-column justify-content-around -->
+            </div>
+            <div class="row g-0 mt-4">
+                <div class="col-md-3 col-sm-3 col-12">
+                    <div class="d-flex">
+                        <img id="patientImg" [src]="patient.image" alt="">
+                    </div>
+                </div>
+                <div class=" col-md-4 col-sm-4 col-12">
                     <div class="row mt-3">
-                        <div class="col-sm-6 col-md-4 col-lg-3"> 
-                            <span>Full name:</span>
+                        <div class="col-xl-4"> 
+                            <span class="text-dark fw-bold">Full name:</span>
                         </div>
-                        <div class="col-sm-6 mx-1 mx-sm-0">
-                            <span>Patient Name</span>
+                        <div class="col-xl-6 mx-2 mx-xl-0">
+                            <span>{{patient.first_name+" "+patient.last_name}}</span>
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-sm-6 col-md-4 col-lg-3"> 
-                            <span>Age:</span>
+                        <div class="col-xl-4"> 
+                            <span class="text-dark fw-bold">Age:</span>
                         </div>
-                        <div class="col-sm-6 mx-1 mx-sm-0">
-                            <span>Patient Age</span>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-sm-6 col-md-4 col-lg-3"> 
-                            <span>Gender:</span>
-                        </div>
-                        <div class="col-sm-6 mx-1 mx-sm-0">
-                            <span>Patient Gender</span>
+                        <div class="col-xl-6 mx-2 mx-xl-0">
+                            <span>{{patient.age}}</span>
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-sm-6 col-md-4 col-lg-3"> 
-                            <span>Phone:</span>
+                        <div class="col-xl-4"> 
+                            <span class="text-dark fw-bold">Gender:</span>
                         </div>
-                        <div class="col-sm-6 mx-1 mx-sm-0">
-                            <span>Patient Phone</span>
+                        <div class="col-xl-6 mx-2 mx-xl-0">
+                            <span>{{patient.gender}}</span>
                         </div>
                     </div>
-                        <!-- <div class="col-3 h-100 d-flex flex-column justify-content-around"> 
-                            <span>Full name:</span>
-                            <span>Age:</span>
-                            <span>Phone:</span>
+                    <div class="row mt-3">
+                        <div class="col-xl-4">
+                            <span class="text-dark fw-bold">Phone:</span>
                         </div>
-                        <div class="col-6 h-100 d-flex flex-column justify-content-around">
-                            <span>Patient Name</span>
-                            <span>Patient Age</span>
-                            <span>Patient Phone</span>
-                        </div> -->
-                    
+                        <div class="col-xl-6 mx-2 mx-xl-0">
+                            <span>{{patient.phone}}</span>
+                        </div>
+                    </div>
+                </div>
+                <hr id="hr" class="mt-3">
+                <div class="mt-1 col-md-4 col-sm-4 col-12">
+                    <div class="row mt-3">
+                        <div class="col-xl-6"> 
+                            <span class="text-dark fw-bold">Signup Date:</span>
+                        </div>
+                        <div class="col-xl-6 mx-2 mx-xl-0">
+                            <span>{{patient.signUpDate}}</span>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-xl-6"> 
+                            <span class="text-dark fw-bold">Total Prescerptions#:</span>
+                        </div>
+                        <div class="col-xl-6 mx-2 mx-xl-0">
+                            <span>{{patientPrescreptions.length}}</span>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-xl-6"> 
+                            <span class="text-dark fw-bold">Total MonyPaid:</span>
+                        </div>
+                        <div class="col-xl-6 mx-2 mx-xl-0">
+                            <span>{{calcTotalPaid()}} $</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="d-flex mt-5">
+                    <h3 style="border-bottom:1px solid;" class="border-gray">Appointments</h3>
+                </div>
+            </div>
+            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                <table class="table my-0" id="dataTable">
+                    <!-- mdbTable #tableEl="mdbTable" -->
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Doctor Name</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let appt of patientAppointments|paginate:{
+                            id: 'appointment_pagination',
+                            itemsPerPage: 5,
+                            currentPage: page,
+                            totalItems: patientAppointments.length
+                        }">
+                            <td>{{appt._id}}</td>
+                            <td>{{appt.doctor_name}}</td>
+                            <td>{{appt.date}}</td>
+                            <td>{{appt.time}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Doctor Name</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            
+            <div *ngIf="patientPrescreptions.length> 0" class="row">
+                <div class="row">
+                    <nav class="d-flex justify-content-end dataTables_paginate paging_simple_numbers">
+                        <pagination-controls  id="appointment_pagination" [maxSize]="5" [directionLinks]="true" (pageChange)="page = $event"></pagination-controls>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="d-flex mt-2">
+                    <h3 style="border-bottom:1px solid;" class="border-gray">Prescriptions</h3>
+                </div>
+            </div>
+            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                <table class="table my-0" id="dataTable">
+                    <!-- mdbTable #tableEl="mdbTable" -->
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Date</th>
+                            <th>Doctor Name</th>
+                            <th>Medicines</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let presc of patientPrescreptions|paginate:{
+                            id: 'prescriptions_pagination',
+                            itemsPerPage: 5,
+                            currentPage: page,
+                            totalItems: patientPrescreptions.length
+                        }">
+                            <td>{{presc._id}}</td>
+                            <td>{{presc.date}}</td>
+                            <td>{{presc.doctorName}}</td>
+                            <td>{{presc.medicine}}</td>
+                            <td>{{presc.price}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Date</th>
+                            <th>Doctor Name</th>
+                            <th>Medicines</th>
+                            <th>Price</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div *ngIf="patientPrescreptions.length > 0" class="row">
+                <div class="row">
+                    <nav class="d-flex justify-content-end dataTables_paginate paging_simple_numbers">
+                        <pagination-controls  id="prescriptions_pagination" [maxSize]="5" [directionLinks]="true" (pageChange)="page = $event"></pagination-controls>
+                    </nav>
                 </div>
             </div>
             <!-- Code here -->
+
         </div>
     </div>
 </div>

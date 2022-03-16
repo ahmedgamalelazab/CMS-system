@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Appointment {\n  constructor(_id, doctor_name, date, time) {\n    this._id = _id;\n    this.doctor_name = doctor_name;\n    this.date = date;\n    this.time = time;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}
