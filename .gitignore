@@ -1,0 +1,14 @@
+*
+
+!.gitignore
+!client/
+!app-client/
+!src/
+!app/
+!Employee**
+!appointment**
+!patient**
+!prescription**
+!home**
+!services**
+!_model**

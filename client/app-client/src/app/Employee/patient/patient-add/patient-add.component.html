@@ -1,0 +1,34 @@
+
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">New Patient</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 fw-bold">Patient Info</p>
+        </div>
+        <div class="card-body">
+            <div id="divAddPatient">
+                <form action="">
+                    <div class="mb-3">
+                        <label for="txtStdId" class="form-label">Name</label>
+                        <input type="text" required min="0" class="form-control" id="txtStdId">
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtStdName" class="form-label">Age</label>
+                        <input type="number" required class="form-control" id="txtStdName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtStdGrade" class="form-label">Phone</label>
+                        <input type="text" required class="form-control" id="txtStdGrade">
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtStdGrade" class="form-label">Image</label>
+                        <input type="file" required accept=".jpeg, .jpg, .png" class="form-control" id="txtStdGrade">
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
