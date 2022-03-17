@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">New Employee</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 fw-bold">Employee Info</p>
+        </div>
+        <div class="card-body">
+            <div id="divAddPatient">
+                <!-- <form action=""> -->
+                <div class="mb-3">
+                    <label for="txtStdId" class="form-label">ID</label>
+                    <input type="number" required min="0" class="form-control" id="txtStdId"
+                        [(ngModel)]="newEmployee.Id">
+                </div>
+                <div class="mb-3">
+                    <label for="txtStdName" class="form-label">Name</label>
+                    <input type="text" required class="form-control" id="txtStdName" [(ngModel)]="newEmployee.Name">
+                </div>
+                <div class="mb-3">
+                    <label for="txtStdGrade" class="form-label">Age</label>
+                    <input type="number" required class="form-control" id="txtStdGrade" [(ngModel)]="newEmployee.Age">
+                </div>
+                <div class="mb-3">
+                    <label for="txtStdGrade" class="form-label">Salary</label>
+                    <input type="number" required class="form-control" id="txtStdGrade"
+                        [(ngModel)]="newEmployee.Salary">
+                </div>
+                <!-- <div class="mb-3">
+                        <label for="txtStdGrade" class="form-label">Image</label>
+                        <input type="file" required accept=".jpeg, .jpg, .png" class="form-control" id="txtStdGrade">
+                    </div> -->
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-primary" (click)="save()" [routerLink]="['']">Save</button>
+                </div>
+                <!-- </form> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div *ngIf="flag">
+    <label>ID</label>
+    <input type="number" [(ngModel)]="newEmployee.Id"><br>
+    <label>Name</label>
+    <input type="text" [(ngModel)]="newEmployee.Name"><br>
+    <label>Age</label>
+    <input type="number" [(ngModel)]="newEmployee.Age"><br>
+    <label>Salary</label>
+    <input type="number" [(ngModel)]="newEmployee.Salary"><br>
+
+    <button type="button" (click)="save()" class="btn btn-facebook">Save</button>
+</div> -->

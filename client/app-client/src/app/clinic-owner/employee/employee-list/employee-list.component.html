@@ -1,0 +1,107 @@
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Employee</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 fw-bold">Employees Info</p>
+        </div>
+        <div class="card-body">
+            <!-- Code here -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="text-md" id="dataTable_filter"><label class="form-label"><input type="search" ngModel
+                                #username (keyup)="searchEmployee(username.value)" class="form-control form-control-sm"
+                                aria-controls="dataTable" placeholder="Search"></label></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-md-end"><button (click)="addEmployee()" [routerLink]="['./add']"
+                            class="btn btn-outline-success">Add
+                            Employee</button></div>
+                </div>
+            </div>
+            <div *ngIf="employees.length == 0" class="row">
+                <div id="divNoData" class="container d-flex justify-content-center">
+                    <h3 class="text-danger">Sorry, there is no data to show.!</h3>
+                </div>
+            </div>
+            <div *ngIf="employees.length > 0" class="table-responsive table mt-2" id="dataTable" role="grid"
+                aria-describedby="dataTable_info">
+                <table class="table my-0" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Salary</th>
+                            <th>CRUD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of employees">
+                            <!-- <td class="link"><a [routerLink]="['./profile/'+patient._id]"><img
+                                        class="rounded-circle me-2" width="30" height="30"
+                                        [src]="patient.img">{{patient.name}}</a></td> -->
+                            <td>{{item.Id}}</td>
+                            <td>{{item.Name}}</td>
+                            <td>{{item.Age}}</td>
+                            <td>{{item.Salary}}</td>
+                            <td>
+                                <a [routerLink]="['./edit/'+item.Id]" (click)="editEmployee(item)"><i
+                                        class="fas fa-edit fs-4 text-primary" title="Edit"></i></a>
+                            </td>
+                            <td>
+                                <a (click)="deleteEmployee(item)"><i class="fa fa-trash text-danger fs-4" title="Delete"
+                                        aria-hidden="true"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="employees.length > 0" class="row">
+                <div class="col-md-6 align-self-center">
+                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of
+                        27</p>
+                </div>
+                <div class="col-md-6">
+                    <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                        <ul class="pagination">
+                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span
+                                        aria-hidden="true">«</span></a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span
+                                        aria-hidden="true">»</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 
+<button class="btn btn-primary" (click)="addEmployee()">Add Employee</button>
+
+<table *ngIf="employees.length>0" class="table table-striped table-inverse table-responsive">
+    <thead class="thead-inverse">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Salary</th>
+            <th>CRUD</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of employees">
+            <td>{{item.Id}}</td>
+            <td>{{item.Name}}</td>
+            <td>{{item.Age}}</td>
+            <td>{{item.Salary}}</td>
+            <td>
+                <button (click)="editEmployee(item)">Edit</button>
+                <button (click)="deleteEmployee(item)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table> -->
