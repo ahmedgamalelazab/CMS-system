@@ -1,9 +1,16 @@
-document.addEventListener(
-  "DOMContentLoaded",
-  function () {
-    "use strict"; // Start of use strict
+// (() => {
+//   console.log("called code");
+//   document.addEventListener(
+//     "DOMContentLoaded",
 
-    console.log("im done");
+//     false
+//   );
+// })();
+
+(() => {
+  console.log("called code");
+  function themeLib() {
+    "use strict"; // Start of use strict
     var sidebar = document.querySelector(".sidebar");
     var sidebarToggles = document.querySelectorAll(
       "#sidebarToggle, #sidebarToggleTop"
@@ -86,6 +93,8 @@ document.addEventListener(
         }
       });
     }
-  },
-  false
-);
+  }
+  //calling
+  console.log("calling theme lib");
+  themeLib();
+})();

@@ -1,0 +1,34 @@
+*{
+  color:black;
+  font-family: 'Roboto', sans-serif;;
+}
+
+.show-case-container{
+  display: flex;
+  flex-direction: column;
+  /* background-color: red; */
+  align-items: center;
+}
+
+.form-container{
+  /* background-color: red; */
+  width: 95%;
+}
+
+.custom-button{
+  background-color: transparent;
+  color:green;
+  font-weight: bold;
+  border : 1px green solid;
+  padding:20px;
+  margin: 10px 0px;
+
+}
+
+.offer{
+  font-weight: bold;
+}
+
+input{
+  background-color: #fafafa;
+}
