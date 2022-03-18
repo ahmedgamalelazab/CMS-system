@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ScriptService } from './services/script.store.service';
+import { ScriptService } from '../services/script.store.service';
 
 @Component({
   selector: 'pm-admin',
@@ -15,7 +14,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.script
-      .load('bs-init', 'theme')
+      .load('charts.js','bs-init', 'theme')
       .then((data) => {
         console.log('script loaded ', data);
       })

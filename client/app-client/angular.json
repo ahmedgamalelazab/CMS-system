@@ -35,8 +35,7 @@
               "./node_modules/jquery/dist/jquery.min.js",
               "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "./src/assets/js/bs-init.js",
-              "./src/assets/js/theme.js",
-              "./node_modules/chart.js/dist/chart.min.js"
+              "./src/assets/js/theme.js"
             ]
           },
           "configurations": {

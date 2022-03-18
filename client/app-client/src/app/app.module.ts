@@ -12,7 +12,7 @@ import { AppRoutesModule } from './modules/app-routes/app-routes.module';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
