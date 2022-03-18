@@ -5,7 +5,7 @@ import { ScriptService } from '../../services/script.store.service';
   selector: 'pm-doctor',
   templateUrl: './doctor.component.html',
   styleUrls: ['./doctor.component.css'],
-  providers:[ScriptService]
+  // providers:[ScriptService]
 })
 export class DoctorComponent implements OnInit {
 

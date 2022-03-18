@@ -49,14 +49,14 @@ loadScript(name: string) {
                         resolve({script: name, loaded: true, status: 'Loaded'});
                     }
                 };
-            } else {  //Others
+              } else {  //Others
                 script.onload = () => {
-                    this.scripts[name].loaded = true;
-                    resolve({script: name, loaded: true, status: 'Loaded'});
+                  this.scripts[name].loaded = true;
+                  resolve({script: name, loaded: true, status: 'Loaded'});
                 };
-            }
+              }
             script.onerror = (error: any) => resolve({script: name, loaded: false, status: 'Loaded'});
-            document.getElementsByTagName('body')[0].appendChild(script);
+            document.getElementsByTagName('head')[0].appendChild(script);
         }
     });
 }

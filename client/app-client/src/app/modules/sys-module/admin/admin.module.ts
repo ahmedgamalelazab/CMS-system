@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ClinicComponent } from './clinic/clinic.component';
 import { DoctorComponent } from './doctors/doctor.component';
-import { PatientComponent } from './patients/patient.component';
 
 @NgModule({
   declarations: [AdminComponent, DashboardComponent, ClinicComponent],
@@ -20,7 +19,6 @@ import { PatientComponent } from './patients/patient.component';
           { path: 'Dashboard', component: DashboardComponent },
           { path: 'clinic', component: ClinicComponent },
           { path: 'doctors', component: DoctorComponent },
-          { path: 'patient', component: PatientComponent },
         ],
       },
     ]),

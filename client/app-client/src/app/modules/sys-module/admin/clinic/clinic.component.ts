@@ -5,7 +5,7 @@ import { ScriptService } from '../../services/script.store.service';
   selector: 'pm-clinic',
   templateUrl: './clinic.component.html',
   styleUrls: ['./clinic.component.css'],
-  providers:[ScriptService]
+  // providers:[ScriptService]
 })
 export class ClinicComponent implements OnInit {
 

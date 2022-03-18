@@ -7,7 +7,7 @@
 //   );
 // })();
 
-(() => {
+(async () => {
   console.log("called code");
   function themeLib() {
     "use strict"; // Start of use strict
@@ -96,5 +96,6 @@
   }
   //calling
   console.log("calling theme lib");
-  themeLib();
+
+  document.addEventListener("DOMContentLoaded", themeLib, false);
 })();
