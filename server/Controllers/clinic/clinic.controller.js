@@ -1,31 +1,9 @@
 //building example data
 //place holder data
 const { request, response } = require('express');
-/**
- * data example
- const clinics = [
-  new Clinic(
-    'cafa1e2b-a46e-4a32-82e6-c9c1c0082ae0',
-    'National Clinic',
-    [
-      new Doctor(
-        '91cf741b-735b-445a-b4f6-3167de034b01',
-        'ahmed sameh',
-        44,
-        4000,
-        new User('ahmedSamah', '123456'),
-        'cafa1e2b-a46e-4a32-82e6-c9c1c0082ae0',
-        true,
-        './doctors/profiles/91cf741b-735b-445a-b4f6-3167de034b01/profile.png'
-      ),
-    ],
-    '313 Surrey Avenue',
-    '+880 545 190 1948',
-    'clinic with all the feature that any patient dream with',
-    '91cf741b-735b-445a-b4f6-3167de034b01'
-  ),
-];
- */
+const Clinic = require('../../Models/Clinic.js');
+const User = require('../../Models/User.js');
+const { Doctor } = require('../../Models/Doctor.js');
 
 /**
  *
@@ -34,9 +12,40 @@ const { request, response } = require('express');
  * @param {Function} next
  */
 module.exports.getAllClinicsController = async function (req, res, next) {
+  const user = await User.create({
+    email: 'agemy844@gmail.com',
+    password: '12345',
+    userType: 'doctor',
+  });
+
+  const doctorTest = await Doctor.create({
+    name: 'testDoc',
+    age: 55,
+    salary: 3344,
+    user: user._id,
+    isOwner: true,
+    profileImage: 'none',
+    owner: null,
+  });
+
+  const docFullData = await Doctor.findOne({
+    name: 'testDoc',
+  }).populate({
+    path: 'user',
+  });
+
+  const clinicTest = await Clinic.create({
+    name: 'tsetClinic',
+    doctors: [doctorTest],
+    address: 'testing address',
+    phone: '01032122442',
+    description: 'testing description',
+    owner: doctorTest._id,
+  });
+
   res.status(200).json({
     success: true,
-    data: 'data clinic sent to user here',
+    data: docFullData,
   });
 };
 
@@ -100,7 +109,7 @@ module.exports.getAllClinicsDoctorsController = async (req, res, next) => {
  * @param {Function} next
  * @description this api for the doctor [OWNER] to assign to his clinic doctors
  */
-module.exports.doctorAssignClinicDoctor = async (req, res, next) => {
+module.exports.ownerAssignClinicDoctor = async (req, res, next) => {
   res.status(200).json({
     success: true,
     data: 'get all clinic doctors logic result will be sent to the user',
