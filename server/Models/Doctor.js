@@ -1,4 +1,4 @@
-//DOCTOR is depending on the user
+//cleaned
 const mongoose = require('mongoose');
 const User = require('./User');
 const doctorSchema = new mongoose.Schema(
@@ -6,7 +6,7 @@ const doctorSchema = new mongoose.Schema(
     name: mongoose.SchemaTypes.String,
     age: mongoose.SchemaTypes.Number,
     salary: mongoose.SchemaTypes.Number,
-    //we can use the ref like that , but me i love to make it with another way
+    //we can use the ref like that  but i love to make it with another way
     //   user: {
     //     type: mongoose.SchemaTypes.ObjectId,
     //     ref: 'User',
