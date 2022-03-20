@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: "", redirectTo: "/employee/patient", pathMatch: "full" },
   // {path:"students",loadChildren:()=>import("./students/students.module").then(m=>m.StudentsModule)},
   { path: "medicine", loadChildren: () => import("./medicine/medicine.module").then(m => m.MedicineModule) },
+  { path: "appointment", loadChildren: () => import("./appointment/appointment.module").then(m => m.AppointmentModule) },
 
   // {path:"**",component:ErrorComponent},
 ]

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Doctor } from './_model/doctor';
 import { Medicine } from './_model/medicine';
 
 @Injectable({
@@ -6,6 +7,7 @@ import { Medicine } from './_model/medicine';
 })
 export class MedicineService {
 
+  constructor() { }
 
   private medicines: Medicine[] = [
     new Medicine(1, "CHLORIDE INJECTION", 170),
@@ -13,12 +15,22 @@ export class MedicineService {
     new Medicine(3, "ALMOVITAE", 137),
     new Medicine(4, "AMLOPHAR", 76)
   ];
+  private doctors: Doctor[] = [
+    new Doctor(1, "Dr.Khalid", 6500),
+    new Doctor(2, "Dr.Omar", 9500),
+    new Doctor(3, "Dr.Salim", 5000),
+    new Doctor(4, "Dr.Rana", 9900),
+  ];
   medicineId: number = 1;
-  constructor() { }
-  //***********Get********* */
+  //***********Get**********/
   getAllMedicines(): Medicine[] {
     return this.medicines;
   }
+  //***********Get Doctors**********/
+  getAllDoctors(): Doctor[] {
+    return this.doctors;
+  }
+
   //***********Add********* */
   AddMedicine(med: Medicine) {
     this.medicines.push(new Medicine(med.id, med.name, med.price));

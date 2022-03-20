@@ -12,12 +12,10 @@ export class MedicineListComponent implements OnInit {
 
   medicines: Medicine[] = this.medSer.getAllMedicines();
   medicineList: Medicine[] = this.medicines;
-
-
-
-
   medicine: Medicine = new Medicine(0, "", 0);
 
+  ngOnInit(): void {
+  }
   //Search 
   searchMedicine(name: string) {
     if (name.length == 0) {
@@ -31,9 +29,7 @@ export class MedicineListComponent implements OnInit {
         this.medicineList.push(element);
     });
 
-  }
-  ngOnInit(): void {
-  }
+  }//end of search
 
   PassID(medId: number) {
     this.medSer.medicineId = medId;
@@ -53,10 +49,5 @@ export class MedicineListComponent implements OnInit {
 
 
 }
-
-  // DeleteMed(medId: number) {
-  //   this.medicine = this.medSer.getMedicineByID(medId);
-
-  // }
 
 

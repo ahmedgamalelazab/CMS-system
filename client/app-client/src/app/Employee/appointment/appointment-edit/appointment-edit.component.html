@@ -1,1 +1,39 @@
-<p>appointment-edit works!</p>
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Edit Appointment</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 fw-bold">Appointment Info</p>
+        </div>
+        <div class="card-body">
+            <div id="divAddMedicine>">
+                <!-- <form action=""> -->
+                    <!-- Dr Name -->
+                    <div class="mb-3">
+                        <label for="txtDocName" class="form-label">Doctor Name</label>
+                        <select class="form-select" aria-label="Default select example" name="Doctors" [(ngModel)]="editedAppointment.DocName">
+                            <!-- <option selected>Please select a doctor</option> -->
+                            <option *ngFor="let doc of docList" [value]="doc.name">{{doc.name}}</option>
+                            </select>
+                    </div>
+
+                    <!--Appointment Date -->
+                    <div class="mb-3"> 
+                        <label for="txtAppointmentDate" class="form-label">Date</label>
+                        <input type="date" [(ngModel)]="editedAppointment.date" class="form-control" id="txtAppName">
+                    </div>
+
+                    <!-- Appointment Time -->
+                    <div class="mb-3">
+                        <label for="txtAppointmentTime" class="form-label">Time</label>
+                        <input type="time" [(ngModel)]="editedAppointment.time" required class="form-control" id="txtAppPrice">
+                    </div>
+
+                    <!-- Add Appointment -->
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" (click)="SaveEditedMedicine()" class="btn btn-primary">Save</button>
+                    </div> 
+                <!-- </form> -->
+            </div>
+        </div>
+    </div>
+</div>
