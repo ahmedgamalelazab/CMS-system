@@ -1,3 +1,4 @@
+//cleaned
 const mongoose = require('mongoose');
 const Clinic = require('./Clinic.js');
 const patientSchema = new mongoose.Schema(

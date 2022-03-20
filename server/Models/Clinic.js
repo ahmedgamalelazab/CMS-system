@@ -1,4 +1,4 @@
-//clinic code
+//cleaned
 const mongoose = require('mongoose');
 const { Doctor, doctorSchema } = require('./Doctor.js');
 

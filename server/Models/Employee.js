@@ -1,3 +1,4 @@
+//cleaned
 const mongoose = require('mongoose');
 const User = require('./User.js');
 const Clinic = require('./Clinic');
