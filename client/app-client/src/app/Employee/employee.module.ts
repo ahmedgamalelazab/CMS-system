@@ -1,15 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PatientModule } from './patient/patient.module';
 import { EmployeeComponent } from './employee.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home/home.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ScriptService } from './services/script.store.service';
+import { InvoiceModule } from './invoice/invoice.module';
 
 const routes:Routes = [
-  {path:"home",component:HomeComponent},
-  {path:"",redirectTo:"/home",pathMatch:"full"},
-  {path:"patient",loadChildren:()=>import("./patient/patient.module").then(m=>m.PatientModule)},
+  {
+    path:'',component:EmployeeComponent,
+    children:[
+      {path:'',redirectTo:'/employee/home',pathMatch:'full'},
+      {path:"home",component:HomeComponent},
+      {path:"patient",loadChildren:()=>import("./patient/patient.module").then(m=>m.PatientModule)},
+      {path:"invoice",loadChildren:()=>import("./invoice/invoice.module").then(m=>m.InvoiceModule)},
+    ]
+  }
 ]
 
 @NgModule({
@@ -18,17 +25,17 @@ const routes:Routes = [
     HomeComponent
   ],
   imports: [
-  CommonModule,
-    PatientModule,
-    RouterModule,
+CommonModule,
     RouterModule.forChild(routes),
+    InvoiceModule,
     NgxPaginationModule,
     
   ],
   exports:[
     EmployeeComponent,
     NgxPaginationModule
-  ]
+  ],
+  // providers:[ScriptService]
 })
 
 export class EmployeeModule { }

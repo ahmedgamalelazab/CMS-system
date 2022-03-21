@@ -10,5 +10,14 @@
 !patient**
 !prescription**
 !home**
-!services**
+!.services**
 !_model**
+
+
+!server/
+!Controllers/
+patient/
+!Routes/
+!Services/
+patients/
+!app.js

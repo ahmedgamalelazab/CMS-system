@@ -31,6 +31,16 @@
                 ><i class="fas fa-capsules"></i><span>Medicines</span></a
                 >
             </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/employee/invoice']" href="">
+                  <i class="fa fa-dollar-sign"></i><span>Invoices</span>
+              </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/login']" href="">
+                <i class="fa fa-calendar-check"></i><span>Login</span>
+            </a>
+        </li>
         </ul>
         <div class="text-center d-none d-md-inline">
             <button
@@ -204,7 +214,6 @@
           </div>
         </nav>
 
-        <!-- <pm-patient-edit></pm-patient-edit> -->
         <router-outlet></router-outlet>
       
       
