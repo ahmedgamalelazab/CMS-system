@@ -254,6 +254,68 @@ async function removeDoctorService(docId) {
 }
 
 /**
+ * @very_important : because appointment will tie the doctor to his patients .. so appointment service will take care of ting them together , this won't get any result until we attach appointment to a doctor
+ * @param {string} docId
+ * @returns {Promise}
+ */
+async function getAllDoctorPatientsService(docId) {
+  return new Promise(async (resolve, reject) => {
+    if (DBConnection.isConnected()) {
+      try {
+        //if connected
+        //i will find his patients from the appointment
+        const appointments = await Appointment.find({
+          doctor: docId,
+        }).populate('patient');
+        //if all are ok
+        resolve({
+          success: true,
+          data: appointments,
+        });
+      } catch (error) {
+        reject(new Error(error.message));
+      }
+    } else {
+      reject(new Error('db connection problem'));
+    }
+  });
+}
+
+async function updateDoctorService(docId, docName, docAge) {
+  return new Promise(async (resolve, reject) => {
+    //he  is  not allowed to edit his data except only his name and age
+    if (DBConnection.isConnected()) {
+      const dataTracer = {};
+      try {
+        const result = await Doctor.updateOne({
+          _id: docId,
+          name: docName,
+          age: docAge,
+        });
+
+        const updatedDoc = await Doctor.findOne({
+          _id: docId,
+        });
+        //if all are ok
+        dataTracer.updatedData = 1;
+        dataTracer.updatedDocData = updatedDoc;
+
+        resolve({
+          succesS: true,
+          data: dataTracer,
+        });
+      } catch (error) {
+        reject(new Error(error.message));
+      }
+    } else {
+      reject(new Error('db connection problem'));
+    }
+  });
+}
+
+/////////////////////////////ONLY FOR CLEAN CODE PURPOSE - NOT REPEAT MY SELF /////////////////
+
+/**
  *
  * @param {string} docId
  * @param {Appointment} Appointment
@@ -343,4 +405,6 @@ module.exports = {
   addDoctorToClinicService,
   getAllDoctorsService,
   removeDoctorService,
+  getAllDoctorPatientsService,
+  updateDoctorService,
 };

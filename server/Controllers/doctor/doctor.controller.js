@@ -3,6 +3,8 @@ const {
   addDoctorToClinicService,
   getAllDoctorsService,
   removeDoctorService,
+  getAllDoctorPatientsService,
+  updateDoctorService,
 } = require('../../Services/doctor/doctor.service.js');
 
 /**
@@ -95,7 +97,26 @@ module.exports.removeDoctorDataController = async (req, res, next) => {
  * @param {response} res
  * @param {Function} next
  */
-module.exports.getAllDoctorPatientsData = async (req, res, next) => {};
+module.exports.getAllDoctorPatientsData = async (req, res, next) => {
+  try {
+    const docId = req.params.id;
+
+    const result = await getAllDoctorPatientsService(docId);
+
+    //if all are ol
+
+    res.status(200).json({
+      success: true,
+      data: result.data,
+    });
+  } catch (error) {
+    res.status(501).json({
+      success: false,
+      data: null,
+      errorMessage: error.message,
+    });
+  }
+};
 
 /**
  *
@@ -103,4 +124,22 @@ module.exports.getAllDoctorPatientsData = async (req, res, next) => {};
  * @param {response} res
  * @param {Function} next
  */
-module.exports.updateDoctorDataController = async (req, res, next) => {};
+module.exports.updateDoctorDataController = async (req, res, next) => {
+  try {
+    const docId = req.params.id;
+    const { docName, docAge } = req.body;
+
+    const result = await updateDoctorService(docId);
+    //if all are ok
+    res.status(201).json({
+      success: true,
+      data: result.data,
+    });
+  } catch (error) {
+    res.status(501).json({
+      success: false,
+      data: null,
+      errorMessage: error.message,
+    });
+  }
+};
