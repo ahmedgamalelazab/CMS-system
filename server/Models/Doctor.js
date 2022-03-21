@@ -5,7 +5,7 @@ const doctorSchema = new mongoose.Schema(
   {
     name: mongoose.SchemaTypes.String,
     age: mongoose.SchemaTypes.Number,
-    salary: mongoose.SchemaTypes.Number,
+    // salary: mongoose.SchemaTypes.Number, // not make sense to make cms with salary for the doctor
     //we can use the ref like that  but i love to make it with another way
     //   user: {
     //     type: mongoose.SchemaTypes.ObjectId,
@@ -22,8 +22,9 @@ const doctorSchema = new mongoose.Schema(
       default:
         'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png',
     },
-    owner: {
+    assignedBy: {
       type: mongoose.SchemaTypes.ObjectId,
+      default: null,
     },
     isConnectedToClinic: {
       type: mongoose.SchemaTypes.Boolean,
@@ -40,7 +41,7 @@ doctorSchema.path('user').ref(User); //much more clean
 
 const Doctor = mongoose.model('Doctor', doctorSchema);
 
-doctorSchema.path('owner').ref(Doctor);
+doctorSchema.path('assignedBy').ref(Doctor);
 
 module.exports = {
   Doctor,

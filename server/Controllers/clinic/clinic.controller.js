@@ -54,9 +54,8 @@ module.exports.addClinicController = async function (req, res, next) {
       userPassword,
       docName,
       docAge,
-      docSalary,
       iswOwner,
-      docBoss,
+      assignedBy,
     } = req.body;
 
     const result = await AddClinicService(
@@ -68,9 +67,8 @@ module.exports.addClinicController = async function (req, res, next) {
       userPassword,
       docName,
       docAge,
-      docSalary,
       iswOwner,
-      docBoss
+      assignedBy
     );
 
     //if no error

@@ -16,9 +16,8 @@ const mongoose = require('mongoose'); //for transaction purposes
  * @param {string} userPassword
  * @param {string} docName
  * @param {number} docAge
- * @param {number} docSalary
  * @param {boolean} iswOwner
- * @param {string} docBoss
+ * @param {string} assignedBy
  * @returns {Promise}
  * @description calling a some transactions in order to insert record clinic
  */
@@ -31,9 +30,8 @@ async function AddClinicService(
   userPassword,
   docName,
   docAge,
-  docSalary,
   iswOwner,
-  docBoss
+  assignedBy
 ) {
   return new Promise(async (resolve, reject) => {
     if (DBConnection.isConnected()) {
@@ -62,10 +60,9 @@ async function AddClinicService(
               {
                 name: docName,
                 age: docAge,
-                salary: docSalary,
                 user: user[0]._id,
                 isOwner: iswOwner,
-                owner: docBoss,
+                assignedBy: assignedBy,
               },
             ],
             {
