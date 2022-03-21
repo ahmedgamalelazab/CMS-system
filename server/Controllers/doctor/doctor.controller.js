@@ -1,4 +1,7 @@
 const { request, response } = require('express');
+const {
+  addDoctorToClinicService,
+} = require('../../Services/doctor/doctor.service.js');
 
 /**
  *
@@ -16,7 +19,31 @@ module.exports.getAllDoctorsController = async (req, res, next) => {};
  * @description you can add doctor to the system then u can assign him to a clinic , this is only for the admin
  * @admin true only for the admin
  */
-module.exports.addDoctorController = async (req, res, next) => {};
+module.exports.addDoctorController = async (req, res, next) => {
+  try {
+    console.log(req.body);
+    const { docName, docAge, assignedBy, userEmail, userPassword } = req.body;
+
+    const result = await addDoctorToClinicService(
+      docName,
+      docAge,
+      assignedBy,
+      userEmail,
+      userPassword
+    );
+    //if all are ok
+    res.status(201).json({
+      success: true,
+      data: result.data,
+    });
+  } catch (error) {
+    res.status(501).json({
+      success: false,
+      data: null,
+      errorMessage: error.message,
+    });
+  }
+};
 
 /**
  *

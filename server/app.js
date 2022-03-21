@@ -37,52 +37,54 @@ const port = process.env.PORT || 3333;
 
 //multer code
 
-const { Doctor } = require('./Models/Doctor.js');
+// const { Doctor } = require('./Models/Doctor.js');
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join('./', '/uploads'));
-  },
-  filename: async function (req, file, cb) {
-    console.log(req.body);
-    const doctor = await Doctor.create({
-      name: req.body.name,
-    });
-    cb(null, doctor._id.toString() + '.' + file.mimetype.split('/')[1]);
-    doctor.profileImage = `${path.join(
-      './',
-      'upload',
-      `${doctor._id}.${file.mimetype.split('/')[1]}`
-    )}`;
-    await Doctor.updateOne(
-      {
-        _id: doctor._id,
-      },
-      {
-        profileImage: doctor.profileImage,
-      }
-    );
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, path.join('./', '/uploads'));
+//   },
+//   filename: async function (req, file, cb) {
+//     console.log(req.body);
+//     const doctor = await Doctor.create({
+//       name: req.body.name,
+//     });
+//     cb(null, doctor._id.toString() + '.' + file.mimetype.split('/')[1]);
+//     doctor.profileImage = `${path.join(
+//       './',
+//       'upload',
+//       `${doctor._id}.${file.mimetype.split('/')[1]}`
+//     )}`;
+//     await Doctor.updateOne(
+//       {
+//         _id: doctor._id,
+//       },
+//       {
+//         profileImage: doctor.profileImage,
+//       }
+//     );
+//   },
+// });
 
-const upload = multer({ storage: storage });
-//end of multer code
+// const upload = multer({ storage: storage });
+// //end of multer code
+
+// app.post(
+//   '/app/v1/profile',
+//   upload.single('profile'),
+//   function (req, res, next) {
+//     console.log(req.file, req.body);
+//     res.json({
+//       file: req.file,
+//       body: req.body,
+//     });
+//   }
+// );
+// app.use('/images', express.static(__dirname + '/uploads'));
 app.use(helmet());
 app.use(morgan());
 app.use(express.json());
-app.post(
-  '/app/v1/profile',
-  upload.single('profile'),
-  function (req, res, next) {
-    console.log(req.file, req.body);
-    res.json({
-      file: req.file,
-      body: req.body,
-    });
-  }
-);
-app.use('/images', express.static(__dirname + '/uploads'));
-app.use('/api/v1', require('./Routes/clinic/clinic.routes'));
+app.use('/api/v1', require('./Routes/clinic/clinic.routes.js'));
+app.use('/api/v1', require('./Routes/doctor/doctor.routes.js'));
 app.use('/', async (re, res, next) => {
   res.status(200).json({
     success: false,

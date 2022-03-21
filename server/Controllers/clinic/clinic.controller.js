@@ -169,17 +169,3 @@ module.exports.getAllClinicsDoctorsController = async (req, res, next) => {
     });
   }
 };
-
-/**
- *
- * @param {request} req
- * @param {response} res
- * @param {Function} next
- * @description this api for the doctor [OWNER] to assign to his clinic doctors
- */
-module.exports.ownerAssignClinicDoctor = async (req, res, next) => {
-  res.status(200).json({
-    success: true,
-    data: 'get all clinic doctors logic result will be sent to the user',
-  });
-};

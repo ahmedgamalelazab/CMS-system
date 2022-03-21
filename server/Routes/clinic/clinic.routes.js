@@ -15,8 +15,6 @@ const {
 Router.route('/clinics').get(getAllClinicsController);
 Router.route('/clinics/:id/doctors').get(getAllClinicsDoctorsController);
 Router.route('/clinics/add').post(addClinicController);
-//this is allowed to the owner of the clinic
-Router.route('/clinics/owner/doctors/add').post(ownerAssignClinicDoctor);
 Router.route('/clinics/update/:id').put(updateClinicDataController);
 Router.route('/clinics/delete/:id').delete(removeClinicDataController);
 
