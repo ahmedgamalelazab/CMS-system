@@ -232,9 +232,31 @@ async function updateClinicDataService(
   });
 }
 
+async function getAllClinicDoctors(clinicId) {
+  return new Promise(async (resolve, reject) => {
+    if (DBConnection.isConnected()) {
+      try {
+        const clinic = await Clinic.findOne({
+          _id: clinicId,
+        });
+        //if all are ok
+        resolve({
+          success: true,
+          data: clinic.doctors,
+        });
+      } catch (error) {
+        reject(new Error(error.message));
+      }
+    } else {
+      reject(new Error('db connection problem'));
+    }
+  });
+}
+
 module.exports = {
   AddClinicService,
   getAllClinicsService,
   eraseClinicData,
   updateClinicDataService,
+  getAllClinicDoctors,
 };

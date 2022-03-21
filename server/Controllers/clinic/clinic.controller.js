@@ -6,6 +6,7 @@ const {
   getAllClinicsService,
   eraseClinicData,
   updateClinicDataService,
+  getAllClinicDoctors,
 } = require('../../Services/Clinic/Clinic.service.js');
 
 /**
@@ -153,10 +154,22 @@ module.exports.updateClinicDataController = async (req, res, next) => {
  * @param {Function} next
  */
 module.exports.getAllClinicsDoctorsController = async (req, res, next) => {
-  res.status(200).json({
-    success: true,
-    data: 'get all clinic doctors logic result will be sent to the user',
-  });
+  try {
+    const clinicId = req.params.id;
+
+    const result = await getAllClinicDoctors(clinicId);
+
+    res.status(200).json({
+      success: true,
+      data: result.data,
+    });
+  } catch (error) {
+    res.status(501).json({
+      success: false,
+      data: null,
+      errorMessage: error.message,
+    });
+  }
 };
 
 /**
