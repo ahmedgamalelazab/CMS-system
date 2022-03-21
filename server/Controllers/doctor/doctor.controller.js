@@ -129,7 +129,7 @@ module.exports.updateDoctorDataController = async (req, res, next) => {
     const docId = req.params.id;
     const { docName, docAge } = req.body;
 
-    const result = await updateDoctorService(docId);
+    const result = await updateDoctorService(docId, docName, docAge);
     //if all are ok
     res.status(201).json({
       success: true,

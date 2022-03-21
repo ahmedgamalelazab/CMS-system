@@ -287,11 +287,15 @@ async function updateDoctorService(docId, docName, docAge) {
     if (DBConnection.isConnected()) {
       const dataTracer = {};
       try {
-        const result = await Doctor.updateOne({
-          _id: docId,
-          name: docName,
-          age: docAge,
-        });
+        const result = await Doctor.updateOne(
+          {
+            _id: docId,
+          },
+          {
+            name: docName,
+            age: docAge,
+          }
+        );
 
         const updatedDoc = await Doctor.findOne({
           _id: docId,
