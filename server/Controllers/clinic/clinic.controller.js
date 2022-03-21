@@ -4,6 +4,8 @@ const { request, response } = require('express');
 const {
   AddClinicService,
   getAllClinicsService,
+  eraseClinicData,
+  updateClinicDataService,
 } = require('../../Services/Clinic/Clinic.service.js');
 
 /**
@@ -92,10 +94,21 @@ module.exports.addClinicController = async function (req, res, next) {
  * @param {Function} next
  */
 module.exports.removeClinicDataController = async (req, res, next) => {
-  res.status(201).json({
-    success: true,
-    data: 'remove clinic logic result will be sent to the user',
-  });
+  try {
+    const clinicId = req.params.id;
+    const result = await eraseClinicData(clinicId);
+    res.status(201).json({
+      status: true,
+      data: result.data,
+      deletingState: result.deletingState,
+    });
+  } catch (error) {
+    res.status(501).json({
+      success: false,
+      data: null,
+      errorMessage: error.message,
+    });
+  }
 };
 
 /**
@@ -105,10 +118,32 @@ module.exports.removeClinicDataController = async (req, res, next) => {
  * @param {Function} next
  */
 module.exports.updateClinicDataController = async (req, res, next) => {
-  res.status(200).json({
-    success: true,
-    data: 'update clinic logic will be sent to the user',
-  });
+  try {
+    const clinicId = req.params.id;
+    const { clinicName, clinicAddress, clinicPhone, clinicDescription, owner } =
+      req.body;
+    const result = await updateClinicDataService(
+      clinicId,
+      clinicName,
+      clinicAddress,
+      clinicPhone,
+      clinicDescription,
+      owner
+    );
+
+    //if all are ok
+    res.status(201).json({
+      success: true,
+      data: result.data,
+      updateState: result.updateState,
+    });
+  } catch (error) {
+    res.status(501).json({
+      success: false,
+      data: null,
+      errorMessage: error.message,
+    });
+  }
 };
 
 /**

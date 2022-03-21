@@ -25,6 +25,10 @@ const doctorSchema = new mongoose.Schema(
     owner: {
       type: mongoose.SchemaTypes.ObjectId,
     },
+    isConnectedToClinic: {
+      type: mongoose.SchemaTypes.Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

@@ -67,6 +67,7 @@ async function AddClinicService(
           if (doctor.isOwner) {
             clinic.owner = doctor._id;
           }
+          doctor.isConnectedToClinic = true;
           clinic.doctors.push(doctor);
           ////////////////////////////////////////
           ////////////SAVING CODE ////////////////
@@ -119,7 +120,121 @@ async function getAllClinicsService() {
   });
 }
 
+/**
+ * @idea : to delete clinic u have either delete the whole clinic data with doctor data or simply delete the clinic and keep the data of the doctor then switch to the doctor as admin and delete his data if u want
+ * @desc : so we won't delete the whole data we simply will delete the clinic
+ * @very_important : the strategy of the erasing is simply allow the admin to know if the doctor is connected to clinic or not if the doctor tagged with isConnectedToClinic : false that's mean we should erase his data on demand
+ * @param {string} clinicId
+ * @returns {Promise}
+ */
+async function eraseClinicData(clinicId) {
+  return new Promise(async (resolve, reject) => {
+    const dataTracer = {}; //data tracer
+
+    if (DBConnection.isConnected()) {
+      try {
+        //do connection safe
+
+        //we will do some transactions in order to delete and mark down the doctors who are connected to the clinic removed
+
+        const session = await mongoose.startSession();
+
+        await session.withTransaction(async () => {
+          //getting the target clinic
+          const clinicDataOnRemove = await Clinic.findOne({
+            _id: clinicId,
+          });
+
+          clinicDataOnRemove.doctors.forEach(async doctor => {
+            await Doctor.updateOne(
+              {
+                _id: doctor._id,
+              },
+              {
+                isConnectedToClinic: false,
+              }
+            );
+          });
+
+          const result = await Clinic.deleteOne({
+            _id: clinicId,
+          });
+
+          //if it removed well
+
+          dataTracer.erasedClinic = clinicDataOnRemove; // will return as that's was the result
+        });
+
+        session.endSession();
+
+        resolve({
+          success: true,
+          data: dataTracer.erasedClinic,
+          deletingState: 1,
+        });
+      } catch (error) {
+        reject(new Error(error.message));
+      }
+    } else {
+      reject('db connection problem');
+    }
+  });
+}
+
+/**
+ * @very_important : when u display the clinic doctors if u deleted a doctor u will have to update the clinic doctors list
+ * @param {string} clinicId
+ * @param {string} clinicName
+ * @param {string} clinicAddress
+ * @param {string} clinicPhone
+ * @param {string} clinicDescription
+ * @param {string} owner
+ */
+async function updateClinicDataService(
+  clinicId,
+  clinicName,
+  clinicAddress,
+  clinicPhone,
+  clinicDescription,
+  owner
+) {
+  return new Promise(async (resolve, reject) => {
+    if (DBConnection.isConnected()) {
+      const dataTracer = {};
+      try {
+        const clinic = await Clinic.findOne({
+          _id: clinicId,
+        });
+
+        clinic.name = clinicName;
+        clinic.address = clinicAddress;
+        clinic.description = clinicDescription;
+        clinic.phone = clinicPhone;
+        clinic.owner = owner;
+
+        //if all are ok
+
+        clinic.save();
+
+        dataTracer.data = clinic;
+
+        resolve({
+          status: true,
+          data: dataTracer.data,
+          updateState: 1,
+        });
+      } catch (error) {
+        reject(new Error(error.message));
+      }
+    } else {
+      reject(new Error('db connection problem'));
+    }
+  });
+}
+
 module.exports = {
   AddClinicService,
   getAllClinicsService,
+  eraseClinicData,
+  updateClinicDataService,
 };
