@@ -89,6 +89,16 @@ async function addPatientService(
   });
 }
 
+/**
+ *
+ * @param {string} patientId
+ * @param {string} firstName
+ * @param {string} lastName
+ * @param {number} age
+ * @param {number} gender
+ * @param {string} phone
+ * @returns {Promise}
+ */
 async function updatePatientService(
   patientId,
   firstName,
