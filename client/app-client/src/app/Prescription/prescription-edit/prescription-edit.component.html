@@ -1,6 +1,6 @@
 <!-- <p>prescription-edit works!</p> -->
 
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="editedPrescription != null">
     <h3 class="text-dark mb-4">Edit Prescription</h3>
     <div class="card shadow">
         <div class="card-header py-3">
@@ -11,19 +11,19 @@
                 <form #f="ngForm" action="">
                     <div class="mb-3">
                         <label  class="form-label">Patient Name:</label>
-                        <input type="text" class="form-control"  name="Pname" [(ngModel)]="editedPrescription.patientName">
+                        <input type="text" class="form-control"  name="Pname" [(ngModel)]="editedPrescription.patient">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Doctor Name:</label>
-                        <input type="text" required class="form-control"  name="Dname" [(ngModel)]="editedPrescription.doctortName">
+                        <input type="text" required class="form-control"  name="Dname" [(ngModel)]="editedPrescription.doctor">
                     </div>
                     <div class="mb-3">
                         <label  class="form-label">Clinic Name:</label>
-                        <input type="text" required class="form-control"  name="Cname" [(ngModel)]="editedPrescription.clinicName">
+                        <input type="text" required class="form-control"  name="Cname" [(ngModel)]="editedPrescription.clinic">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Date:</label>
-                        <input type="text" required class="form-control"  name="dose" [(ngModel)]="editedPrescription.date">
+                        <input type="date" required class="form-control"  name="dose" [(ngModel)]="editedPrescription.date">
                     </div>
                     <div class="d-flex justify-content-between">
                         <button type="submit" class="btn btn-primary" (click)="SaveEditedPrescription()">Save</button>

@@ -1,6 +1,6 @@
 <!-- <p>prescription-add works!</p> -->
 
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="newPrescription !=null">
     <h3 class="text-dark mb-4">Add New Prescription</h3>
     <div class="card shadow">
         <div class="card-header py-3">
@@ -10,24 +10,24 @@
             <div id="divAddPatient">
                 <form action="">
                     <div class="mb-3">
-                        <label  class="form-label">Patient ID:</label>
-                        <input type="text" class="form-control"  name="pid" [(ngModel)]="newPrescription.pid">
+                        <label  class="form-label">ID:</label>
+                        <input type="text" class="form-control"  name="pid" [(ngModel)]="newPrescription._id">
                     </div>
                     <div class="mb-3">
                         <label  class="form-label">Patient Name:</label>
-                        <input type="text" class="form-control"  name="Pname" [(ngModel)]="newPrescription.patientName">
+                        <input type="text" class="form-control"  name="Pname" [(ngModel)]="newPrescription.patient">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Doctor Name:</label>
-                        <input type="text" required class="form-control"  name="Dname"[(ngModel)]="newPrescription.doctortName">
+                        <input type="text" required class="form-control"  name="Dname"[(ngModel)]="newPrescription.doctor">
                     </div>
                     <div class="mb-3">
                         <label  class="form-label">Clinic Name:</label>
-                        <input type="text" required class="form-control"  name="Cname" [(ngModel)]="newPrescription.clinicName">
+                        <input type="text" required class="form-control"  name="Cname" [(ngModel)]="newPrescription.clinic">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Date:</label>
-                        <input type="text" required class="form-control"  name="Date" [(ngModel)]="newPrescription.date">
+                        <input type="date" required class="form-control"  name="Date" [(ngModel)]="newPrescription.date">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">List Of Medicine:</label>

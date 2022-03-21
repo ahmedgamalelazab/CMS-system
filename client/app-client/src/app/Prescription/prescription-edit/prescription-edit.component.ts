@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PrescriptionService } from 'src/app/prescription.service';
+import { PrescriptionService } from 'src/app/services/prescription.service';
 import { Prescription } from 'src/app/_model/Prescription';
 
 @Component({
@@ -10,13 +10,13 @@ import { Prescription } from 'src/app/_model/Prescription';
 })
 export class PrescriptionEditComponent implements OnInit {
  // @Input() editedPrescription: Prescription = new Prescription(0,"","","",0);
- editedPrescription: Prescription  = new Prescription(0,"","","",["","","",""],new Date());
+ editedPrescription: Prescription|null=null;  
  
   constructor(private activeR:ActivatedRoute,private PrescriptionSer: PrescriptionService,private router:Router) { }
   ngOnInit(): void {
     this.activeR.params.subscribe(a=>{
-      // this.PrescriptionSer.getPrescriptionByID(a["pid"]).subscribe(presc=>this.editedPrescription=presc);
-      this.editedPrescription= this.PrescriptionSer.getPrescriptionByID(a["pid"]);
+       this.PrescriptionSer.getPrescriptionByID(a["pid"]).subscribe(presc=>this.editedPrescription=presc);
+      //this.editedPrescription= this.PrescriptionSer.getPrescriptionByID(a["pid"]);
     })
     //this.editedPrescription= this.PrescriptionSer.getPrescriptionByID(this.editedPrescription.pid);
   }

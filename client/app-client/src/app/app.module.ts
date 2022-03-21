@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import {HttpClientModule} from '@angular/common/http'
 import { AppComponent } from './app.component';
 import * as $ from 'jquery';
 import { FormsModule } from '@angular/forms';
@@ -12,7 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
     AppComponent
   ],
   imports: [
-  BrowserModule,FormsModule,PrescriptionModule,AppRoutingModule
+  BrowserModule,FormsModule,PrescriptionModule,AppRoutingModule,HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

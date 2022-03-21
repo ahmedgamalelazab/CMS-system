@@ -6,15 +6,6 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <!-- <div class="col-md-6 text-nowrap">
-                      <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Show&nbsp;<select class="d-inline-block form-select form-select-sm">
-                                        <option value="10" selected="">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select>&nbsp;</label>
-                                </div
-                </div> -->
                 <div class="col-md-6">
                     <div class=" dataTables_filter" id="dataTable_filter"><label class="form-label"><input
                                 type="search" class="form-control form-control-sm" aria-controls="dataTable" ngModel #f
@@ -36,9 +27,9 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Patient </th>
                             <th>Doctor </th>
                             <th>Clinic </th>
+                            <th>Patient </th>
                             <th>Date</th>
                             <th>List of Medicine</th>
                             <th>Edit </th>
@@ -48,23 +39,22 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of PrescriptionList">
-                            <td>{{item.pid}}</td>
-                            <td>{{item.patientName}}</td>
-                            <td>{{item.doctortName}}</td>
-                            <td>{{item.clinicName}}</td>
+                            <td>{{item._id}}</td>
+                            <td>{{item.doctor}}</td>
+                            <td>{{item.clinic}}</td>
+                            <td>{{item.patient}}</td>
                             <td>{{item.date|date:'yy/MMM/dd'}}</td>
                             <td >
-                                <span *ngFor="let i of item.listmedicine">
+                                <span *ngFor="let i of item.medicine">
                                     {{i}},
                                 </span>
                             </td>
                             <td>
-                                <a [routerLink]="['./edit/'+item.pid]"><i class="fas fa-edit fs-4 text-primary"
+                                <a [routerLink]="['./edit/'+item._id]"><i class="fas fa-edit fs-4 text-primary"
                                         title="Edit"></i></a>
                             </td>
                             <td>
-                                <!-- <button type="button" class="btn btn-danger" (click)="deletePrescription(item.pid)">Delete</button> -->
-                                <a><i class="fa fa-trash text-danger fs-4" (click)="deletePrescription(item.pid)"
+                                <a><i class="fa fa-trash text-danger fs-4" (click)="deletePrescription(item._id)"
                                         title="Delete"></i></a>
                             </td>
                         </tr>
@@ -72,22 +62,17 @@
                     <tfoot>
                         <tr>
                             <td><strong>ID</strong></td>
-                            <td><strong>Patient </strong></td>
                             <td><strong>Doctor </strong></td>
                             <td><strong>Clinic </strong></td>
+                            <td><strong>Patient </strong></td>
                             <td><strong>Date</strong></td>
                             <td><strong>List of Medicine</strong></td>
                             <th>Edit </th>
                             <th>Delete </th>
-
                         </tr>
                     </tfoot>
                 </table>
             </div>
-
-            <!-- <pm-prescription-edit [editedPrescription]="prescription"></pm-prescription-edit>
-                    <pm-prescription-add></pm-prescription-add>  -->
-            <!-- <router-outlet></router-outlet> -->
             <div class="row">
                 <div class="col-md-6 align-self-center">
                     <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10

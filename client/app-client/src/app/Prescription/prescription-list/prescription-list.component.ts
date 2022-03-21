@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PrescriptionService } from 'src/app/prescription.service';
+import { PrescriptionService } from 'src/app/services/prescription.service';
 import { Prescription } from 'src/app/_model/Prescription';
 
 @Component({
@@ -10,37 +10,36 @@ import { Prescription } from 'src/app/_model/Prescription';
 export class PrescriptionListComponent implements OnInit {
 
   Prescriptions: Prescription[] = [];
-  prescription: Prescription = new Prescription(0,"","","",["","","",""],new Date());
-  PrescriptionList:Prescription[] = this.PrescriptionSer.getAllPrescription();
+  PrescriptionList:Prescription[] = [];
   constructor(private PrescriptionSer:PrescriptionService) { }
  
-  PrescriptionDetails(pid: number) {
-    this.prescription= this.PrescriptionSer.getPrescriptionByID(pid);
-  }
   deletePrescription(id:number){
     if(confirm("Are you sure you want delete this record?")){
-      this.PrescriptionSer.delete(id);
+      this.PrescriptionSer.deletePrescription(id);
     }
-   
-
   }
   
   searchprescription(pname:string){
-    if(pname.length == 0){
-      this.PrescriptionList = this.Prescriptions;
-      return;
-    }
-    this.PrescriptionList = [];
-    this.Prescriptions.forEach(element => {
-      if(element.patientName.toLowerCase().startsWith(pname.toLowerCase()))
-        this.PrescriptionList.push(element);
-    });
+    //will be updated after merging
+    //-----------------------------------
+    // if(pname.length == 0){
+    //   this.PrescriptionList = this.Prescriptions;
+    //   return;
+    // }
+    // this.PrescriptionList = [];
+    // this.Prescriptions.forEach(element => {
+    //   if(element.patient.toLowerCase().startsWith(pname.toLowerCase()))
+    //     this.PrescriptionList.push(element);
+    // });
 
   }
 
   ngOnInit(): void {
    
-    this.Prescriptions=this.PrescriptionSer.getAllPrescription();
+   this.PrescriptionSer.getAllPrescription().subscribe({
+     next:(p)=>{this.Prescriptions=p;this.PrescriptionList=p},
+     error:(e)=>{console.error(e)}
+   });
   
   
   }

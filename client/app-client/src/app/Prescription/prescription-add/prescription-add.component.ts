@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PrescriptionService } from 'src/app/prescription.service';
+import { PrescriptionService } from 'src/app/services/prescription.service';
 import { Prescription } from 'src/app/_model/Prescription';
 
 @Component({
@@ -10,10 +10,10 @@ import { Prescription } from 'src/app/_model/Prescription';
 })
 export class PrescriptionAddComponent implements OnInit {
 
-  newPrescription: Prescription = new Prescription(0, "", "", "",[], new Date());
+  newPrescription: Prescription |null=null;
   constructor( private PrescriptionSer: PrescriptionService, private router: Router) { }
   save() {
-    if (this.newPrescription.pid>0) {
+    if (this.newPrescription != null) {
       this.PrescriptionSer.addPrescription(this.newPrescription);
       alert("Prescription added Successfully!");
       this.router.navigateByUrl("/prescription");
