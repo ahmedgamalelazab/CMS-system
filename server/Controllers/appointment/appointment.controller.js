@@ -7,7 +7,7 @@ const {
   getAppointmentByIdService,
   addAppointmentService,
   updateAppointmentService,
-  deleteAppointmentService
+  deleteAppointmentService,
 } = require('../../Services/appointment/appointment.service.js');
 
 /**
@@ -42,7 +42,7 @@ module.exports.getAllAppointmentController = async (req, res, next) => {
  * @param {response} res
  * @param {Function} next
  */
- module.exports.getClinicAppointmentsController = async (req, res, next) => {
+module.exports.getClinicAppointmentsController = async (req, res, next) => {
   try {
     const clinicId = req.params.id;
     const result = await getClinicAppointmentsService(clinicId);
@@ -65,10 +65,10 @@ module.exports.getAllAppointmentController = async (req, res, next) => {
  * @param {response} res
  * @param {Function} next
  */
- module.exports.getDoctorAppointmentsController = async (req, res, next) => {
+module.exports.getDoctorAppointmentsController = async (req, res, next) => {
   try {
     const doctorId = req.params.id;
-    const result = await getEmployeeByIdService(doctorId);
+    const result = await getDoctorAppointmentsService(doctorId);
     //if all are ok
     res.status(200).json({
       success: true,
@@ -88,7 +88,7 @@ module.exports.getAllAppointmentController = async (req, res, next) => {
  * @param {response} res
  * @param {Function} next
  */
- module.exports.getPatientAppointmentsController = async (req, res, next) => {
+module.exports.getPatientAppointmentsController = async (req, res, next) => {
   try {
     const patientId = req.params.id;
     const result = await getPatientAppointmentsService(patientId);
@@ -128,7 +128,6 @@ module.exports.getAppointmentByIdController = async (req, res, next) => {
   }
 };
 
-
 /**
  *
  * @param {request} req
@@ -137,7 +136,15 @@ module.exports.getAppointmentByIdController = async (req, res, next) => {
  */
 module.exports.AddAppointmentController = async (req, res, next) => {
   try {
-    const { clinicId, doctorId, patientId, date, isConfirmed, totalPrice, payment } = req.body;
+    const {
+      clinicId,
+      doctorId,
+      patientId,
+      date,
+      isConfirmed,
+      totalPrice,
+      payment,
+    } = req.body;
 
     const result = await addAppointmentService(
       clinicId,
