@@ -68,7 +68,7 @@ async function AddClinicService(
             clinic.owner = doctor._id;
           }
           doctor.isConnectedToClinic = true;
-          clinic.doctors.push(doctor);
+          clinic.doctors.push(doctor._id);
           ////////////////////////////////////////
           ////////////SAVING CODE ////////////////
           //? any code issue this transaction will not fll the data
@@ -98,6 +98,7 @@ async function AddClinicService(
 /////////////////////////////////////////////////////////////////////////////
 
 /**
+ * @very_important : BUG FIXED getting array of doctors using populate rather than depend on nested object
  * returns {Promise}
  */
 async function getAllClinicsService() {
@@ -105,7 +106,7 @@ async function getAllClinicsService() {
     if (DBConnection.isConnected()) {
       const dataTracer = {};
 
-      const clinics = await Clinic.find().populate('owner'); // suppose to get me all the clinics
+      const clinics = await Clinic.find().populate('owner').populate('doctors'); // suppose to get me all the clinics
 
       dataTracer.clinicsData = clinics;
 
@@ -145,10 +146,10 @@ async function eraseClinicData(clinicId) {
             _id: clinicId,
           });
 
-          clinicDataOnRemove.doctors.forEach(async doctor => {
+          clinicDataOnRemove.doctors.forEach(async doctorID => {
             await Doctor.updateOne(
               {
-                _id: doctor._id,
+                _id: doctorID,
               },
               {
                 isConnectedToClinic: false,
@@ -214,7 +215,7 @@ async function updateClinicDataService(
 
         //if all are ok
 
-        clinic.save();
+        await clinic.save();
 
         dataTracer.data = clinic;
 
@@ -238,7 +239,7 @@ async function getAllClinicDoctors(clinicId) {
       try {
         const clinic = await Clinic.findOne({
           _id: clinicId,
-        });
+        }).populate('doctors');
         //if all are ok
         resolve({
           success: true,
@@ -252,6 +253,8 @@ async function getAllClinicDoctors(clinicId) {
     }
   });
 }
+
+//TODO implement the doctor doctors[workers] control
 
 module.exports = {
   AddClinicService,

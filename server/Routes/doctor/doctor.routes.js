@@ -12,8 +12,11 @@ const {
 
 Router.route('/doctors').get(getAllDoctorsController);
 Router.route('/doctors/patients').get(getAllDoctorPatientsData);
+//weird but adding doctor here is just for admin purposes
 Router.route('/doctors/add').post(addDoctorController);
+//delete a doctor then update the correspond clinic
 Router.route('/doctors/delete/:id').delete(removeDoctorDataController);
+
 Router.route('/doctors/update:id').put(updateDoctorDataController);
 
 module.exports = Router;
