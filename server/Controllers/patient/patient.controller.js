@@ -33,6 +33,12 @@ module.exports.getAllPatientsController = async (req, res, next) => {
   }
 };
 
+/**
+ *
+ * @param {request} req
+ * @param {response} res
+ * @param {Function} next
+ */
 module.exports.getPatientByIdController = async (req, res, next) => {
   try {
     const patientId = req.params.id;
