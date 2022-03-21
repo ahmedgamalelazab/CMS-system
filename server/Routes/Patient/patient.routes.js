@@ -2,15 +2,15 @@ const Router = require('express').Router();
 
 const {
   doctorAddPatientController,
-  doctorGetAllPatientsController,
+  getPatientByIdController,
   doctorRemovePatientController,
   doctorUpdatePatientController,
   getAllPatientsController,
 } = require('../../Controllers/patient/patient.controller.js');
 
 Router.route('/patients').get(getAllPatientsController);
+Router.route('/patients/:id').get(getPatientByIdController);
 Router.route('/doctor/patients/add').post(doctorAddPatientController);
-Router.route('/doctor/patients').get(doctorGetAllPatientsController);
 Router.route('/doctor/patients/remove/:id').delete(
   doctorRemovePatientController
 );

@@ -85,6 +85,7 @@ app.use(morgan());
 app.use(express.json());
 app.use('/api/v1', require('./Routes/clinic/clinic.routes.js'));
 app.use('/api/v1', require('./Routes/doctor/doctor.routes.js'));
+app.use('/api/v1', require('./Routes/Patient/patient.routes.js'));
 app.use('/', async (re, res, next) => {
   res.status(200).json({
     success: false,
