@@ -19,6 +19,8 @@ const doctorSchema = new mongoose.Schema(
     },
     profileImage: {
       type: mongoose.SchemaTypes.String,
+      default:
+        'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png',
     },
     owner: {
       type: mongoose.SchemaTypes.ObjectId,

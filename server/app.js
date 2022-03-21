@@ -67,7 +67,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 //end of multer code
-
+app.use(helmet());
+app.use(morgan());
+app.use(express.json());
 app.post(
   '/app/v1/profile',
   upload.single('profile'),

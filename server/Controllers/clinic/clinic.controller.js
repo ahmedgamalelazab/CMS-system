@@ -1,9 +1,10 @@
 //building example data
 //place holder data
 const { request, response } = require('express');
-const Clinic = require('../../Models/Clinic.js');
-const User = require('../../Models/User.js');
-const { Doctor } = require('../../Models/Doctor.js');
+const {
+  AddClinicService,
+  getAllClinicsService,
+} = require('../../Services/Clinic/Clinic.service.js');
 
 /**
  *
@@ -12,41 +13,22 @@ const { Doctor } = require('../../Models/Doctor.js');
  * @param {Function} next
  */
 module.exports.getAllClinicsController = async function (req, res, next) {
-  const user = await User.create({
-    email: 'agemy844@gmail.com',
-    password: '12345',
-    userType: 'doctor',
-  });
+  try {
+    const result = await getAllClinicsService();
 
-  const doctorTest = await Doctor.create({
-    name: 'testDoc',
-    age: 55,
-    salary: 3344,
-    user: user._id,
-    isOwner: true,
-    profileImage: 'none',
-    owner: null,
-  });
+    //if the result came ok !
 
-  const docFullData = await Doctor.findOne({
-    name: 'testDoc',
-  }).populate({
-    path: 'user',
-  });
-
-  const clinicTest = await Clinic.create({
-    name: 'tsetClinic',
-    doctors: [doctorTest],
-    address: 'testing address',
-    phone: '01032122442',
-    description: 'testing description',
-    owner: doctorTest._id,
-  });
-
-  res.status(200).json({
-    success: true,
-    data: docFullData,
-  });
+    res.status(200).json({
+      success: true,
+      data: result.data,
+    });
+  } catch (error) {
+    res.status(501).json({
+      success: false,
+      data: null,
+      message: error.message,
+    });
+  }
 };
 
 /**
@@ -57,10 +39,50 @@ module.exports.getAllClinicsController = async function (req, res, next) {
  */
 module.exports.addClinicController = async function (req, res, next) {
   //body will send me a clinic data
-  res.status(201).json({
-    success: true,
-    data: 'add clinic logic result will be sent to user',
-  });
+  //the body will send the client form data then we will ask the service to insert the record in the db
+
+  try {
+    const {
+      clinicName,
+      clinicAddress,
+      clinicPhone,
+      clinicDescription,
+      userEmail,
+      userPassword,
+      docName,
+      docAge,
+      docSalary,
+      iswOwner,
+      docBoss,
+    } = req.body;
+
+    const result = await AddClinicService(
+      clinicName,
+      clinicAddress,
+      clinicPhone,
+      clinicDescription,
+      userEmail,
+      userPassword,
+      docName,
+      docAge,
+      docSalary,
+      iswOwner,
+      docBoss
+    );
+
+    //if no error
+
+    res.status(201).json({
+      success: true,
+      data: result.data,
+    });
+  } catch (error) {
+    res.status(501).json({
+      success: false,
+      data: null,
+      errorMessage: error.message,
+    });
+  }
 };
 
 /**
