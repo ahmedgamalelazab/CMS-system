@@ -142,7 +142,27 @@ async function updatePatientService(
 async function deletePatientService(patientId) {
   return new Promise(async (resolve, reject) => {
     if (DBConnection.isConnected()) {
+      const dataTracer = {};
+      try {
+        const targetPatient = await Patient.findOne({
+          _id: patientId,
+        });
+
+        dataTracer.deletedPatient = targetPatient;
+
+        await Patient.deleteOne({
+          _id: patientId,
+        });
+
+        resolve({
+          success: true,
+          data: dataTracer,
+        });
+      } catch (error) {
+        reject(new Error(error.message));
+      }
     } else {
+      reject(new Error('db connection problem'));
     }
   });
 }
