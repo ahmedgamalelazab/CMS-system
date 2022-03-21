@@ -4,6 +4,7 @@
   "description": "* Roles :",
   "main": "app.js",
   "scripts": {
+    "start": "app",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon app.js"
   },

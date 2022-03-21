@@ -1,8 +1,0 @@
-.footer img{
-    transition: 0.5s all;
-}
-
-.footer img:hover{
-    cursor: pointer;
-    transform: scale(1.2);
-}

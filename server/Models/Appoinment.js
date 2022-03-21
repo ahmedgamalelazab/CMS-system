@@ -1,10 +1,14 @@
 //cleaned
 const mongoose = require('mongoose');
-const Doctor = require('./Doctor.js');
+const Clinic = require('./Clinic.js');
+const {Doctor} = require('./Doctor.js');
 const Patient = require('./Patient.js');
 
 const appointmentSchema = new mongoose.Schema(
   {
+    clinic: {
+      type: mongoose.SchemaTypes.ObjectId,
+    },
     doctor: {
       type: mongoose.SchemaTypes.ObjectId,
     },
@@ -34,6 +38,7 @@ const appointmentSchema = new mongoose.Schema(
   }
 );
 
+appointmentSchema.path('clinic').ref(Clinic);
 appointmentSchema.path('doctor').ref(Doctor);
 appointmentSchema.path('patient').ref(Patient);
 
