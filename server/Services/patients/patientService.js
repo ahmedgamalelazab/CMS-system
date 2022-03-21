@@ -153,7 +153,6 @@ async function deletePatientService(patientId) {
         await Patient.deleteOne({
           _id: patientId,
         });
-
         resolve({
           success: true,
           data: dataTracer,
@@ -166,3 +165,11 @@ async function deletePatientService(patientId) {
     }
   });
 }
+
+module.exports = {
+  getAllPatientsService,
+  getPatientByIdService,
+  addPatientService,
+  updatePatientService,
+  deletePatientService,
+};
