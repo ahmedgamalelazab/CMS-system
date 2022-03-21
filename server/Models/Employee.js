@@ -19,6 +19,11 @@ const employeeSchema = new mongoose.Schema(
     clinic: {
       type: mongoose.SchemaTypes.ObjectId,
     },
+    //whoever gonna assign a employee should be a clinic owner [doctor]
+    assignedBy: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Doctor',
+    },
   },
   {
     timestamps: true,

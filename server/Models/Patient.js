@@ -26,6 +26,12 @@ const patientSchema = new mongoose.Schema(
     clinic: {
       type: mongoose.SchemaTypes.ObjectId,
     },
+    //if the patient tiedTo array is empty then this patient is not connected to any doctor
+    //then the admin can delete the data or keep the data upon this piece of the information
+    tiedTo: {
+      type: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Doctor' }],
+      required: false,
+    },
   },
   {
     timestamps: true,

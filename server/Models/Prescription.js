@@ -25,7 +25,7 @@ const prescriptionSchema = new mongoose.Schema(
     },
     date: {
       type: mongoose.SchemaTypes.Date,
-      default: date.now,
+      default: Date.now,
     },
     hasPayed: {
       type: mongoose.SchemaTypes.Boolean,
@@ -37,6 +37,11 @@ const prescriptionSchema = new mongoose.Schema(
       type: mongoose.SchemaTypes.String,
       enum: ['cash', 'visa'],
       default: 'cash',
+    },
+    //this is because i will keep the data when i remove the connected doctor so i need to know if this prescription tied to a doctor or not
+    tiedToDoctor: {
+      type: mongoose.SchemaTypes.Boolean,
+      default: false,
     },
   },
   {
