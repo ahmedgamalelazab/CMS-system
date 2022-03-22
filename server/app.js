@@ -83,6 +83,7 @@ const port = process.env.PORT || 3333;
 app.use(helmet());
 app.use(morgan());
 app.use(express.json());
+app.use('/api/v1', require('./Routes/auth/auth.routes.js'));
 app.use('/api/v1', require('./Routes/clinic/clinic.routes.js'));
 app.use('/api/v1', require('./Routes/doctor/doctor.routes.js'));
 app.use('/api/v1', require('./Routes/employee/employee.routes.js')); // added by mostafa
