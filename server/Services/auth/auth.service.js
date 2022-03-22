@@ -34,7 +34,10 @@ async function authService(userEmail, userPassword) {
           process.env.ADMIN_SECRET_KEY
         );
 
-        resolve(token);
+        resolve({
+          user: 'admin',
+          token: token,
+        });
       }
 
       //else go search in the users
@@ -71,7 +74,11 @@ async function authService(userEmail, userPassword) {
                   },
                   process.env.DOCTOR_SECRET_KEY
                 );
-                resolve(token);
+                resolve({
+                  user: 'doctor',
+                  token: token,
+                  doctorOwner: 'true',
+                });
               } else {
                 //some logic if the doctor is not owner
                 //in order to know the clinic of the non-owner doctor we are going to search by his assigned by doc
@@ -88,7 +95,11 @@ async function authService(userEmail, userPassword) {
                   },
                   process.env.DOCTOR_SECRET_KEY
                 );
-                resolve(token);
+                resolve({
+                  user: 'doctor',
+                  token: token,
+                  doctorOwner: 'false',
+                });
               }
             } else {
               reject(
@@ -118,7 +129,10 @@ async function authService(userEmail, userPassword) {
                 },
                 process.env.DOCTOR_SECRET_KEY
               );
-              resolve(token);
+              resolve({
+                user: 'employee',
+                token: token,
+              });
             } else {
               reject(
                 'INVALID email or password , pleas check your email with the system-admin'

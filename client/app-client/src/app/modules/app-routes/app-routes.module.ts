@@ -5,6 +5,7 @@ import {WelcomeModule} from './../welcome/welcome.module';
 import { LoginComponent } from 'src/app/components/auth/login/login.component';
 import { AdminModule } from '../sys-module/admin/admin.module';
 import {FormsModule} from '@angular/forms';
+import { HttpClientModule  } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import {FormsModule} from '@angular/forms';
     AdminModule,
     WelcomeModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
       {path:'login',component:LoginComponent},
       // {path:'',redirectTo:'/home',pathMatch:'full'},
@@ -24,7 +26,8 @@ import {FormsModule} from '@angular/forms';
   exports:[
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ]
 })
 export class AppRoutesModule { }

@@ -11,19 +11,17 @@ module.exports.authController = async function (req, res, next) {
   try {
     const { email, password } = req.body;
 
-    const token = await authService(email, password);
+    const data = await authService(email, password);
 
     //if all are success
     res.status(200).json({
       success: true,
-      data: null,
-      token: token,
+      data: data,
     });
   } catch (error) {
     res.status(501).json({
       success: false,
       data: null,
-      token: null,
       errorMessage: error.message,
     });
   }
