@@ -4,15 +4,17 @@ import {RouterModule} from '@angular/router';
 import {WelcomeModule} from './../welcome/welcome.module';
 import { LoginComponent } from 'src/app/components/auth/login/login.component';
 import { AdminModule } from '../sys-module/admin/admin.module';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
-
+    LoginComponent,
   ],
   imports: [
     CommonModule,
     AdminModule,
     WelcomeModule,
+    FormsModule,
     RouterModule.forRoot([
       {path:'login',component:LoginComponent},
       // {path:'',redirectTo:'/home',pathMatch:'full'},
@@ -21,7 +23,8 @@ import { AdminModule } from '../sys-module/admin/admin.module';
   ],
   exports:[
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ]
 })
 export class AppRoutesModule { }
