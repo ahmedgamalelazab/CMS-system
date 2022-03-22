@@ -36,8 +36,12 @@ export class LoginComponent implements OnInit {
           console.log("hello");
           window.location.replace("http://localhost:4200/admin/Dashboard");
         break;
+        case 'doctor':
+          console.log('go to doctor page');
+          break;
         case'employee':
         //edit here the dist
+        console.log('go to employee page');
         break;
         default:
           //error message

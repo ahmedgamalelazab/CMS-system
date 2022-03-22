@@ -22,14 +22,6 @@ export class LoginService{
         password:userPassword
       }).pipe(
         tap((response)=>console.log(response)),
-        catchError(error => {
-          if (error.error instanceof ErrorEvent) {
-             console.log(`Error: ${error.error.message}`);
-          } else {
-              console.log(`Error: ${error.message}`);
-          }
-          return of([]);
-      })
       )
 
     }
