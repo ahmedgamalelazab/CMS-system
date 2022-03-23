@@ -5,6 +5,10 @@ const {
   getAllPatientsService,
   getPatientByIdService,
   updatePatientService,
+<<<<<<< HEAD
+=======
+  getAllClinicPatients,
+>>>>>>> master
 } = require('../../Services/patients/patientService.js');
 
 /**
@@ -153,3 +157,35 @@ module.exports.doctorRemovePatientController = async (req, res, next) => {
     });
   }
 };
+<<<<<<< HEAD
+=======
+
+/**
+ *
+ * @param {request} req
+ * @param {response} res
+ * @param {Function} next
+ */
+module.exports.getAllClinicPatientsController = async function (
+  req,
+  res,
+  next
+) {
+  try {
+    //!DANGER THIS WILL BE UPDATED AFTER ADDING AUTH MIDDLEWARE
+    const clinicId = req.params.id;
+    const result = await getAllClinicPatients(clinicId);
+    //if all are ok
+    res.status(200).json({
+      success: true,
+      data: result.data,
+    });
+  } catch (error) {
+    res.status(501).json({
+      success: false,
+      data: null,
+      errorMessage: error.message,
+    });
+  }
+};
+>>>>>>> master

@@ -1,4 +1,8 @@
 const Patient = require('../../Models/Patient.js');
+<<<<<<< HEAD
+=======
+const Clinic = require('../../Models/Clinic.js');
+>>>>>>> master
 const mongoose = require('mongoose'); //only for transaction purposes
 const { DBConnection } = require('../../DataBase/db.config.js');
 
@@ -176,10 +180,44 @@ async function deletePatientService(patientId) {
   });
 }
 
+<<<<<<< HEAD
+=======
+/**
+ *
+ * @param {string} clinicId
+ * @returns {Promise}
+ */
+async function getAllClinicPatients(clinicId) {
+  return new Promise(async (resolve, reject) => {
+    if (DBConnection.isConnected()) {
+      //if connection is ok
+      try {
+        const patients = await Clinic.find({
+          clinic: clinicId,
+        });
+        //if all are ok
+        resolve({
+          success: true,
+          data: patients,
+        });
+      } catch (error) {
+        reject(new Error(error.message));
+      }
+    } else {
+      reject(new Error('db connection error'));
+    }
+  });
+}
+
+>>>>>>> master
 module.exports = {
   getAllPatientsService,
   getPatientByIdService,
   addPatientService,
   updatePatientService,
   deletePatientService,
+<<<<<<< HEAD
+=======
+  getAllClinicPatients,
+>>>>>>> master
 };

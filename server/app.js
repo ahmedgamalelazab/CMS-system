@@ -10,6 +10,7 @@ const morgan = require('morgan');
 const app = express();
 //db code
 const { applicationEventTracker } = require('./DataBase/db.config.js');
+const cors = require('cors');
 
 /**
  * registering the state of the db connection
@@ -80,11 +81,18 @@ const port = process.env.PORT || 3333;
 //   }
 // );
 // app.use('/images', express.static(__dirname + '/uploads'));
+
+
+
+app.use(cors());
 app.use(helmet());
 app.use(morgan());
 app.use(express.json());
+app.use('/api/v1', require('./Routes/auth/auth.routes.js'));
 app.use('/api/v1', require('./Routes/clinic/clinic.routes.js'));
 app.use('/api/v1', require('./Routes/doctor/doctor.routes.js'));
+app.use('/api/v1', require('./Routes/employee/employee.routes.js')); // added by mostafa
+app.use('/api/v1', require('./Routes/appointment/appointment.routes.js')); // added by mostafa
 app.use('/api/v1', require('./Routes/Patient/patient.routes.js'));
 app.use('/api/v1', require('./Routes/medicine/medicine.routes.js'));
 app.use('/api/v1', require('./Routes/prescription/prescription.routes.js'));
