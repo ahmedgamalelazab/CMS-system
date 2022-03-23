@@ -47,16 +47,16 @@ export class ClinicComponent implements OnInit {
   submitClinic(ngForm:NgForm){
     console.log(ngForm.value);
     const clinicModel:ClinicModel = {
-        clinicName:ngForm.value.clinicName,
-        clinicAddress:ngForm.value.clinicAddress,
-       clinicPhone:ngForm.value.clinicPhone,
-       clinicDescription:ngForm.value.clinicDescription,
-       userEmail:ngForm.value.docEmail,
-       userPassword:ngForm.value.docPassword,
-       docName:ngForm.value.docName,
-       docAge:ngForm.value.docAge,
-       iswOwner:ngForm.value.docAge === 'true' ? true : false,
-       assignedBy:null
+      clinicName:ngForm.value.clinicName,
+      clinicAddress:ngForm.value.clinicAddress,
+      clinicPhone:ngForm.value.clinicPhone,
+      clinicDescription:ngForm.value.clinicDescription,
+      userEmail:ngForm.value.docEmail,
+      userPassword:ngForm.value.docPassword,
+      docName:ngForm.value.docName,
+      docAge:ngForm.value.docAge,
+      iswOwner:ngForm.value.docAge === 'true' ? true : false,
+      assignedBy:null
     }
 
     this.adminClinicService.adminAddClinic(clinicModel).subscribe({
