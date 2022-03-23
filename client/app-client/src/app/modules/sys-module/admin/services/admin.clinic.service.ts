@@ -17,6 +17,7 @@ export class AdminClinicService{
     //POST REQUEST
     //BECAUSE THIS API ROUTE IS PROTECTED SO I GOTTA SEND WITH IT MY TOKEN
     const adminData = JSON.parse(window.localStorage.getItem('admin')??"");
+    console.log(adminData);
     //TODO handle ANY ERRORS
     return this.http.post('http://localhost:9999/api/v1/clinics/add',clinicModel,{
       headers:{

@@ -48,6 +48,19 @@ module.exports.addClinicController = async function (req, res, next) {
 
   try {
     if (req.payload.userType === 'admin') {
+      const {
+        clinicName,
+        clinicAddress,
+        clinicPhone,
+        clinicDescription,
+        userEmail,
+        userPassword,
+        docName,
+        docAge,
+        iswOwner,
+        assignedBy,
+      } = req.body;
+
       const result = await AddClinicService(
         clinicName,
         clinicAddress,

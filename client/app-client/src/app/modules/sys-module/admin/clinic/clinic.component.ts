@@ -65,7 +65,7 @@ export class ClinicComponent implements OnInit {
       complete:()=>console.log('request completed')
     })
 
-    window.location.reload();
+    // window.location.reload();
 
   }
 
