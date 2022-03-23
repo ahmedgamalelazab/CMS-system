@@ -3,11 +3,7 @@
  */
 //cleaned
 const mongoose = require('mongoose');
-<<<<<<< HEAD
 const { Doctor } = require('./Doctor.js');
-=======
-const Doctor = require('./Doctor.js');
->>>>>>> master
 const Patient = require('./Patient.js');
 const Clinic = require('./Clinic.js');
 const { Medicine, medicineSchema } = require('./Medicine.js');

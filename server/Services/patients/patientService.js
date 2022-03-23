@@ -1,8 +1,5 @@
 const Patient = require('../../Models/Patient.js');
-<<<<<<< HEAD
-=======
 const Clinic = require('../../Models/Clinic.js');
->>>>>>> master
 const mongoose = require('mongoose'); //only for transaction purposes
 const { DBConnection } = require('../../DataBase/db.config.js');
 
@@ -180,8 +177,6 @@ async function deletePatientService(patientId) {
   });
 }
 
-<<<<<<< HEAD
-=======
 /**
  *
  * @param {string} clinicId
@@ -209,15 +204,11 @@ async function getAllClinicPatients(clinicId) {
   });
 }
 
->>>>>>> master
 module.exports = {
   getAllPatientsService,
   getPatientByIdService,
   addPatientService,
   updatePatientService,
   deletePatientService,
-<<<<<<< HEAD
-=======
   getAllClinicPatients,
->>>>>>> master
 };

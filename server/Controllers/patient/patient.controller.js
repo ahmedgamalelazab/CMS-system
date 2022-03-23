@@ -5,10 +5,7 @@ const {
   getAllPatientsService,
   getPatientByIdService,
   updatePatientService,
-<<<<<<< HEAD
-=======
   getAllClinicPatients,
->>>>>>> master
 } = require('../../Services/patients/patientService.js');
 
 /**
@@ -157,8 +154,6 @@ module.exports.doctorRemovePatientController = async (req, res, next) => {
     });
   }
 };
-<<<<<<< HEAD
-=======
 
 /**
  *
@@ -188,4 +183,3 @@ module.exports.getAllClinicPatientsController = async function (
     });
   }
 };
->>>>>>> master

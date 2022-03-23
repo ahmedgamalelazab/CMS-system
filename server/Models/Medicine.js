@@ -20,9 +20,5 @@ const Medicine = mongoose.model('Medicine', medicineSchema);
 
 module.exports = {
   Medicine,
-<<<<<<< HEAD
-  medicineSchema
-=======
   medicineSchema,
->>>>>>> master
 };

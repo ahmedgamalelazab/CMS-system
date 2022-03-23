@@ -1,25 +1,14 @@
-<<<<<<< HEAD
-
-const mongoose = require('mongoose');
-
-const Doctor = require('./Doctor.js');
-
-=======
 //cleaned
 const mongoose = require('mongoose');
 const Clinic = require('./Clinic.js');
-const {Doctor} = require('./Doctor.js');
->>>>>>> master
+const { Doctor } = require('./Doctor.js');
 const Patient = require('./Patient.js');
 
 const appointmentSchema = new mongoose.Schema(
   {
-<<<<<<< HEAD
-=======
     clinic: {
       type: mongoose.SchemaTypes.ObjectId,
     },
->>>>>>> master
     doctor: {
       type: mongoose.SchemaTypes.ObjectId,
     },
@@ -49,10 +38,7 @@ const appointmentSchema = new mongoose.Schema(
   }
 );
 
-<<<<<<< HEAD
-=======
 appointmentSchema.path('clinic').ref(Clinic);
->>>>>>> master
 appointmentSchema.path('doctor').ref(Doctor);
 appointmentSchema.path('patient').ref(Patient);
 
