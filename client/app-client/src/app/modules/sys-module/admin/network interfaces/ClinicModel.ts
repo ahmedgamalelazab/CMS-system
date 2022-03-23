@@ -6,12 +6,12 @@ export interface ClinicModel{
   clinicAddress:string;
   clinicPhone:string;
   clinicDescription:string;
-  docUserEmail:string;
-  docUserPassword:string;
+  userEmail:string;
+  userPassword:string;
   docName:string;
   docAge:number;
-  docIsOwner:boolean;
-  docAssignedBy:string|null;
+  iswOwner:boolean;
+  assignedBy:string|null;
 
 
 
