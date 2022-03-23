@@ -5,11 +5,13 @@ import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ClinicComponent } from './clinic/clinic.component';
 import { DoctorComponent } from './doctors/doctor.component';
+import {FormsModule} from '@angular/forms'
 
 @NgModule({
   declarations: [AdminComponent, DashboardComponent, ClinicComponent],
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forChild([
       {
         path: 'admin',
@@ -23,6 +25,6 @@ import { DoctorComponent } from './doctors/doctor.component';
       },
     ]),
   ],
-  exports: [CommonModule],
+  exports: [CommonModule,FormsModule],
 })
 export class AdminModule {}

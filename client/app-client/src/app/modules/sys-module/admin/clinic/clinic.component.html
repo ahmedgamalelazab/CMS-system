@@ -6,7 +6,10 @@
           <h3 class="text-dark mb-4">Clinics</h3>
           <div class="card shadow">
             <div class="card-header py-3">
-              <p class="text-primary m-0 fw-bold">Employee Info</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <p class="text-primary m-0 fw-bold">Clinics info</p>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add Clinic</button>
+              </div>
             </div>
             <div class="card-body">
               <div class="row">
@@ -275,8 +278,68 @@
         </div>
       </footer>
     </div>
-    <a class="border rounded d-inline scroll-to-top" href="#page-top"
-      ><i class="fas fa-angle-up"></i
-    ></a>
+
+    <!--REGRESTRATION MODEL-->
+    <div  class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">New Clinic</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form #clinicForm ="ngForm" (ngSubmit)="submitClinic(clinicForm)" novalidate>
+              <div class="mb-3">
+                <label for="clinic-name" class="col-form-label">Name :</label>
+                <input type="text" class="form-control" id="clinic-name" name="clinicName" ngModel #clinicName="ngModel">
+              </div>
+              <div class="mb-3">
+                <label for="clinic-address" class="col-form-label">address :</label>
+                <input type="text" class="form-control" id="clinic-address" ngModel name="clinicAddress" #clinicAddress="ngModel">
+              </div>
+              <div class="mb-3">
+                <label for="clinic-phone" class="col-form-label">phone :</label>
+                <input type="phone" class="form-control" id="clinic-phone" ngModel #clinicPhone="ngModel" name="clinicPhone">
+              </div>
+              <div class="mb-3">
+                <label for="clinic-description" class="col-form-label">description :</label>
+                <textarea class="form-control" id="clinic-description" ngModel #clinicDescription="ngModel" name="clinicDescription"></textarea>
+              </div>
+              <hr>
+              <div class="mb-3">
+                <label for="clinic-doc-email" class="col-form-label">email :</label>
+                <input type="email" class="form-control" id="clinic-doc-email" ngModel #docEmail="ngModel" name="docEmail">
+              </div>
+              <div class="mb-3">
+                <label for="clinic-doc-password" class="col-form-label">password :</label>
+                <input type="password" class="form-control" id="clinic-doc-password" ngModel #docPassword="ngModel" name="docPassword">
+              </div>
+              <div class="mb-3">
+                <label for="clinic-doc-name" class="col-form-label">doctor name :</label>
+                <input type="text" class="form-control" id="clinic-doc-name" ngModel #docName="ngModel" name="docName">
+              </div>
+              <div class="mb-3">
+                <label for="clinic-doc-age" class="col-form-label">doctor age :</label>
+                <input type="number" class="form-control" id="clinic-doc-age" ngModel #docAge="ngModel" name="docAge">
+              </div>
+              <div class="mb-3">
+                <label for="clinic-doc-isOwner" class="col-form-label">isOwner :</label>
+                <select class="form-select" aria-label="Default select example" name="isOwner" ngModel #docIsOwner="ngModel">
+                  <option value="true">true</option>
+                  <option value="false">false</option>
+                </select>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Send message</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--REGRESTRATION MODEL-->
+
+
   </div>
 </section>

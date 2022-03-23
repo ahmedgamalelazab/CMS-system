@@ -30,11 +30,14 @@ export class LoginComponent implements OnInit {
   }
 
   dispatchUser(response:any , router:Router){
-    switch(response.data.user){
+    console.log(console.log(response));
+    if(response.data.user){
+      switch(response.data.user){
         case 'admin':
           // router.navigate(['/admin/dashboard']);
           console.log("hello");
           window.location.replace("http://localhost:4200/admin/Dashboard");
+          window.localStorage.setItem("admin",JSON.stringify(response.data));
         break;
         case 'doctor':
           console.log('go to doctor page');
@@ -47,6 +50,9 @@ export class LoginComponent implements OnInit {
           //error message
           break;
 
+    }
+    }else{
+      console.log(response);
     }
   }
 

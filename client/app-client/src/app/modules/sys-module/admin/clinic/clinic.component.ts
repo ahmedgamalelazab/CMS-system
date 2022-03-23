@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ScriptService } from '../../services/script.store.service';
 
 @Component({
@@ -18,6 +19,12 @@ export class ClinicComponent implements OnInit {
         console.log('script loaded ', data);
       })
       .catch((error) => console.log(error));
+  }
+
+  submitClinic(ngForm:NgForm){
+    console.log(ngForm.value);
+
+
   }
 
 }

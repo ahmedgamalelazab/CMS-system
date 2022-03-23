@@ -8,20 +8,19 @@ import { ScriptService } from '../services/script.store.service';
   // providers:[ScriptService]
 })
 export class AdminComponent implements OnInit, AfterViewInit {
+
+  public data:any;
+
   constructor(private script: ScriptService) {}
+
 
   ngAfterViewInit(): void {
 
   }
 
   ngOnInit(): void {
-
-    // this.script
-    //   .load('charts.js','bs-init', 'theme')
-    //   .then((data) => {
-    //     console.log('script loaded ', data);
-    //   })
-    //   .catch((error) => console.log(error));
+    this.data = JSON.parse(window.localStorage.getItem('admin')?? '');
+    console.log(this.data);
   }
 
 }
