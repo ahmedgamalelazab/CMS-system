@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { tap } from "rxjs";
 import { ClinicModel } from "../network interfaces/ClinicModel";
 
 
@@ -14,12 +15,27 @@ export class AdminClinicService{
 
   adminAddClinic(clinicModel:ClinicModel){
     //POST REQUEST
-    //TODO update this request to take third param as header to send the token with it
-    this.http.post('http://localhost:9999/api/v1/clinics/add',clinicModel)
-  }
+    //BECAUSE THIS API ROUTE IS PROTECTED SO I GOTTA SEND WITH IT MY TOKEN
+    const adminData = JSON.parse(window.localStorage.getItem('admin')??"");
+    //TODO handle ANY ERRORS
+    return this.http.post('http://localhost:9999/api/v1/clinics/add',clinicModel,{
+      headers:{
+        "x-auth-token":adminData.token
+      }
+    }).pipe(
+      tap(response=>console.log(response))
+      )
+    }
 
-  adminGelAllClinics(){
-    //GET REQUEST
+    adminGelAllClinics(){
+      //GET REQUEST
+      const adminData = JSON.parse(window.localStorage.getItem('admin')??"");
+      return this.http.get<any>('http://localhost:9999/api/v1/clinics',{
+        headers:{
+          "x-auth-token":adminData.token
+        }
+    }).pipe(tap(response=>console.log(response)))
+
   }
 
   adminDeleteClinic(){

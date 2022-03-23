@@ -17,14 +17,16 @@ const {
  */
 module.exports.getAllClinicsController = async function (req, res, next) {
   try {
-    const result = await getAllClinicsService();
-
-    //if the result came ok !
-
-    res.status(200).json({
-      success: true,
-      data: result.data,
-    });
+    if (req.payload.userType === 'admin') {
+      const result = await getAllClinicsService();
+      //if the result came ok !
+      res.status(200).json({
+        success: true,
+        data: result.data,
+      });
+    } else {
+      throw new Error('FORBIDDEN');
+    }
   } catch (error) {
     res.status(501).json({
       success: false,
@@ -58,25 +60,29 @@ module.exports.addClinicController = async function (req, res, next) {
       assignedBy,
     } = req.body;
 
-    const result = await AddClinicService(
-      clinicName,
-      clinicAddress,
-      clinicPhone,
-      clinicDescription,
-      userEmail,
-      userPassword,
-      docName,
-      docAge,
-      iswOwner,
-      assignedBy
-    );
+    if (req.payload.userType === 'admin') {
+      const result = await AddClinicService(
+        clinicName,
+        clinicAddress,
+        clinicPhone,
+        clinicDescription,
+        userEmail,
+        userPassword,
+        docName,
+        docAge,
+        iswOwner,
+        assignedBy
+      );
+
+      res.status(201).json({
+        success: true,
+        data: result.data,
+      });
+    } else {
+      throw new Error('FORBIDDEN');
+    }
 
     //if no error
-
-    res.status(201).json({
-      success: true,
-      data: result.data,
-    });
   } catch (error) {
     res.status(501).json({
       success: false,
@@ -94,13 +100,17 @@ module.exports.addClinicController = async function (req, res, next) {
  */
 module.exports.removeClinicDataController = async (req, res, next) => {
   try {
-    const clinicId = req.params.id;
-    const result = await eraseClinicData(clinicId);
-    res.status(201).json({
-      status: true,
-      data: result.data,
-      deletingState: result.deletingState,
-    });
+    if (req.payload.userType === 'admin') {
+      const clinicId = req.params.id;
+      const result = await eraseClinicData(clinicId);
+      res.status(201).json({
+        status: true,
+        data: result.data,
+        deletingState: result.deletingState,
+      });
+    } else {
+      throw new Error('FORBIDDEN');
+    }
   } catch (error) {
     res.status(501).json({
       success: false,
@@ -118,24 +128,33 @@ module.exports.removeClinicDataController = async (req, res, next) => {
  */
 module.exports.updateClinicDataController = async (req, res, next) => {
   try {
-    const clinicId = req.params.id;
-    const { clinicName, clinicAddress, clinicPhone, clinicDescription, owner } =
-      req.body;
-    const result = await updateClinicDataService(
-      clinicId,
-      clinicName,
-      clinicAddress,
-      clinicPhone,
-      clinicDescription,
-      owner
-    );
+    if (req.payload.userType === 'admin') {
+      const clinicId = req.params.id;
+      const {
+        clinicName,
+        clinicAddress,
+        clinicPhone,
+        clinicDescription,
+        owner,
+      } = req.body;
+      const result = await updateClinicDataService(
+        clinicId,
+        clinicName,
+        clinicAddress,
+        clinicPhone,
+        clinicDescription,
+        owner
+      );
 
-    //if all are ok
-    res.status(201).json({
-      success: true,
-      data: result.data,
-      updateState: result.updateState,
-    });
+      //if all are ok
+      res.status(201).json({
+        success: true,
+        data: result.data,
+        updateState: result.updateState,
+      });
+    } else {
+      throw new Error('FORBIDDEN');
+    }
   } catch (error) {
     res.status(501).json({
       success: false,
@@ -146,21 +165,25 @@ module.exports.updateClinicDataController = async (req, res, next) => {
 };
 
 /**
- *
+ * @very_important
  * @param {request} req
  * @param {response} res
  * @param {Function} next
  */
 module.exports.getAllClinicsDoctorsController = async (req, res, next) => {
   try {
-    const clinicId = req.params.id;
+    if (req.payload.userType === 'admin') {
+      const clinicId = req.params.id;
 
-    const result = await getAllClinicDoctors(clinicId);
+      const result = await getAllClinicDoctors(clinicId);
 
-    res.status(200).json({
-      success: true,
-      data: result.data,
-    });
+      res.status(200).json({
+        success: true,
+        data: result.data,
+      });
+    } else {
+      throw new Error('FORBIDDEN');
+    }
   } catch (error) {
     res.status(501).json({
       success: false,

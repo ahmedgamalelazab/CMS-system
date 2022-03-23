@@ -6,7 +6,6 @@ const {
   getAllClinicsDoctorsController,
   removeClinicDataController,
   updateClinicDataController,
-  ownerAssignClinicDoctor,
 } = require('../../Controllers/clinic/clinic.controller.js');
 
 const { authMiddleWare } = require('../../Middlewares/auth.js');

@@ -16,3 +16,11 @@ export interface ClinicModel{
 
 
 }
+
+export interface ClinicClientInTable{
+  name:string;
+  doctors:number;
+  address:string;
+  phone:string;
+  createAt:string;
+}
