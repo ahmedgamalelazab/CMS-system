@@ -4,10 +4,7 @@
   "description": "* Roles :",
   "main": "app.js",
   "scripts": {
-<<<<<<< HEAD
-=======
     "start": "app",
->>>>>>> master
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon app.js"
   },
@@ -19,10 +16,7 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "helmet": "^5.0.2",
-<<<<<<< HEAD
-=======
     "jsonwebtoken": "^8.5.1",
->>>>>>> master
     "mongoose": "^6.2.7",
     "morgan": "^1.10.0",
     "multer": "^1.4.4"
