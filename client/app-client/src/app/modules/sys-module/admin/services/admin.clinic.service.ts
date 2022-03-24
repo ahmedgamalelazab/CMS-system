@@ -39,15 +39,39 @@ export class AdminClinicService{
 
   }
 
+  /**
+   * @description : this will be used in clinic profile
+   */
   adminDeleteClinic(){
     //DELETE REQUEST
   }
 
+
+  /**
+   * @description : this will be used in clinic profile
+   */
   adminUpdateClinic(){
     //PUT REQUEST
   }
 
+
+  /**
+   * @description : this is general will be used to replace the table
+   */
   adminGetClinicDoctors(){
+    //GET ALL CLINIC DOCS
+  }
+
+  /**
+   * @description : this is general will be used to replace the table
+   */
+  adminGetClinicEmployees(){
+    //GET ALL CLINIC DOCS
+  }
+  /**
+   * @description : this is general will be used to replace the table
+   */
+  adminGetClinicProfile(){
     //GET ALL CLINIC DOCS
   }
 

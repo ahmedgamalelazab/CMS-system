@@ -18,6 +18,7 @@ export interface ClinicModel{
 }
 
 export interface ClinicClientInTable{
+  id:string,
   name:string;
   doctors:number;
   address:string;
