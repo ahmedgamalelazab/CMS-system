@@ -5,7 +5,7 @@ const {
   getClinicEmployeesService,
   addEmployeeService,
   updateEmployeeService,
-  deleteEmployeeService
+  deleteEmployeeService,
 } = require('../../Services/employee/employee.service.js');
 
 /**
@@ -63,15 +63,23 @@ module.exports.getEmployeeByIdController = async (req, res, next) => {
  * @param {response} res
  * @param {Function} next
  */
- module.exports.getAllEmployeesInClinicController = async (req, res, next) => {
+module.exports.getAllEmployeesInClinicController = async (req, res, next) => {
   try {
-    const clinicId = req.params.clinicId;
-    const result = await getClinicEmployeesService(clinicId);
-    //if all are ok
-    res.status(200).json({
-      success: true,
-      data: result.data,
-    });
+    if (req.payload.userType === 'admin' || req.payload.userType === 'doctor') {
+      const clinicId = req.params.clinicId;
+      const result = await getClinicEmployeesService(clinicId);
+      //if all are ok
+      res.status(200).json({
+        success: true,
+        data: result.data,
+      });
+    } else {
+      res.status(403).json({
+        success: false,
+        data: null,
+        errorMessage: 'FORBIDDEN',
+      });
+    }
   } catch (error) {
     res.status(501).json({
       success: false,
@@ -88,7 +96,8 @@ module.exports.getEmployeeByIdController = async (req, res, next) => {
  */
 module.exports.AddEmployeeController = async (req, res, next) => {
   try {
-    const { name, age, salary, userEmail, userPassword, clinicId, assignedBy } = req.body;
+    const { name, age, salary, userEmail, userPassword, clinicId, assignedBy } =
+      req.body;
 
     const result = await addEmployeeService(
       name,
@@ -128,12 +137,7 @@ module.exports.UpdateEmployeeController = async (req, res, next) => {
 
     const { name, age, salary } = req.body;
 
-    const result = await updateEmployeeService(
-      empId,
-      name,
-      age,
-      salary
-    );
+    const result = await updateEmployeeService(empId, name, age, salary);
     //if all are ok
     res.status(201).json({
       success: true,

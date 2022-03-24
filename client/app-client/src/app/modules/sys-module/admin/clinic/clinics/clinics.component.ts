@@ -5,8 +5,9 @@ import { ScriptService } from '../../../services/script.store.service';
 import {
   ClinicClientInTable,
   ClinicModel,
-} from '../../network interfaces/ClinicModel';
+} from '../../network interfaces/Models';
 import { AdminClinicService } from '../../services/admin.clinic.service';
+import { ClinicStateStoreService } from '../../services/clinic.store.service';
 
 @Component({
   selector: 'pm-clinics',
@@ -18,7 +19,8 @@ export class ClinicsComponent implements OnInit {
     private script: ScriptService,
     private adminClinicService: AdminClinicService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private clinicStoreState:ClinicStateStoreService
   ) {}
 
   clientClinics: ClinicClientInTable[] = [];
@@ -36,6 +38,8 @@ export class ClinicsComponent implements OnInit {
             doctors: clinic.doctors.length,
             createAt: new Date(clinic.createdAt).toLocaleDateString(),
             phone: clinic.phone,
+            description:clinic.description,
+            owner:clinic.owner
           });
         });
       },
@@ -81,6 +85,10 @@ export class ClinicsComponent implements OnInit {
     this.clinicId = itemRef.children[0].innerHTML.toString();
     console.log(this.clinicId);
     // alert(itemRef.children[0].innerHTML.toString());
+    this.clinicStoreState.pushClinicId(this.clinicId);
+    this.clinicStoreState.pushClinicObject(this.clientClinics.filter((clinic)=>{
+       return clinic.id === this.clinicId;
+    })[0]);
   }
 
   switchToClinicDoctors() {
