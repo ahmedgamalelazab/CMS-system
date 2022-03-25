@@ -16,7 +16,7 @@
     * you can customize the admin data from the environment . 
     * follow up the demo below to control each part of the application . 
 
-# Application Demp : 
+# Application Demo : 
 * coming soon ...
 
 # future Features : 
