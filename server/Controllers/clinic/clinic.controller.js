@@ -104,7 +104,7 @@ module.exports.removeClinicDataController = async (req, res, next) => {
       const clinicId = req.params.id;
       const result = await eraseClinicData(clinicId);
       res.status(201).json({
-        status: true,
+        success: true, //FIXED BUG
         data: result.data,
         deletingState: result.deletingState,
       });

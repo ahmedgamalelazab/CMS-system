@@ -21,9 +21,25 @@ export class ClinicProfileComponent implements OnInit{
   }
 
 
-
+  //this is deleting the clinic using the id that been stored in the state store
   deleteClinic(){
-
+      if(confirm('are u sure u wanna delete this clinic ? ')){
+        const clinicId = this.clinicStoreService.getClinicId(); // clinic id
+        this.adminClinicService.adminDeleteClinic(clinicId).subscribe({
+          next:(response)=>{
+            if(response.success){
+              console.log("deleted clinic");
+              this.router.navigate(['clinics'], {
+                relativeTo: this.activatedRoute.parent,
+              });
+            }else{
+              console.log('Problem with the deleting process');
+            }
+          }
+        })
+      }else{
+        console.log("deleting process canceled");
+      }
   }
 
   updateClinic(clinicName:NgModel,clinicAddress:NgModel,clinicPhone:NgModel,clinicDescription:NgModel,clinicOwner:NgModel,){

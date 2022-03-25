@@ -66,17 +66,25 @@ export class ClinicsComponent implements OnInit {
       userPassword: ngForm.value.docPassword,
       docName: ngForm.value.docName,
       docAge: ngForm.value.docAge,
-      iswOwner: ngForm.value.docAge === 'true' ? true : false,
+      iswOwner: ngForm.value.isOwner === 'true' ? true : false, //BUG FIXED
       assignedBy: null,
     };
 
+    // console.log(clinicModel);
+
     this.adminClinicService.adminAddClinic(clinicModel).subscribe({
-      next: (response) => console.log(response),
+      next: (response) => {
+        if(response.success){
+          window.location.reload();
+        }else{
+          console.log("adding clinic failed");
+        }
+      },
       error: (err) => console.log(err),
       complete: () => console.log('request completed'),
     });
 
-    // window.location.reload();
+
   }
 
   onClinicItemClick(itemRef: Element) {
@@ -86,6 +94,7 @@ export class ClinicsComponent implements OnInit {
     console.log(this.clinicId);
     // alert(itemRef.children[0].innerHTML.toString());
     this.clinicStoreState.pushClinicId(this.clinicId);
+    //pushing a clinic's object to state store
     this.clinicStoreState.pushClinicObject(this.clientClinics.filter((clinic)=>{
        return clinic.id === this.clinicId;
     })[0]);

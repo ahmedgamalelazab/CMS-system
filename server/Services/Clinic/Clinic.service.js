@@ -7,10 +7,7 @@ const mongoose = require('mongoose'); //for transaction purposes
 
 ///////////////////////////////////////////////////////////////////////////
 /**
-<<<<<<< HEAD
-=======
  *
->>>>>>> master
  * @param {string} clinicName
  * @param {string} clinicAddress
  * @param {string} clinicPhone

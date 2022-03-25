@@ -61,7 +61,7 @@ export interface IClinicEmployee {
   id: string;
   name: string;
   age: string;
-  salary: 1200;
+  salary: string;
   user: string;
   clinic: string;
   assignedBy: string;

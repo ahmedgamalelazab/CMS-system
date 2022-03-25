@@ -9,7 +9,11 @@ const {
 } = require('../../Controllers/doctor/doctor.controller.js');
 
 //TODO implement the auth logic and pass the middleware to control those apis
+//TODO PROTECT THOSE ROUTES
 
+/**
+ * @description : this will get all doctors on the system
+ */
 Router.route('/doctors').get(getAllDoctorsController);
 Router.route('/doctors/:id/patients').get(getAllDoctorPatientsData);
 //weird but adding doctor here is just for admin purposes

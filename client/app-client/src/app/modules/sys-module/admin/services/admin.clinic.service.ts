@@ -20,7 +20,7 @@ export class AdminClinicService {
     console.log(adminData);
     //TODO handle ANY ERRORS
     return this.http
-      .post('http://localhost:9999/api/v1/clinics/add', clinicModel, {
+      .post<any>('http://localhost:9999/api/v1/clinics/add', clinicModel, {
         headers: {
           'x-auth-token': adminData.token,
         },
@@ -45,11 +45,18 @@ export class AdminClinicService {
   }
 
   /**
-   * @description : this will be used in clinic profile
+   * @description : this will be used in clinic profile , delete specific clinic from the system
    * @allowed : ONLY ADMIN
+   * @Yasser-Abd-El-Hady  && @HadeerEladawey1212 Pleas take care of logging process : if the doctor is owner and not connected to clinic , don't allow him to login
    */
-  adminDeleteClinic() {
+  adminDeleteClinic(clinicId:string) {
     //DELETE REQUEST
+    const adminData = JSON.parse(window.localStorage.getItem('admin') ?? '');
+    return this.http.delete<any>(`http://localhost:9999/api/v1/clinics/delete/${clinicId}`,{
+      headers:{
+        "x-auth-token":adminData.token
+      }
+    }).pipe(tap((response)=>console.log(response)))
   }
 
   /**
