@@ -103,7 +103,7 @@ async function addDoctorToClinicService(
 async function getAllDoctorsService() {
   return new Promise(async (resolve, reject) => {
     if (DBConnection.isConnected()) {
-      const result = await Doctor.find();
+      const result = await Doctor.find().populate('user');
       //if all are ok
       resolve({
         success: true,

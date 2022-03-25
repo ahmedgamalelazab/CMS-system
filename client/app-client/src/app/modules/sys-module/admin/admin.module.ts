@@ -20,6 +20,7 @@ import { ClinicProfileComponent } from './clinic/profile/clinicProfile.component
     ClinicDoctorsComponent,
     ClinicEmployeesComponent,
     ClinicProfileComponent,
+    DoctorComponent
   ],
   imports: [
     CommonModule,

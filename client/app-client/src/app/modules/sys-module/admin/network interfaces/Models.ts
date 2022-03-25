@@ -46,7 +46,7 @@ export interface IClinicDoctor {
   assignedBy: string;
   name: string;
   age: string;
-  user: string;
+  user: string | Object | any;
   isOwner: string;
   profileImage: string;
   isConnectedToClinic: boolean;
@@ -76,3 +76,5 @@ export interface IClinicPayload{
   clinicDescription:string,
   owner:string,
 }
+
+

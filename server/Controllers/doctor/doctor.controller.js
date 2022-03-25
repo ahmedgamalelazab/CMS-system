@@ -12,15 +12,24 @@ const {
  * @param {request} req
  * @param {response} res
  * @param {Function} next
+ * @allowed : ONLY ADMIN
  */
 module.exports.getAllDoctorsController = async (req, res, next) => {
   try {
-    const result = await getAllDoctorsService();
-    //if all are ok
-    res.status(200).json({
-      success: true,
-      data: result.data,
-    });
+    if (req.payload.userType === 'admin') {
+      const result = await getAllDoctorsService();
+      //if all are ok
+      res.status(200).json({
+        success: true,
+        data: result.data,
+      });
+    } else {
+      res.status(403).json({
+        success: false,
+        data: null,
+        errorMessage: 'FORBIDDEN',
+      });
+    }
   } catch (error) {
     res.status(501).json({
       success: false,

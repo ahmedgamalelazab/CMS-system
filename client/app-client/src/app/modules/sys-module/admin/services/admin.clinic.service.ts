@@ -107,8 +107,14 @@ export class AdminClinicService {
   }
   /**
    * @description : this is general will be used to replace the table
+   * @allowed : ONLY ADMIN
    */
-  adminGetClinicProfile() {
-    //GET ALL CLINIC DOCS
+  adminGetAllDoctors(){
+    const adminData = JSON.parse(window.localStorage.getItem('admin') ?? '');
+      return this.http.get<any>('http://localhost:9999/api/v1/doctors',{
+        headers:{
+          'x-auth-token': adminData.token,
+        }
+      }).pipe(tap((response)=>console.log(response)))
   }
 }
