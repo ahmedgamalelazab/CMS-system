@@ -10,6 +10,7 @@ import { ClinicsComponent } from './clinic/clinics/clinics.component';
 import { ClinicDoctorsComponent } from './clinic/doctors/clinicDoctors.component';
 import { ClinicEmployeesComponent } from './clinic/employees/clinicEmployees.component';
 import { ClinicProfileComponent } from './clinic/profile/clinicProfile.component';
+import { DoctorProfileComponent } from './doctorProfile/doctorProfile.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ClinicProfileComponent } from './clinic/profile/clinicProfile.component
     ClinicDoctorsComponent,
     ClinicEmployeesComponent,
     ClinicProfileComponent,
-    DoctorComponent
+    DoctorComponent,
+    DoctorProfileComponent
   ],
   imports: [
     CommonModule,
@@ -44,6 +46,7 @@ import { ClinicProfileComponent } from './clinic/profile/clinicProfile.component
             ],
           },
           { path: 'doctors', component: DoctorComponent },
+          { path: 'doctors/:id/profile', component: DoctorProfileComponent },
         ],
       },
     ]),

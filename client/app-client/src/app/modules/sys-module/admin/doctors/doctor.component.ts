@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ScriptService } from '../../services/script.store.service';
 import { IClinicDoctor } from '../network interfaces/Models';
 import { AdminClinicService } from '../services/admin.clinic.service';
+import { AdminClinicDoctorsStateStoreService } from '../services/clinicDoctors.store.service';
 
 @Component({
   selector: 'pm-doctor',
@@ -14,7 +16,7 @@ export class DoctorComponent implements OnInit {
 
   clinicDoctors: IClinicDoctor[];
 
-  constructor(private script:ScriptService,private adminClinicService:AdminClinicService) {
+  constructor(private script:ScriptService,private adminClinicService:AdminClinicService,private adminClinicDoctorsService:AdminClinicDoctorsStateStoreService,private router:Router,private activatedRoute:ActivatedRoute) {
     this.clinicDoctors = [];
   }
 
@@ -50,12 +52,20 @@ export class DoctorComponent implements OnInit {
   }
 
   onDoctorItemClick(doctor:Element){
-
+    //update the adminClinicDoctorsStoreService doctor to send it to the next page
+    console.log(doctor.children[0].innerHTML.toString()) // [x]
+    const doctorId = doctor.children[0].innerHTML.toString();
+    const targetDoctor:IClinicDoctor = this.clinicDoctors.filter((doctor:IClinicDoctor)=>{
+      return doctor.id === doctorId
+    })[0]
+    console.log(targetDoctor);
+    //update the store state
+    this.adminClinicDoctorsService.updateClinicDoctorState(targetDoctor); // updated the store state [x]
+    this.router.navigate([`doctors/${targetDoctor.id}/profile`],{
+       relativeTo: this.activatedRoute.parent,
+    });
   }
 
-  submitDoctor(ngForm:NgForm){
-
-  }
 
 
 

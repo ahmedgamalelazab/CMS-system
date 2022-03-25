@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
-import { ClinicModel, IClinicDoctor, IClinicPayload } from '../network interfaces/Models';
+import {
+  ClinicModel,
+  IClinicDoctor,
+  IClinicPayload,
+} from '../network interfaces/Models';
 
 @Injectable({
   providedIn: 'root',
@@ -49,27 +53,35 @@ export class AdminClinicService {
    * @allowed : ONLY ADMIN
    * @Yasser-Abd-El-Hady  && @HadeerEladawey1212 Pleas take care of logging process : if the doctor is owner and not connected to clinic , don't allow him to login
    */
-  adminDeleteClinic(clinicId:string) {
+  adminDeleteClinic(clinicId: string) {
     //DELETE REQUEST
     const adminData = JSON.parse(window.localStorage.getItem('admin') ?? '');
-    return this.http.delete<any>(`http://localhost:9999/api/v1/clinics/delete/${clinicId}`,{
-      headers:{
-        "x-auth-token":adminData.token
-      }
-    }).pipe(tap((response)=>console.log(response)))
+    return this.http
+      .delete<any>(`http://localhost:9999/api/v1/clinics/delete/${clinicId}`, {
+        headers: {
+          'x-auth-token': adminData.token,
+        },
+      })
+      .pipe(tap((response) => console.log(response)));
   }
 
   /**
    * @description : this will be used in clinic profile
    */
-  adminUpdateClinic(payload:IClinicPayload,clinicId:string) {
+  adminUpdateClinic(payload: IClinicPayload, clinicId: string) {
     //PUT REQUEST
     const adminData = JSON.parse(window.localStorage.getItem('admin') ?? '');
-    return this.http.put<any>(`http://localhost:9999/api/v1/clinics/update/${clinicId}`,payload,{
-      headers:{
-        "x-auth-token":adminData.token
-      }
-    }).pipe(tap((response)=>console.log(response)))
+    return this.http
+      .put<any>(
+        `http://localhost:9999/api/v1/clinics/update/${clinicId}`,
+        payload,
+        {
+          headers: {
+            'x-auth-token': adminData.token,
+          },
+        }
+      )
+      .pipe(tap((response) => console.log(response)));
   }
 
   /**
@@ -79,42 +91,57 @@ export class AdminClinicService {
   adminGetClinicDoctors(clinicId: string) {
     //GET ALL CLINIC DOCS
     const adminData = JSON.parse(window.localStorage.getItem('admin') ?? '');
-    return this.http.get<any>(
-      `http://localhost:9999/api/v1/clinics/${clinicId}/doctors`,
-      {
+    return this.http
+      .get<any>(`http://localhost:9999/api/v1/clinics/${clinicId}/doctors`, {
         headers: {
           'x-auth-token': adminData.token,
         },
-      }
-    ).pipe(tap((response)=>console.log(response)))
+      })
+      .pipe(tap((response) => console.log(response)));
   }
 
   /**
    * @description : this is general will be used to replace the table
    */
-  adminGetClinicEmployees(clinicId:string) {
+  adminGetClinicEmployees(clinicId: string) {
     //GET ALL CLINIC DOCS
     const adminData = JSON.parse(window.localStorage.getItem('admin') ?? '');
-    return this.http.get<any>(
-      `http://localhost:9999/api/v1/employee/clinic/${clinicId}`,
-      {
+    return this.http
+      .get<any>(`http://localhost:9999/api/v1/employee/clinic/${clinicId}`, {
         headers: {
           'x-auth-token': adminData.token,
         },
-      }
-    ).pipe(tap((response)=>console.log(response)))
-
+      })
+      .pipe(tap((response) => console.log(response)));
   }
   /**
    * @description : this is general will be used to replace the table
    * @allowed : ONLY ADMIN
    */
-  adminGetAllDoctors(){
+  adminGetAllDoctors() {
     const adminData = JSON.parse(window.localStorage.getItem('admin') ?? '');
-      return this.http.get<any>('http://localhost:9999/api/v1/doctors',{
-        headers:{
+    return this.http
+      .get<any>('http://localhost:9999/api/v1/doctors', {
+        headers: {
           'x-auth-token': adminData.token,
-        }
-      }).pipe(tap((response)=>console.log(response)))
+        },
+      })
+      .pipe(tap((response) => console.log(response)));
+  }
+
+  /**we should lock this update and delete for owners and admins */
+  adminUpdateDoctorData(formData: FormData, doctorId: string) {
+    return this.http
+      .put<any>(
+        `http://localhost:9999/app/v1/doctor/profile/update/${doctorId}`,
+        formData
+      )
+      .pipe(tap((response) => console.log(response)));
+  }
+
+  adminDeleteDoctor(doctorId: string) {
+    return this.http
+      .delete<any>(`http://localhost:9999/api/v1/doctors/delete/${doctorId}`)
+      .pipe(tap((response) => console.log(response)));
   }
 }

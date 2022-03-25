@@ -1,0 +1,127 @@
+<div class="container-fluid">
+  <h3 class="text-dark mb-4">Clinics</h3>
+  <div class="card shadow">
+    <div class="card-header py-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <p class="text-primary m-0 fw-bold">Doctor Profile</p>
+        <!-- <button
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          data-bs-whatever="@mdo"
+        >
+          Add Doctor
+        </button> -->
+      </div>
+    </div>
+    <div class="card-body">
+      <div
+        class="table-responsive table mt-2"
+        id="dataTable"
+        role="grid"
+        aria-describedby="dataTable_info"
+      >
+        <table class="table my-0" id="dataTable">
+          <thead>
+            <tr>
+              <th>key</th>
+              <th>data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr data-bs-toggle="modal" data-bs-target="#clinicDetailsModal" class="clinic-item" *ngFor="let doctor of clinicDoctors; let i = index" #itemRef (click)="onDoctorItemClick(itemRef)">
+              <td class="hide">{{doctor.id}}</td>
+              <td><img src="{{doctor.profileImage}}" alt="loading" width="40px" height="40px"></td>
+              <td>{{doctor.name}}</td>
+              <td>{{doctor.isOwner}}</td>
+              <td>{{doctor.age}}</td>
+              <td>{{doctor.user}}</td>
+              <td>{{doctor.createdAt}}</td>
+            </tr> -->
+            <tr>
+              <td>Doctor Profile Image</td>
+              <td>
+                <div class="doctorProfileImageContainer">
+                  <img src="{{adminClinicDoctorsStoreService.getClinicDoctor().profileImage}}" #doctorProfileImage alt="loading" width="70px" height="70px">
+                </div>
+                <input
+                  class="form-control mt-3"
+                  placeholder="{{ adminClinicDoctorsStoreService.getClinicDoctor().id }}"
+                  type="file"
+                  name="clinicName"
+                  style="width: 100%"
+                  #doctorProfileImagePickerElement
+                  ngModel
+                  #doctorProfileImagePicker = "ngModel"
+                />
+                <input
+                  class="form-control mt-3"
+                  placeholder="{{ adminClinicDoctorsStoreService.getClinicDoctor().profileImage }}"
+                  value="{{ adminClinicDoctorsStoreService.getClinicDoctor().profileImage }}"
+                  type="text"
+                  name="doctor-profile-img-url"
+                  style="width: 100%"
+                  ngModel
+                  #doctorProfileImageURL = "ngModel"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>doctor name</td>
+              <td>
+                <input
+                  class="form-control"
+                  placeholder="{{ adminClinicDoctorsStoreService.getClinicDoctor().name }}"
+                  value="{{ adminClinicDoctorsStoreService.getClinicDoctor().name }}"
+                  type="text"
+                  name="clinicAddress"
+                  style="width: 100%"
+                  ngModel
+                  #doctorName = "ngModel"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>doctor email</td>
+              <td>
+                <input
+                  class="form-control"
+                  placeholder="{{ adminClinicDoctorsStoreService.getClinicDoctor().user.email }}"
+                  value="{{ adminClinicDoctorsStoreService.getClinicDoctor().user.email }}"
+                  type="text"
+                  name="doctorEmail"
+                  style="width: 100%"
+                  ngModel
+                  #doctorEmail = "ngModel"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>doctor password</td>
+              <td>
+                <input
+                  class="form-control"
+                  placeholder="{{ adminClinicDoctorsStoreService.getClinicDoctor().user.password }}"
+                  value="{{ adminClinicDoctorsStoreService.getClinicDoctor().user.password }}"
+                  type="text"
+                  name="doctorPassword"
+                  style="width: 100%"
+                  ngModel
+                  #doctorPassword = "ngModel"
+                />
+              </td>
+            </tr>
+          </tbody>
+
+          <tfoot></tfoot>
+        </table>
+      </div>
+      <div class="d-flex justify-content-end w-100">
+        <!-- <div class="btn btn-danger mx-2" >delete</div> -->
+        <!-- <div class="btn btn-primary mx-2" >Update</div> -->
+         <div class="btn btn-danger mx-2" (click)="deleteDoctor()">delete</div>
+        <div class="btn btn-primary mx-2" (click)="updateDoctorData(doctorName,doctorEmail,doctorPassword,doctorProfileImageURL,doctorProfileImagePicker)">Update</div>
+      </div>
+    </div>
+  </div>
+</div>
