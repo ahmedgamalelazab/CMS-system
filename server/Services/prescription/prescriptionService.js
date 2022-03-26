@@ -6,7 +6,10 @@ async function getAllPrescription() {
   return new Promise(async (resolve, reject) => {
     if (DBConnection.isConnected()) {
       try {
-        const prescriptions = await Prescription.find().populate('doctor')//.populate('clinic').populate('patient');
+        const prescriptions = await Prescription.find()
+          .populate('doctor')
+          .populate('clinic')
+          .populate('patient');
         resolve({
           success: true,
           data: prescriptions,
@@ -31,7 +34,10 @@ async function getPrescriptionById(prescriptionId) {
       try {
         const prescription = await Prescription.findOne({
           _id: prescriptionId,
-        }).populate('doctor').populate('clinic').populate('patient');
+        })
+          .populate('doctor')
+          .populate('clinic')
+          .populate('patient');
         resolve({
           success: true,
           data: prescription,
@@ -80,7 +86,7 @@ async function addPrescription(
           hasPayed: hasPayed,
           totalPrice: totalPrice,
           paymentMethod: paymentMethod,
-          tiedToDoctor: tiedToDoctor
+          tiedToDoctor: tiedToDoctor,
         });
 
         //if all are ok
@@ -139,7 +145,7 @@ async function updatePrescription(
             hasPayed: hasPayed,
             totalPrice: totalPrice,
             paymentMethod: paymentMethod,
-            tiedToDoctor: tiedToDoctor
+            tiedToDoctor: tiedToDoctor,
           }
         );
         const updatedPrescription = await Prescription.findOne({
