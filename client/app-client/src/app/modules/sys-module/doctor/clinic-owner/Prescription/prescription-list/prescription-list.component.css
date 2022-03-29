@@ -1,0 +1,34 @@
+.tiedToDoctorClass:hover,.not_tiedToDoctorClass:hover{
+     background-color:rgb(86, 86, 247);
+        color: white;
+    }
+  
+  .not_tiedToDoctorClass{
+    background-color:brown;
+    color:white;
+  }
+i:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.link a{
+    text-decoration: none;
+    color: #858796;
+}
+
+.link:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.link:hover > a{
+    color: blue;
+}
+#divNoData{
+    height: 60vh;
+}
+
+h3.text-danger{
+    margin-top: 10%;
+}

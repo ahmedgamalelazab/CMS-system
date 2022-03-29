@@ -1,0 +1,13 @@
+
+
+
+.clinic-item:hover{
+  background-color: #466BD9;
+  color:white;
+  cursor: pointer;
+}
+
+
+.hide{
+  display:none;
+}

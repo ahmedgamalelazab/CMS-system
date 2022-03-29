@@ -1,0 +1,31 @@
+<!-- <p>prescription-add works!</p> -->
+
+<div class="container-fluid" *ngIf="newPrescription !=null">
+    <h3 class="text-dark mb-4">Add New Prescription</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 fw-bold">Prescription Information</p>
+        </div>
+        <div class="card-body">
+            <div id="divAddPatient">
+                <form #f="ngForm" action="">
+                    <div class="mb-3">
+                        <label  class="form-label">Patient Name:</label>
+                        <select [(ngModel)]="selectedPatient" class="mb-3" name="medicine" class="d-inline-block form-select form-select-sm">
+                            <option selected *ngFor="let patient of patients" selected [ngValue]="patient">{{patient.firstName+" "+patient.lastName}}</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">List Of Medicine:</label>
+                        <select [(ngModel)]="selectedMed" multiple class="mb-3" name="medicine" class="d-inline-block form-select form-select-sm">
+                            <option *ngFor="let med of medicines" [ngValue]="med">{{med.name}}</option>
+                        </select>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary" (click)="save()">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

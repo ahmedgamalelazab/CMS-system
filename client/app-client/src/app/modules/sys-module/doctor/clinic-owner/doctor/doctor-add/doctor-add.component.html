@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">New Doctor</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 fw-bold">Doctor Info</p>
+        </div>
+        <div class="card-body">
+            <div id="divAddPatient">
+                <!-- <form action=""> -->
+                <!-- <div class="mb-3">
+                    <label for="txtStdId" class="form-label">ID</label>
+                    <input type="number" required min="0" class="form-control" [(ngModel)]="newDoctor.Id">
+                </div> -->
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" [(ngModel)]="newDoctor.name" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="txtStdGrade" class="form-label">Age</label>
+                    <input type="number" [(ngModel)]="newDoctor.age" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="txtStdGrade" class="form-label">Email</label>
+                    <input type="text" [(ngModel)]="newDoctor.email" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="txtStdGrade" class="form-label">Password</label>
+                    <input type="text" [(ngModel)]="newDoctor.password" class="form-control" required>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+                </div>
+                <!-- </form> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div *ngIf="flag">
+    <label>ID</label>
+    <input type="number" [(ngModel)]="newDoctor.Id"><br>
+    <label>Name</label>
+    <input type="text" [(ngModel)]="newDoctor.Name"><br>
+    <label>Age</label>
+    <input type="number" [(ngModel)]="newDoctor.Age"><br>
+    <label>Salary</label>
+    <input type="number" [(ngModel)]="newDoctor.Salary"><br>
+
+    <button type="button" (click)="save()" class="btn btn-facebook">Save</button>
+</div> -->

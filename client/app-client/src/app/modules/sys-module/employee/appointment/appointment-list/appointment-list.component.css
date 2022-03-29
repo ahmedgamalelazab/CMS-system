@@ -1,0 +1,12 @@
+h3.text-danger{
+    margin-top: 10%;
+}
+
+#divNoData{
+    height: 60vh;
+}
+
+i:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+}

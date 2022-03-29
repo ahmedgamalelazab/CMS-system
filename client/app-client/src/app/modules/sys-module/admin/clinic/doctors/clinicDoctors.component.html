@@ -1,0 +1,181 @@
+<div class="container-fluid">
+  <h3 class="text-dark mb-4">Clinics</h3>
+  <div class="card shadow">
+    <div class="card-header py-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <p class="text-primary m-0 fw-bold">Clinics Doctors info</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6 text-nowrap">
+          <div
+            id="dataTable_length"
+            class="dataTables_length"
+            aria-controls="dataTable"
+          >
+            <label class="form-label"
+              >Show&nbsp;<select
+                class="d-inline-block form-select form-select-sm"
+              >
+                <option value="10" selected="">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option></select
+              >&nbsp;</label
+            >
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div
+            class="text-md-end dataTables_filter"
+            id="dataTable_filter"
+          >
+            <label class="form-label"
+              ><input
+                type="search"
+                class="form-control form-control-sm"
+                aria-controls="dataTable"
+                placeholder="Search"
+            /></label>
+          </div>
+        </div>
+      </div>
+      <div
+        class="table-responsive table mt-2"
+        id="dataTable"
+        role="grid"
+        aria-describedby="dataTable_info"
+      >
+        <table class="table my-0" id="dataTable">
+          <thead>
+            <tr>
+              <th>profileImage</th>
+              <th>name</th>
+              <th>Clinic Owner</th>
+              <th>age</th>
+              <th>userId</th>
+              <th>created At</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="clinic-item" *ngFor="let doctor of clinicDoctors; let i = index" #itemRef (click)="onDoctorItemClick(itemRef)">
+              <td class="hide">{{doctor.id}}</td>
+              <td><img src="{{doctor.profileImage}}" alt="loading" width="40px" height="40px"></td>
+              <td>{{doctor.name}}</td>
+              <td>{{doctor.isOwner}}</td>
+              <td>{{doctor.age}}</td>
+              <td>{{doctor.user}}</td>
+              <td>{{doctor.createdAt}}</td>
+            </tr>
+
+          <tfoot>
+          </tfoot>
+        </table>
+      </div>
+      <div class="row">
+        <div class="col-md-6 align-self-center">
+          <p
+            id="dataTable_info"
+            class="dataTables_info"
+            role="status"
+            aria-live="polite"
+          >
+            Showing 1 to 10 of 27
+          </p>
+        </div>
+        <div class="col-md-6">
+          <nav
+            class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers"
+          >
+            <ul class="pagination">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Previous"
+                  ><span aria-hidden="true">«</span></a
+                >
+              </li>
+              <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">2</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">3</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next"
+                  ><span aria-hidden="true">»</span></a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--!updating doctor adding to system functionality !important-->
+<!--?REGRESTRATION MODEL-->
+<div  class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Clinic</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #clinicForm ="ngForm" (ngSubmit)="submitDoctor(clinicForm)" novalidate>
+          <div class="mb-3">
+            <label for="clinic-name" class="col-form-label">Name :</label>
+            <input type="text" class="form-control" id="clinic-name" name="clinicName" ngModel #clinicName="ngModel">
+          </div>
+          <div class="mb-3">
+            <label for="clinic-address" class="col-form-label">address :</label>
+            <input type="text" class="form-control" id="clinic-address" ngModel name="clinicAddress" #clinicAddress="ngModel">
+          </div>
+          <div class="mb-3">
+            <label for="clinic-phone" class="col-form-label">phone :</label>
+            <input type="phone" class="form-control" id="clinic-phone" ngModel #clinicPhone="ngModel" name="clinicPhone">
+          </div>
+          <div class="mb-3">
+            <label for="clinic-description" class="col-form-label">description :</label>
+            <textarea class="form-control" id="clinic-description" ngModel #clinicDescription="ngModel" name="clinicDescription"></textarea>
+          </div>
+          <hr>
+          <div class="mb-3">
+            <label for="clinic-doc-email" class="col-form-label">email :</label>
+            <input type="email" class="form-control" id="clinic-doc-email" ngModel #docEmail="ngModel" name="docEmail">
+          </div>
+          <div class="mb-3">
+            <label for="clinic-doc-password" class="col-form-label">password :</label>
+            <input type="password" class="form-control" id="clinic-doc-password" ngModel #docPassword="ngModel" name="docPassword">
+          </div>
+          <div class="mb-3">
+            <label for="clinic-doc-name" class="col-form-label">doctor name :</label>
+            <input type="text" class="form-control" id="clinic-doc-name" ngModel #docName="ngModel" name="docName">
+          </div>
+          <div class="mb-3">
+            <label for="clinic-doc-age" class="col-form-label">doctor age :</label>
+            <input type="number" class="form-control" id="clinic-doc-age" ngModel #docAge="ngModel" name="docAge">
+          </div>
+          <div class="mb-3">
+            <label for="clinic-doc-isOwner" class="col-form-label">isOwner :</label>
+            <select class="form-select" aria-label="Default select example" name="isOwner" ngModel #docIsOwner="ngModel">
+              <option value="true">true</option>
+              <option value="false">false</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Add Doctor</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--REGRESTRATION MODEL-->
+
+

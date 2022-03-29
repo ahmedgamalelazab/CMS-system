@@ -1,0 +1,271 @@
+<div class="container-fluid">
+    <div class="d-sm-flex justify-content-between align-items-center mb-4">
+        <h3 class="text-dark mb-0">Dashboard</h3>
+        <button class="btn btn-primary btn-sm d-none d-sm-inline-block" disabled role="button"><i
+                class="fas fa-download fa-sm text-white-50"></i>&nbsp;Generate
+            Report</button>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-start-primary py-2">
+                <div class="card-body">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col me-2">
+                            <div class="text-uppercase text-primary fw-bold text-xs mb-1">
+                                <span>Number of Patients</span>
+                            </div>
+                            <div class="text-dark fw-bold h5 mb-0"><span>40,000</span></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-user fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-start-success py-2">
+                <div class="card-body">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col me-2">
+                            <div class="text-uppercase text-success fw-bold text-xs mb-1">
+                                <span>Total Appointments</span>
+                            </div>
+                            <div class="text-dark fw-bold h5 mb-0"><span>1,000</span></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar-check fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-start-info py-2">
+                <div class="card-body">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col me-2">
+                            <div class="text-uppercase text-info fw-bold text-xs mb-1">
+                                <span>Today Appointments</span>
+                            </div>
+                            <div class="row g-0 align-items-center">
+                                <div class="col-auto">
+                                    <div class="text-dark fw-bold h5 mb-0 me-3">
+                                        <span>{{ todayAppointments.length }}</span>
+                                    </div>
+                                </div>
+                                <!-- <div class="col">
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-info" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"><span class="visually-hidden">50%</span></div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-start-warning py-2">
+                <div class="card-body">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col me-2">
+                            <div class="text-uppercase text-warning fw-bold text-xs mb-1">
+                                <span>Pending Prescriptions</span>
+                            </div>
+                            <div class="text-dark fw-bold h5 mb-0">
+                                <span>{{ pendingPrescriptions.length }}</span>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-file-medical fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <hr class="w-75 m-auto" style="height: 2px" />
+    </div>
+    <div class="row mt-4">
+        <div class="col-12">
+            <h3 class="text-dark">Today Appointments</h3>
+        </div>
+        <div class="col-12">
+            <div class="card-body">
+                <div *ngIf="todayAppointments.length <= 0" class="row">
+                    <div id="divNoData" class="container d-flex justify-content-center">
+                        <h3 class="text-info">There is no Appointments for today.!</h3>
+                    </div>
+                </div>
+                <div *ngIf="todayAppointments.length > 0" class="table-responsive table mt-2" id="dataTable" role="grid"
+                    aria-describedby="dataTable_info">
+                    <table class="table my-0" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>Doctor Name</th>
+                                <th>Patient Name</th>
+                                <th>isConfirmed</th>
+                                <th>Total Price</th>
+                                <th>payment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of todayAppointments">
+                                <td>{{ item.doctor.name }}</td>
+                                <td>
+                                    {{ item.patient.firstName + " " + item.patient.lastName }}
+                                </td>
+                                <td>{{ item.isConfirmed }}</td>
+                                <td>{{ item.totalPrice }}</td>
+                                <td>{{ item.payment }}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Doctor Name</th>
+                                <th>Patient Name</th>
+                                <th>isConfirmed</th>
+                                <th>Total Price</th>
+                                <th>payment</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <hr class="w-75 m-auto" style="height: 2px" />
+    </div>
+    <div class="row mt-4">
+        <div class="col-12">
+            <h3 class="text-dark">Pending Prescriptions</h3>
+        </div>
+        <div class="col-12">
+            <div class="card-body">
+                <div *ngIf="pendingPrescriptions.length <= 0" class="row">
+                    <div id="divNoData" class="container d-flex justify-content-center">
+                        <h3 class="text-success">There is no Pending Prescriptions.!</h3>
+                    </div>
+                </div>
+                <div *ngIf="pendingPrescriptions.length > 0" class="table-responsive table mt-2" id="dataTable"
+                    role="grid" aria-describedby="dataTable_info">
+                    <table class="table my-0" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>Doctor Name</th>
+                                <th>Patient Name</th>
+                                <th>Medicines</th>
+                                <th>Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of pendingPrescriptions">
+                                <td>{{ item.doctor.name }}</td>
+                                <td>
+                                    {{ item.patient.firstName + " " + item.patient.lastName }}
+                                </td>
+                                <td>
+                                    <span *ngFor="let med of item.medicine">{{ med.name }},</span>
+                                </td>
+                                <td>{{ item.totalPrice }}</td>
+                                <td>
+                                    <button data-bs-toggle="modal" data-bs-target="#PresPaymentModal"
+                                        class="btn text-warning" (click)="setSelectedPrescription(item)">
+                                        Check out
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Doctor Name</th>
+                                <th>Patient Name</th>
+                                <th>Medicines</th>
+                                <th>Total Price</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Prescription Payment</h5>
+                <button type="button" class="btn-close" [value]="" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>TotalPrice:</p>
+                <!-- {{selectedPres.totalPrice}} -->
+                <div class="row">
+                    <input type="radio" value="cash" />Cash
+                    <input type="radio" value="visa" />Visa
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="PresPaymentModal" tabindex="-1" aria-labelledby="PresPaymentModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-top: 20vh;">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Prescription Payment
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- <fieldset disabled> -->
+                    <div class="mb-3">
+                      <label for="disabledTextInput" class="form-label">Patient Name</label>
+                      <input type="text" disabled id="disabledTextInput" value="{{ selectedPres.patient.firstName+' '+selectedPres.patient.lastName }}" class="form-control" placeholder="Patient Name">
+                    </div>
+                    <div class="mb-3">
+                      <label for="disabledSelect" class="form-label">Total Price</label>
+                      <input type="text" disabled id="disabledTextInput" value="{{selectedPres.totalPrice}}" class="form-control" placeholder="Total Price">
+                    </div>
+                    <div class="mb-3">
+                        <label for="disabledSelect" class="form-label">Payment method</label>
+                        <div class="form-check mx-3">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                            <label class="form-check-label" for="flexRadioDefault1">
+                              Cash
+                            </label>
+                          </div>
+                          <div class="form-check mx-3">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                              Visa
+                            </label>
+                          </div>
+                      </div>
+                  <!-- </fieldset> -->
+                <!-- {{selectedPres.totalPrice}} -->
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancel
+                </button>
+                <button type="button" (click)="submitPresPayment()" data-bs-dismiss="modal" class="btn btn-primary">Submit Payment</button>
+            </div>
+        </div>
+    </div>
+</div>

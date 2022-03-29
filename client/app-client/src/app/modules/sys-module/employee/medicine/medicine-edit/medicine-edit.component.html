@@ -1,0 +1,32 @@
+<!-- 
+<pre>
+    <label>Name: </label>     <input type="text" [(ngModel)]="editedMedicine.name">            <label>Price: </label>            <input type="text" [(ngModel)]="editedMedicine.price">    <button class="btn btn-secondary" (click)="SaveEditedMedicine()">
+   Save Edit
+</button>
+</pre> -->
+
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Edit Medicine</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 fw-bold">Medicine Info</p>
+        </div>
+        <div class="card-body">
+            <div id="divAddMedicine>">
+                <!-- <form action=""> -->
+                    <div class="mb-3">
+                        <label for="txtMedName" class="form-label">Name</label>
+                        <input type="text" name="midName" [(ngModel)]="editedMedicine.name" class="form-control" id="txtMedName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtMedPrice" class="form-label">Price</label>
+                        <input type="number" name="midPrice" [(ngModel)]="editedMedicine.price" required class="form-control" id="txtMedPrice">
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" (click)="SaveEditedMedicine()" class="btn btn-primary">Save</button>
+                    </div>
+                <!-- </form> -->
+            </div>
+        </div>
+    </div>
+</div>
