@@ -14,10 +14,11 @@ const {
  * @param {request} req
  * @param {response} res
  * @param {Function} next
+ * @ahmedgamalelazab //fix cinflict here accept both 
  */
 module.exports.getAllClinicsController = async function (req, res, next) {
   try {
-    if (req.payload.userType === 'admin') {
+    if (req.payload.userType === 'admin' || req.payload.userType === 'employee') {
       const result = await getAllClinicsService();
       //if the result came ok !
       res.status(200).json({
@@ -173,15 +174,22 @@ module.exports.updateClinicDataController = async (req, res, next) => {
  */
 module.exports.getAllClinicsDoctorsController = async (req, res, next) => {
   try {
-    if (req.payload.userType === 'admin') {
-      const clinicId = req.params.id;
+    if (req.payload.userType === 'admin' || req.payload.userType === 'employee' || req.payload.userType === 'doctor') {
+      let clinicId = '';
+      if (req.payload.userType === 'admin') {
+        clinicId = req.params.id; //from doctor clinic ui
+      } else if(req.payload.userType === 'employee'){
+        clinicId = req.payload.userLoad.employeeData.clinic;
+      }else{
+        clinicId = req.payload.userLoad.clinicData._id;
+      }
 
       const result = await getAllClinicDoctors(clinicId);
-
       res.status(200).json({
         success: true,
         data: result.data,
       });
+
     } else {
       throw new Error('FORBIDDEN');
     }

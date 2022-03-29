@@ -42,13 +42,17 @@ module.exports.getAllPatientsController = async (req, res, next) => {
  */
 module.exports.getPatientByIdController = async (req, res, next) => {
   try {
-    const patientId = req.params.id;
-    const result = await getPatientByIdService(patientId);
-    //if all are ok
-    res.status(200).json({
-      success: true,
-      data: result.data,
-    });
+    if(req.payload.userType === 'employee'){
+      const patientId = req.params.id;
+      const result = await getPatientByIdService(patientId);
+      //if all are ok
+      res.status(200).json({
+        success: true,
+        data: result.data,
+      });
+    }else{
+      throw new Error('FORBIDDEN');
+    }
   } catch (error) {
     res.status(501).json({
       success: false,

@@ -66,7 +66,12 @@ module.exports.getEmployeeByIdController = async (req, res, next) => {
 module.exports.getAllEmployeesInClinicController = async (req, res, next) => {
   try {
     if (req.payload.userType === 'admin' || req.payload.userType === 'doctor') {
-      const clinicId = req.params.clinicId;
+      let clinicId = '';
+      if(req.payload.userType === 'admin'){
+        clinicId = req.params.clinicId;
+      }else{
+        clinicId = req.payload.userLoad.clinicData._id;
+      }
       const result = await getClinicEmployeesService(clinicId);
       //if all are ok
       res.status(200).json({
@@ -96,25 +101,29 @@ module.exports.getAllEmployeesInClinicController = async (req, res, next) => {
  */
 module.exports.AddEmployeeController = async (req, res, next) => {
   try {
-    const { name, age, salary, userEmail, userPassword, clinicId, assignedBy } =
-      req.body;
+    if(req.payload.userType === 'doctor'){
+      const { name, age, salary, userEmail, userPassword } = req.body;
 
-    const result = await addEmployeeService(
-      name,
-      age,
-      salary,
-      userEmail,
-      userPassword,
-      clinicId,
-      assignedBy
-    );
+      const assignedBy = req.payload.userLoad.doctorData._id;
+      const clinicId = req.payload.userLoad.clinicData._id;
 
-    //if all are ok
+      const result = await addEmployeeService(
+        name,
+        age,
+        salary,
+        userEmail,
+        userPassword,
+        clinicId,
+        assignedBy
+      );
 
-    res.status(201).json({
-      success: true,
-      data: result.data,
-    });
+      //if all are ok
+
+      res.status(201).json({
+        success: true,
+        data: result.data,
+      });
+    }
   } catch (error) {
     res.status(501).json({
       success: false,
