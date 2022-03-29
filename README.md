@@ -17,7 +17,7 @@
     * follow up the demo below to control each part of the application . 
 
 # Application Demo : 
-* coming soon ...
+* ![this is demo](./Demo/Demo.gif)
 
 # future Features : 
 * payments .. data analysis UI reflections . 

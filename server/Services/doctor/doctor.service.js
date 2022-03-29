@@ -116,6 +116,27 @@ async function getAllDoctorsService() {
 }
 
 /**
+ *
+ * @param {string} docId
+ * @returns {Promise}
+ * @description: get all doctors on the system but only admin is allowed to do so
+ */
+ async function getDoctorByIdService(docId) {
+  return new Promise(async (resolve, reject) => {
+    if (DBConnection.isConnected()) {
+      const result = await Doctor.findOne({_id:docId}).populate('user');
+      //if all are ok
+      resolve({
+        success: true,
+        data: result,
+      });
+    } else {
+      reject(new Error('db connection problem'));
+    }
+  });
+}
+
+/**
  *@very_important : each time we will delete a doctor we need to erase his appointment records , anything else we will keep it but mark it assigned by
  * @param {string} docId
  * @returns {Promise}
@@ -411,4 +432,5 @@ module.exports = {
   removeDoctorService,
   getAllDoctorPatientsService,
   updateDoctorService,
+  getDoctorByIdService,
 };

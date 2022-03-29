@@ -70,6 +70,7 @@ async function connectDB() {
       });
     });
     await mongoose.connect(process.env.DBConnection);
+    
   } catch (error) {
     //handle error by providing function to close or reconnect again to the db
     //we can implement function that can close the server

@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Add Appointment</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 fw-bold">Appointment Info</p>
+        </div>
+        <div class="card-body">
+            <div id="divAddMedicine>">
+                   <!-- <form action=""> -->
+                       <!--Clinic Doctors -->
+                    <div class="mb-3">
+                        <label  class="form-label">Doctor Name:</label>
+                        <select [(ngModel)]="doctorId" class="mb-3" name="doctor" class="d-inline-block form-select form-select-sm">
+                            <option  *ngFor="let Doc of ClinicDoctors" [ngValue]="Doc._id">{{Doc.name}}</option>
+                        </select>
+                    </div>
+                
+                    <!--Appointment Date -->
+                    <div class="mb-3"> 
+                        <label for="txtAppointmentDate" class="form-label">Date</label>
+                        <input type="date" [(ngModel)]="newAppointment.date" class="form-control" id="txtAppName">
+                    </div>
+
+                    <!-- is Confirmed-->
+                    <div class="mb-3 form-check">
+                        <p style="font-weight: bold;">Confirmed:</p>
+                        <input type="radio" [(ngModel)]="newAppointment.isConfirmed"   id="confirmY" name="confirm" value="true"/>
+                        <label for="confirmY" class="form-label">Yes</label><br>
+                        <input type="radio" [(ngModel)]="newAppointment.isConfirmed"   id="confirmN" name="confirm" value="false"/>
+                        <label for="confirmN" class="form-label">No</label>
+                          
+                    </div>
+
+                       <!-- Total Price-->
+                       <div class="mb-3">
+                        <label for="totalPrice" class="form-label">Total Price</label>
+                        <input type="number" [(ngModel)]="newAppointment.totalPrice"  id="txtAppPrice">
+                        </div>
+                        <!-- Payment-->
+                        <div class="mb-3">
+                            <p style="font-weight: bold;">Payment:</p>
+                            <input type="radio" [(ngModel)]="newAppointment.payment"   id="Cash" name="payment" value="cash"/>
+                            <label for="Cash" class="form-label">Cash</label><br>
+                            <input type="radio" [(ngModel)]="newAppointment.payment"   id="Visa" name="payment" value="visa"/>
+                            <label for="Visa" class="form-label">visa</label>
+                              
+                        </div>
+                    <!-- Edit Appointment -->
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" (click)="save(newAppointment.isConfirmed,newAppointment.totalPrice,newAppointment.payment)" class="btn btn-primary">Add</button> -->
+                   </div> 
+                <!-- </form> -->
+            </div>
+        </div>
+    </div>
+</div>

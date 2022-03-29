@@ -72,7 +72,7 @@ async function addPatientService(
           age: age,
           gender: gender,
           phone: phone,
-          clinicId: clinicId,
+          clinic: clinicId,
         });
 
         //if all are ok
@@ -187,9 +187,9 @@ async function getAllClinicPatients(clinicId) {
     if (DBConnection.isConnected()) {
       //if connection is ok
       try {
-        const patients = await Clinic.find({
+        const patients = await Patient.find({
           clinic: clinicId,
-        });
+        }).populate('clinic');  ///   Mostafa
         //if all are ok
         resolve({
           success: true,

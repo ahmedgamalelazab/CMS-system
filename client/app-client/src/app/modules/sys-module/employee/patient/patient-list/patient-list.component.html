@@ -1,0 +1,77 @@
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Patients</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 fw-bold">Patients Info</p>
+        </div>
+        <div class="card-body">
+            <!-- Code here -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="text-md" id="dataTable_filter"><label class="form-label"><input type="search" ngModel #username (keyup)="searchPatient(username.value)" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-md-end"><button [routerLink]="['./add']" class="btn btn-outline-success">Add New</button></div>
+                </div>
+            </div>
+            <div *ngIf="patientList.length == 0" class="row">
+                <div id="divNoData" class="container d-flex justify-content-center">
+                    <h3 class="text-danger">Sorry, there is no data to show.!</h3>
+                </div>
+            </div>
+            <div *ngIf="patientList.length > 0" class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                <table class="table my-0" id="dataTable">
+                    <!-- mdbTable #tableEl="mdbTable" -->
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let patient of patientList|paginate:{
+                            id: 'listing_pagination',
+                            itemsPerPage: 10,
+                            currentPage: page,
+                            totalItems: patientList.length
+                        }; let i=index">
+                            <td>{{i+1}}</td>
+                            <td class="link"><a [routerLink]="['./profile/'+patient._id]"><img class="rounded-circle me-2" width="30" height="30" [src]="patient.profileImage">{{patient.firstName+" "+patient.lastName}}</a></td>
+                            <td>{{patient.age}}</td>
+                            <td>{{patient.gender}}</td>
+                            <td>{{patient.phone}}</td>
+                            <td>
+                                <a [routerLink]="['./edit/'+patient._id]" class="text-warning">Edit</a>
+                            </td>
+                            <td>
+                                <a (click)="deleteStudent(patient)" title="Delete" class="link text-danger">Delete</a>
+                            </td>
+                            <td>
+                                <a [routerLink]="['/employee/appointment/add/'+patient._id]" class="text-primary">Add Appointment</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Phone</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div *ngIf="patientList.length > 0" class="row">
+                <div class="row">
+                    <nav class="d-flex justify-content-end dataTables_paginate paging_simple_numbers">
+                        <pagination-controls  id="listing_pagination" [maxSize]="10" [directionLinks]="true" (pageChange)="page = $event"></pagination-controls>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

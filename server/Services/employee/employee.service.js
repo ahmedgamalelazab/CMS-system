@@ -8,6 +8,7 @@ async function getAllEmployeesService() {
     if (DBConnection.isConnected()) {
       try {
         const employees = await Employee.find();
+        console.log(employees);
         resolve({
           success: true,
           data: employees,
@@ -32,7 +33,7 @@ async function getClinicEmployeesService(clinicId) {
       try {
         const employees = await Employee.find({
           clinic: clinicId,
-        });
+        }).populate('user');
         resolve({
           success: true,
           data: employees,

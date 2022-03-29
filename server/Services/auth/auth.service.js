@@ -14,6 +14,7 @@ const jwt = require('jsonwebtoken');
  * @param {string} userPassword
  */
 async function authService(userEmail, userPassword) {
+  console.log(userEmail,userPassword);
   //TODO checkout the userEmail and Password
   //IF they match anyone in the DB then auth him and give him a token to user with each request
   //best practice is to implement the process using chain of responsibility but we will do it on the regular way
@@ -127,7 +128,7 @@ async function authService(userEmail, userPassword) {
                   employeeData: employeeFound,
                   clinicData: clinicFound,
                 },
-                process.env.DOCTOR_SECRET_KEY
+                process.env.EMPLOYEE_SECRET_KEY    ///  Mostafa
               );
               resolve({
                 user: 'employee',

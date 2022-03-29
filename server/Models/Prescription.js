@@ -29,6 +29,7 @@ const prescriptionSchema = new mongoose.Schema(
     },
     hasPayed: {
       type: mongoose.SchemaTypes.Boolean,
+      default:false,
     },
     totalPrice: {
       type: mongoose.SchemaTypes.Number,

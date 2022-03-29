@@ -28,8 +28,9 @@ export class ClinicsComponent implements OnInit {
   clinicId: string = '';
 
   ngOnInit(): void {
-    this.adminClinicService.adminGelAllClinics().subscribe({
+    this.adminClinicService.adminGetAllClinics().subscribe({
       next: (response) => {
+        console.log(response);
         response.data.forEach((clinic: any) => {
           this.clientClinics.push({
             id: clinic._id,

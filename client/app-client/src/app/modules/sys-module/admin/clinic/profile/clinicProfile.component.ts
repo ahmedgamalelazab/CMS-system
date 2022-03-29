@@ -44,10 +44,10 @@ export class ClinicProfileComponent implements OnInit{
 
   updateClinic(clinicName:NgModel,clinicAddress:NgModel,clinicPhone:NgModel,clinicDescription:NgModel,clinicOwner:NgModel,){
       const payload:IClinicPayload = {
-        clinicName:clinicName.value,
-        clinicAddress:clinicAddress.value,
-        clinicPhone:clinicPhone.value,
-        clinicDescription:clinicDescription.value,
+        clinicName:clinicName.value.toString() === '' ?  this.clinicStoreService.getClinicObject()?.name : clinicName.value.toString(),
+        clinicAddress:clinicAddress.value.toString() === '' ?  this.clinicStoreService.getClinicObject()?.address : clinicAddress.value.toString(),
+        clinicPhone:clinicPhone.value.toString() === '' ?  this.clinicStoreService.getClinicObject()?.phone : clinicPhone.value.toString(),
+        clinicDescription:clinicDescription.value.toString() === '' ?  this.clinicStoreService.getClinicObject()?.description : clinicDescription.value.toString(),
         owner:clinicOwner.value.toString() === '' ?  this.clinicStoreService.getClinicObject()?.owner._id : clinicOwner.value.toString(),
       }
       console.log(payload);

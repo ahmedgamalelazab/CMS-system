@@ -11,6 +11,7 @@ const jwt = require('jsonwebtoken');
  * @param {Function} next
  */
 module.exports.authMiddleWare = async function (req, res, next) {
+  console.log("passed auth");
   //suppose that the token will be stored in userToken
 
   const userToken = req.headers['x-auth-token'];

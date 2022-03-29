@@ -66,23 +66,27 @@ module.exports.getPatientByIdController = async (req, res, next) => {
  */
 module.exports.doctorAddPatientController = async (req, res, next) => {
   try {
-    const { firstName, lastName, age, gender, phone, clinicId } = req.body;
+    if(req.payload.userType === 'employee'){
+      const { firstName, lastName, age, gender, phone } = req.body;
+      const clinicId = req.payload.userLoad.employeeData.clinic;
+      const result = await addPatientService(
+        firstName,
+        lastName,
+        age,
+        gender,
+        phone,
+        clinicId
+      );
 
-    const result = await addPatientService(
-      firstName,
-      lastName,
-      age,
-      gender,
-      phone,
-      clinicId
-    );
+      //if all are ok
 
-    //if all are ok
-
-    res.status(201).json({
-      success: true,
-      data: result.data,
-    });
+      res.status(201).json({
+        success: true,
+        data: result.data,
+      });
+    }else{
+      throw new Error('FORBIDDEN');
+    }
   } catch (error) {
     res.status(501).json({
       success: false,
@@ -101,23 +105,27 @@ module.exports.doctorAddPatientController = async (req, res, next) => {
  */
 module.exports.doctorUpdatePatientController = async (req, res, next) => {
   try {
-    const patientId = req.params.id;
+    if(req.payload.userType === 'employee'){
+      const patientId = req.params.id;
 
-    const { firstName, lastName, age, gender, phone } = req.body;
+      const { firstName, lastName, age, gender, phone } = req.body;
 
-    const result = await updatePatientService(
-      patientId,
-      firstName,
-      lastName,
-      age,
-      gender,
-      phone
-    );
-    //if all are ok
-    res.status(201).json({
-      success: true,
-      data: result.data,
-    });
+      const result = await updatePatientService(
+        patientId,
+        firstName,
+        lastName,
+        age,
+        gender,
+        phone
+      );
+      //if all are ok
+      res.status(201).json({
+        success: true,
+        data: result.data,
+      });
+    }else{
+      throw new Error('FORBIDDEN');
+    }
   } catch (error) {
     res.status(501).json({
       success: false,
@@ -136,16 +144,20 @@ module.exports.doctorUpdatePatientController = async (req, res, next) => {
  */
 module.exports.doctorRemovePatientController = async (req, res, next) => {
   try {
-    const patientId = req.params.id;
+    if(req.payload.userType === 'employee'){
+      const patientId = req.params.id;
 
-    const result = await deletePatientService(patientId);
+      const result = await deletePatientService(patientId);
 
-    //if all are ok
+      //if all are ok
 
-    res.status(201).json({
-      success: true,
-      data: result.data,
-    });
+      res.status(201).json({
+        success: true,
+        data: result.data,
+      });
+    }else{
+      throw new Error('FORBIDDEN');
+    }
   } catch (error) {
     res.status(501).json({
       success: false,
@@ -168,13 +180,19 @@ module.exports.getAllClinicPatientsController = async function (
 ) {
   try {
     //!DANGER THIS WILL BE UPDATED AFTER ADDING AUTH MIDDLEWARE
-    const clinicId = req.params.id;
-    const result = await getAllClinicPatients(clinicId);
-    //if all are ok
-    res.status(200).json({
-      success: true,
-      data: result.data,
-    });
+    if(req.payload.userType === 'employee'){
+      console.log(req.payload)
+      const clinicId = req.payload.userLoad.employeeData.clinic;
+      const result = await getAllClinicPatients(clinicId);
+      //if all are ok
+      res.status(200).json({
+        success: true,
+        data: result.data,
+      });
+    }else{
+      throw new Error('FORBIDDEN');
+    }
+    
   } catch (error) {
     res.status(501).json({
       success: false,

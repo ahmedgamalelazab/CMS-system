@@ -1,0 +1,89 @@
+<!-- <p>prescription-edit works!</p> -->
+
+<div class="container-fluid" *ngIf="editedPrescription != null">
+    <h3 class="text-dark mb-4">Edit Prescription</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 fw-bold">Prescription Information</p>
+        </div>
+        <div class="card-body">
+            <div id="divAddPatient">
+                <form #f="ngForm" action="">
+                    <!-- <div class="mb-3">
+                        <label  class="form-label">Patient Name:</label>
+                        <input type="text" class="form-control"  name="Pname" [(ngModel)]="editedPrescription.patient.firstName">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Doctor Name:</label>
+                        <input type="text" required class="form-control"  name="Dname" [(ngModel)]="editedPrescription.doctor.name">
+                    </div>
+                    <div class="mb-3">
+                        <label  class="form-label">Clinic Name:</label>
+                        <input type="text" required class="form-control"  name="Cname" [(ngModel)]="editedPrescription.clinic.name">
+                    </div> -->
+                    <!-- *ngFor="let i of editedPrescription.medicine" -->
+                    <!-- <div class="mb-3">
+                        <label class="form-label">Medicines:</label>
+                        <input type="text" required class="form-control" name="medicine"
+                            [(ngModel)]="editedPrescription.medicine[0].name">
+                    </div> -->
+                    <!-- <div>
+                        <label class="form-label">List Of Medicine:</label>
+                        <select class="mb-3" name="medicine" class="d-inline-block form-select form-select-sm">
+                           <option *ngFor="let i of editedPrescription.medicine">{{i.name}}</option>
+                        </select>
+                    </div> -->
+                    <div class="mb-3">
+                        <label class="form-label">List Of Medicine:</label>
+                        <select [(ngModel)]="selectedMed" multiple class="mb-3" name="medicine"
+                            class="d-inline-block form-select form-select-sm">
+                            <option *ngFor="let med of medicines" [ngValue]="med">{{med.name}}</option>
+                        </select>
+                    </div>
+                    <!-- <div class="mb-3">
+                        <label class="form-label">Date:</label>
+                        <input type="date" required class="form-control" name="date"
+                            [(ngModel)]="editedPrescription.date">
+                    </div>-->
+                    <!-- <div class="mb-3">
+                        <p>HasPayed:</p>
+                        <input type="radio" [(ngModel)]="editedPrescription.hasPayed" id="Payed" name="confirm"
+                            value="true" />
+                        <label for="Payed" class="form-label">Yes</label><br>
+                        <input type="radio" [(ngModel)]="editedPrescription.hasPayed" id="notPayed" name="confirm"
+                            value="false" />
+                        <label for="notPayed" class="form-label">No</label>
+
+                    </div> -->
+                    <!-- <div class="mb-3">
+                        <label class="form-label">TotalPrice:</label>
+                        <input type="text" required class="form-control" name="price"
+                            [(ngModel)]="editedPrescription.totalPrice">
+                    </div> -->
+                    <!-- <div class="mb-3">
+                        <p>PaymentMethod:</p>
+                        <input type="radio" [(ngModel)]="editedPrescription.paymentMethod" id="Cash" name="payment"
+                            value="cash" />
+                        <label for="Cash" class="form-label"> Cash</label><br>
+                        <input type="radio" [(ngModel)]="editedPrescription.paymentMethod" id="Visa" name="payment"
+                            value="visa" />
+                        <label for="Visa" class="form-label"> Visa</label>
+                    </div>  -->
+                    <!-- <div class="mb-3">
+                        <p>TiedToDoctor:</p>
+                        <input type="radio" [(ngModel)]="editedPrescription.tiedToDoctor" id="yes" name="tied"
+                            value="true" />
+                        <label for="tied" class="form-label"> Yes</label><br>
+                        <input type="radio" [(ngModel)]="editedPrescription.tiedToDoctor" id="no" name="nottied"
+                            value="false" />
+                        <label for="nottied" class="form-label"> No</label>
+                    </div> -->
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary" (click)="SaveEditedPrescription()">Save</button>
+                        <!-- <a [routerLink]="['/prescription']" class="btn btn-warning text-danger" style="font-size: 20px;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back To List</a> -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

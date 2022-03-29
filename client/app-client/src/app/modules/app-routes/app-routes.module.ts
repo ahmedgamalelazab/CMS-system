@@ -6,14 +6,18 @@ import { LoginComponent } from 'src/app/components/auth/login/login.component';
 import { AdminModule } from '../sys-module/admin/admin.module';
 import {FormsModule} from '@angular/forms';
 import { HttpClientModule  } from '@angular/common/http';
+import { EmployeeModule } from './../sys-module/employee/employee.module';
+import { ClinicOwnerModule } from './../sys-module/doctor/clinic-owner/clinic-owner.module';
 
 @NgModule({
   declarations: [
     LoginComponent,
   ],
   imports: [
-    CommonModule,
+CommonModule,
     AdminModule,
+    EmployeeModule,
+    ClinicOwnerModule,
     WelcomeModule,
     FormsModule,
     HttpClientModule,

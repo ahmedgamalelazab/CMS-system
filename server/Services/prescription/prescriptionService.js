@@ -52,6 +52,61 @@ async function getPrescriptionById(prescriptionId) {
 }
 
 /**
+ *
+ * @param {string} clinicId
+ * @returns {Promise}
+ */
+ async function getPrescriptionsByClinicId(clinicId) {
+  return new Promise(async (resolve, reject) => {
+    if (DBConnection.isConnected()) {
+      try {
+        const prescription = await Prescription.find({
+          clinic: clinicId,
+        })
+          .populate('doctor')
+          .populate('patient');
+        resolve({
+          success: true,
+          data: prescription,
+        });
+      } catch (error) {
+        reject(new Error(error.message));
+      }
+    } else {
+      reject(new Error('db connection problem'));
+    }
+  });
+}
+
+/**
+ *
+ * @param {string} clinicId
+ * @returns {Promise}
+ */
+ async function getPendingPrescriptionsByClinicId(clinicId) {
+  return new Promise(async (resolve, reject) => {
+    if (DBConnection.isConnected()) {
+      try {
+        const prescription = await Prescription.find({
+          clinic: clinicId,
+          hasPayed:false
+        })
+          .populate('doctor')
+          .populate('patient');
+        resolve({
+          success: true,
+          data: prescription,
+        });
+      } catch (error) {
+        reject(new Error(error.message));
+      }
+    } else {
+      reject(new Error('db connection problem'));
+    }
+  });
+}
+
+/**
  * @param {string} doctorId
  * @param {string} clinicId
  * @param {string} patientId
@@ -206,4 +261,6 @@ module.exports = {
   addPrescription,
   updatePrescription,
   deletePrescription,
+  getPrescriptionsByClinicId, /// Mostafa
+  getPendingPrescriptionsByClinicId,  /// Mostafa
 };

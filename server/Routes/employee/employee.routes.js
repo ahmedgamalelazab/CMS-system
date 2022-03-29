@@ -24,8 +24,8 @@ Router.route('/employee/clinic/:clinicId').get(
   authMiddleWare,
   getAllEmployeesInClinicController
 );
-Router.route('/employee/add').post(AddEmployeeController);
-Router.route('/employee/remove/:id').delete(RemoveEmployeeController);
-Router.route('/employee/update/:id').put(UpdateEmployeeController);
+Router.route('/employee/add').post(authMiddleWare,AddEmployeeController);
+Router.route('/employee/remove/:id').delete(authMiddleWare,RemoveEmployeeController);
+Router.route('/employee/update/:id').put(authMiddleWare,UpdateEmployeeController);
 
 module.exports = Router;

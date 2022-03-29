@@ -8,12 +8,16 @@ const {
     removeMedicineController,
 } = require('../../Controllers/medicine/medicine.controller');
 
-Router.route('/medicines').get(getAllMedicinesController);
-Router.route('/medicine/:id').get(getMedicineByIdController);
-Router.route('/medicine/add').post(addMedicineController);
-Router.route('/medicine/remove/:id').delete(
+/// Mostafa
+
+const { authMiddleWare } = require('../../Middlewares/auth');
+
+Router.route('/medicines').get(authMiddleWare,getAllMedicinesController);
+Router.route('/medicine/:id').get(authMiddleWare,getMedicineByIdController);
+Router.route('/medicine/add').post(authMiddleWare,addMedicineController);
+Router.route('/medicine/remove/:id').delete(authMiddleWare,
     removeMedicineController
 );
-Router.route('/medicine/update/:id').put(updateMedicineController);
+Router.route('/medicine/update/:id').put(authMiddleWare,updateMedicineController);
 
 module.exports = Router;

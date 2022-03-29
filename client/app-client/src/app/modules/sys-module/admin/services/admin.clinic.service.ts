@@ -36,7 +36,7 @@ export class AdminClinicService {
    * @description : get all the clinics stored on the system
    * @allowed : ONLY ADMIN
    */
-  adminGelAllClinics() {
+  adminGetAllClinics() {
     //GET REQUEST
     const adminData = JSON.parse(window.localStorage.getItem('admin') ?? '');
     return this.http
@@ -90,7 +90,7 @@ export class AdminClinicService {
    */
   adminGetClinicDoctors(clinicId: string) {
     //GET ALL CLINIC DOCS
-    const adminData = JSON.parse(window.localStorage.getItem('admin') ?? '');
+    const adminData = JSON.parse(window.localStorage.getItem('admin') ?? window.sessionStorage.getItem('employee') ?? '');
     return this.http
       .get<any>(`http://localhost:9999/api/v1/clinics/${clinicId}/doctors`, {
         headers: {
@@ -120,6 +120,7 @@ export class AdminClinicService {
    */
   adminGetAllDoctors() {
     const adminData = JSON.parse(window.localStorage.getItem('admin') ?? '');
+    console.warn(adminData.token);
     return this.http
       .get<any>('http://localhost:9999/api/v1/doctors', {
         headers: {

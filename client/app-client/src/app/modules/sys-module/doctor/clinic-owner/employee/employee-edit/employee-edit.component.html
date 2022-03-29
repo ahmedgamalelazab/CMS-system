@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Edit Employee</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 fw-bold">Employee Info</p>
+        </div>
+        <div class="card-body">
+            <div id="divAddPatient">
+                <!-- <form action=""> -->
+                <!-- <div class="mb-3">
+                    <label class="form-label">ID</label>
+                    <input type="number" required min="0" class="form-control" id="txtStdId" [(ngModel)]="employee.Id">
+                </div> -->
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" [(ngModel)]="editedEmployee.name" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Age</label>
+                    <input type="number" [(ngModel)]="editedEmployee.age" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Salary</label>
+                    <input type="number" [(ngModel)]="editedEmployee.salary" class="form-control" required>
+                </div>
+                <!-- <div class="mb-3">
+                                            <label for="txtStdGrade" class="form-label">Image</label>
+                                            <input type="file" required accept=".jpeg, .jpg, .png" class="form-control" id="txtStdGrade">
+                                        </div> -->
+                <div class="d-flex justify-content-between">
+                    <button type="button" [routerLink]="['']" (click)="save()" class="btn btn-primary">Save</button>
+                </div>
+                <!-- </form> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div *ngIf="employee!=null">
+
+    <label class="form-label">ID</label>
+    <input type="number" min="0" [(ngModel)]="employee.Id">
+
+    <label class="form-label">Name</label>
+    <input type="text" [(ngModel)]="employee.Name">
+
+    <label class="form-label">Age</label>
+    <input type="number" min="0" [(ngModel)]="employee.Age">
+
+    <label class="form-label">Salary</label>
+    <input type="number" min="0" [(ngModel)]="employee.Salary">
+
+    <button (click)="save()">Edit</button>
+
+</div> -->

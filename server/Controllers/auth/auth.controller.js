@@ -10,7 +10,6 @@ const authService = require('../../Services/auth/auth.service.js');
 module.exports.authController = async function (req, res, next) {
   try {
     const { email, password } = req.body;
-
     const data = await authService(email, password);
 
     //if all are success

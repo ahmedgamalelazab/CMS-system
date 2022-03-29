@@ -5,6 +5,8 @@ const {
   getAllPrescription,
   getPrescriptionById,
   updatePrescription,
+  getPrescriptionsByClinicId,   /// Mostafa
+  getPendingPrescriptionsByClinicId,    /// Mostafa
 } = require('../../Services/prescription/prescriptionService.js');
 
 /**
@@ -61,17 +63,85 @@ module.exports.getPrescriptionByIdController = async (req, res, next) => {
  * @param {request} req
  * @param {response} res
  * @param {Function} next
+ */
+ module.exports.getPrescriptionByClinicIdController = async (req, res, next) => {
+  try {
+    console.log(req.payload)
+    if(req.payload.userType === 'employee' || req.payload.userType === 'doctor'){
+      let clinicId ;
+      if(req.payload.userType === 'employee'){
+        clinicId = req.payload.userLoad.employeeData.clinic;
+      }else{
+        clinicId = req.payload.userLoad.clinicData._id;
+      }
+      console.log(clinicId)
+      const result = await getPrescriptionsByClinicId(clinicId);
+      //if all are ok
+      res.status(200).json({
+        success: true,
+        data: result.data,
+      });
+    }else{
+      throw new Error("FORBIDDEN");
+    }
+    
+  } catch (error) {
+    res.status(501).json({
+      success: false,
+      data: null,
+      error:error
+    });
+  }
+};
+
+/**
+ *
+ * @param {request} req
+ * @param {response} res
+ * @param {Function} next
+ */
+ module.exports.getPendingPrescriptionByClinicIdController = async (req, res, next) => {
+  try {
+    if(req.payload.userType === 'employee'){
+      const clinicId = req.payload.userLoad.employeeData.clinic;
+      console.log(clinicId)
+      const result = await getPendingPrescriptionsByClinicId(clinicId);
+      //if all are ok
+      res.status(200).json({
+        success: true,
+        data: result.data,
+      });
+    }else{
+      throw new Error("FORBIDDEN");
+    }
+    
+  } catch (error) {
+    res.status(501).json({
+      success: false,
+      data: null,
+      error:error
+    });
+  }
+};
+
+/**
+ *
+ * @param {request} req
+ * @param {response} res
+ * @param {Function} next
  * @description this function is only allowed for the system admin and not allowed to doctors
  */
 module.exports.addPrescriptionController = async (req, res, next) => {
   try {
-    const { doctorId, clinicId, patientId, medicine,
+    const { patient, medicine,
       date, hasPayed, totalPrice, paymentMethod, tiedToDoctor } = req.body;
 
+    const doctorId = req.payload.userLoad.doctorData._id;    
+    const clinicId = req.payload.userLoad.clinicData._id;  
     const result = await addPrescription(
       doctorId,
       clinicId,
-      patientId,
+      patient,
       medicine,
       date,
       hasPayed,

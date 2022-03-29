@@ -16,14 +16,18 @@ const {
  */
 module.exports.getAllMedicinesController = async (req, res, next) => {
     try {
-        const result = await getAllMedicines();
+        if(req.payload.userType === 'employee' || req.payload.userType === 'doctor'){
+            const result = await getAllMedicines();
 
-        //if all are ok
+            //if all are ok
 
-        res.status(200).json({
-            success: true,
-            data: result.data,
-        });
+            res.status(200).json({
+                success: true,
+                data: result.data,
+            });
+        }else{
+            throw new Error('FORBIDDEN')
+        }
     } catch (error) {
         res.status(501).json({
             success: false,
@@ -41,13 +45,17 @@ module.exports.getAllMedicinesController = async (req, res, next) => {
  */
 module.exports.getMedicineByIdController = async (req, res, next) => {
     try {
-        const medicineId = req.params.id;
-        const result = await getMedicineById(medicineId);
-        //if all are ok
-        res.status(200).json({
-            success: true,
-            data: result.data,
-        });
+        if(req.payload.userType === 'employee'){
+            const medicineId = req.params.id;
+            const result = await getMedicineById(medicineId);
+            //if all are ok
+            res.status(200).json({
+                success: true,
+                data: result.data,
+            });
+        }else{
+            throw new Error("FORBIDDEN");
+        }
     } catch (error) {
         res.status(501).json({
             success: false,
@@ -66,19 +74,23 @@ module.exports.getMedicineByIdController = async (req, res, next) => {
  */
 module.exports.addMedicineController = async (req, res, next) => {
     try {
-        const { name, price } = req.body;
+        if(req.payload.userType === 'employee'){
+            const { name, price } = req.body;
 
-        const result = await addMedicine(
-            name,
-            price
-        );
+            const result = await addMedicine(
+                name,
+                price
+            );
 
-        //if all are ok
+            //if all are ok
 
-        res.status(201).json({
-            success: true,
-            data: result.data,
-        });
+            res.status(201).json({
+                success: true,
+                data: result.data,
+            });
+        }else{
+            throw new Error("FORBIDDEN");
+        }
     } catch (error) {
         res.status(501).json({
             success: false,
@@ -97,20 +109,24 @@ module.exports.addMedicineController = async (req, res, next) => {
  */
 module.exports.updateMedicineController = async (req, res, next) => {
     try {
-        const medicineId = req.params.id;
+        if(req.payload.userType === 'employee'){
+            const medicineId = req.params.id;
 
-        const { name, price } = req.body;
+            const { name, price } = req.body;
 
-        const result = await updateMedicine(
-            medicineId,
-            name,
-            price
-        );
-        //if all are ok
-        res.status(201).json({
-            success: true,
-            data: result.data,
-        });
+            const result = await updateMedicine(
+                medicineId,
+                name,
+                price
+            );
+            //if all are ok
+            res.status(201).json({
+                success: true,
+                data: result.data,
+            });
+        }else{
+            throw new Error("FORBIDDEN");
+        }
     } catch (error) {
         res.status(501).json({
             success: false,
@@ -129,16 +145,20 @@ module.exports.updateMedicineController = async (req, res, next) => {
  */
 module.exports.removeMedicineController = async (req, res, next) => {
     try {
-        const medicineId = req.params.id;
+        if(req.payload.userType === 'employee'){
+            const medicineId = req.params.id;
 
-        const result = await deleteMedicine(medicineId);
+            const result = await deleteMedicine(medicineId);
 
-        //if all are ok
+            //if all are ok
 
-        res.status(201).json({
-            success: true,
-            data: result.data,
-        });
+            res.status(201).json({
+                success: true,
+                data: result.data,
+            });
+        }else{
+            throw new Error('FORBIDDEN');
+        }
     } catch (error) {
         res.status(501).json({
             success: false,

@@ -62,8 +62,8 @@ export interface IClinicEmployee {
   name: string;
   age: string;
   salary: string;
-  user: string;
-  clinic: string;
+  user: any;
+  clinic: any;
   assignedBy: string;
   createdAt: string;
   updatedAt: string;
